@@ -75,6 +75,16 @@ execute_command( C, <<"playlist">>, [] ) ->
 execute_command( C, <<"add">>, [ Uri ] ) ->
 	ok = erlmpd:add( C, binary_to_list( Uri ) ),
 	{ struct, [ { <<"ok">>, true } ] };
+execute_command( C, <<"addid">>, [ Uri ] ) ->
+	SongId = erlmpd:addid( C, Uri ),
+	{ struct, [
+		{ <<"id">>, SongId }
+	] };
+execute_command( C, <<"addid">>, [ Uri, Position ] ) ->
+	SongId = erlmpd:addid( C, Uri, Position ),
+	{ struct, [
+		{ <<"id">>, SongId }
+	] };
 execute_command( _Connection, Command, Args ) ->
 	io:format( "Command: ~p~nArgs: ~p~n", [ Command, Args ] ),
 	throw( { error, unsupported_command } ).
