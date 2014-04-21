@@ -86,5 +86,12 @@ execute_command( C, <<"addid">>, [ Uri, Position ] ) ->
 		{ <<"id">>, SongId }
 	] };
 execute_command( _Connection, Command, Args ) ->
-	io:format( "Command: ~p~nArgs: ~p~n", [ Command, Args ] ),
-	throw( { error, unsupported_command } ).
+	io:format(
+		"*** Unsupported Command~n"
+		"    Command: ~p~n"
+		"    Args: ~p~n", [ Command, Args ] ),
+	{ struct, [
+		{ <<"error">>, <<"Unsupported command">> },
+		{ <<"cmd">>, Command },
+		{ <<"args">>, Args }
+	] }.
