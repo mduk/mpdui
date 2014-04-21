@@ -50,6 +50,16 @@ execute( C, <<"playlist">>, [] ) ->
 	{ struct, [
 		{ <<"playlist">>, ResultsStruct }
 	] };
+execute( C, <<"playlistinfo">>, [] ) ->
+	Results = erlmpd:playlistinfo( C ),
+
+	ResultsStruct = lists:map( fun( Result ) ->
+		{ struct, Result }
+	end, Results ),
+
+	{ struct, [
+		{ <<"playlistinfo">>, ResultsStruct }
+	] };
 
 %% Stored Playlists
 
