@@ -43,14 +43,24 @@
           };
       };
 
-      function sendTxt() {
+      function send( txt ) {
           if(websocket.readyState == websocket.OPEN){
-              txt = $("#send_txt").val();
               websocket.send(txt);
               showScreen('sending: ' + txt); 
           } else {
                showScreen('websocket is not connected'); 
           };
+      };
+
+      function sendTxt() {
+		send( $("#send_txt").val() );
+      };
+
+      function sendCommand( command, arguments ) {
+          send( JSON.stringify( {
+			cmd: command,
+			args: arguments
+          } ) );
       };
 
       function onOpen(evt) { 
@@ -92,19 +102,29 @@
     <div id="navigation">
 
       <p id="connecting">
-	<input type='text' id="server" value="ws://localhost:45001/websocket"></input>
-	<button type="button" onclick="toggle_connection()">connection</button>
+		<input type='text' id="server" value="ws://localhost:45001/websocket"></input>
+		<button type="button" onclick="toggle_connection()">connection</button>
       </p>
       <div id="connected">				
-	<p>
-	  <input type='text' id="send_txt" value=></input>
-	  <button type="button" onclick="sendTxt();">send</button>
-	</p>
+		<p>
+		  <input type='text' id="send_txt" value=></input>
+		  <button type="button" onclick="sendTxt();">send</button>
+		</p>
       </div>
 
+		<hr/>
+
+      <div id="mpd-controls-currentplaylist">
+		<h2>MPD: Current Playlist</h2>
+		<button type="button" onclick="sendCommand('playlist', []);">playlist</button>
+		<button type="button" onclick="sendCommand('clear', []);">clear</button>
+      </div>
+
+		<hr/>
+
       <div id="content">						
-	<button id="clear" onclick="clearScreen()" >Clear text</button>
-	<div id="output"></div>
+		<button id="clear" onclick="clearScreen()" >Clear text</button>
+		<div id="output"></div>
       </div>
 
     </div>
