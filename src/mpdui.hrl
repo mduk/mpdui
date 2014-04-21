@@ -1,1 +1,1 @@
--record( mdpui_command, [ cmd, args = [] ] );
+-record( mpdui_command, { cmd, args = [] } ).
