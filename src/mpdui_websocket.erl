@@ -26,9 +26,6 @@ websocket_handle( { text, RawMsg }, Req, C ) ->
 websocket_handle( _, Req, C ) ->
 	{ ok, Req, C }.
 
-
-
-
 websocket_info( { mpd_now_playing, Playing }, Req, C ) ->
 	Message = { struct, [
 		{ <<"now_playing">>, { struct, Playing } } 
@@ -40,12 +37,9 @@ websocket_info( { mpd_status, Status }, Req, C ) ->
 	] },
 	{ reply, { text, mochijson2:encode( Message ) }, Req, C };
 websocket_info( _, Req, C ) ->
-	{ok, Req, C}.
+	{ ok, Req, C }.
 
-
-
-
-websocket_terminate(_Reason, _Req, _C) ->
+websocket_terminate( _Reason, _Req, _C ) ->
 	ok.
 
 
