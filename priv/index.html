@@ -63,6 +63,13 @@
           } ) );
       };
 
+      function sendSearch() {
+		sendCommand( 'search', [
+			$("#search_type").val(),
+			$("#search_txt").val()
+		] );
+      };
+
       function onOpen(evt) { 
           showScreen('<span style="color: green;">CONNECTED </span>'); 
           $("#connected").fadeIn('slow');
@@ -118,6 +125,10 @@
 		<h2>MPD: Current Playlist</h2>
 		<button type="button" onclick="sendCommand('playlist', []);">playlist</button>
 		<button type="button" onclick="sendCommand('clear', []);">clear</button>
+		<br/>
+		<input type='text' id="search_type" value="artist" readonly="readonly"/>
+		<input type='text' id="search_txt" value=""/>
+		<button type="button" onclick="sendSearch();">search</button>
       </div>
 
 		<hr/>
