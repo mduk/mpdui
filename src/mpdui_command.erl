@@ -13,19 +13,9 @@ execute( C, <<"search">>, [ Type, What ] ) ->
 		{ <<"search">>, [ Type, What ] },
 		{ <<"results">>, ResultsStruct }
 	] };
-execute( C, <<"playlist">>, [] ) ->
-	Results = erlmpd:playlist( C ),
-	
-	ResultsStruct = lists:map( fun( Result ) ->
-		[ _, [ _ | Path ] ] = string:tokens( binary_to_list( Result ), ":" ),
-		{ struct, [
-			{ <<"file">>, list_to_binary( Path ) }
-		] }
-	end, Results ),
 
-	{ struct, [
-		{ <<"playlist">>, ResultsStruct }
-	] };
+%% Current Playlist
+
 execute( C, <<"add">>, [ Uri ] ) ->
 	ok = erlmpd:add( C, binary_to_list( Uri ) ),
 	{ struct, [ { <<"ok">>, true } ] };
@@ -42,6 +32,22 @@ execute( C, <<"addid">>, [ Uri, Position ] ) ->
 execute( C, <<"clear">>, [] ) ->
 	ok = erlmpd:clear( C ),
 	{ struct, [ { <<"ok">>, true } ] };
+execute( C, <<"playlist">>, [] ) ->
+	Results = erlmpd:playlist( C ),
+
+	ResultsStruct = lists:map( fun( Result ) ->
+		[ _, [ _ | Path ] ] = string:tokens( binary_to_list( Result ), ":" ),
+		{ struct, [
+			{ <<"file">>, list_to_binary( Path ) }
+		] }
+	end, Results ),
+
+	{ struct, [
+		{ <<"playlist">>, ResultsStruct }
+	] };
+
+%% Unknown command
+
 execute( _Connection, Command, Args ) ->
 	io:format(
 		"*** Unsupported Command~n"
