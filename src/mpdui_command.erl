@@ -35,8 +35,13 @@ execute( C, <<"previous">>, [] ) ->
 
 execute( C, <<"seek">>, [ Position, Time ] ) when is_integer( Position ) and is_integer( Time ) ->
 	ok( erlmpd:seek( C, Position, Time ) );
-execute( C, <<"seek">>, [ _, _ ] ) ->
+execute( _, <<"seek">>, [ _, _ ] ) ->
 	error_msg( <<"Position and Time arguments must be integers">> );
+
+execute( C, <<"seekid">>, [ Id, Time ] ) when is_integer( Id ) and is_integer( Time ) ->
+	ok( erlmpd:seekid( C, Id, Time ) );
+execute( _, <<"seekid">>, [ _, _ ] ) ->
+	error_msg( <<"Id and Time arguments must be integers">> );
 
 %% Current Playlist
 
