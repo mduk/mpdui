@@ -40,8 +40,14 @@ websocket_terminate(_Reason, _Req, _C) ->
 
 execute_command( C, <<"search">>, [ Type, What ] ) ->
 	Results = erlmpd:search( C, binary_to_atom( Type, utf8 ), binary_to_list( What ) ),
-	lists:map( fun( Result ) ->
+	
+	ResultsStruct = lists:map( fun( Result ) ->
 		{ struct, Result }
-	end, Results );
+	end, Results ),
+	
+	{ struct, [
+		{ <<"search">>, [ Type, What ] },
+		{ <<"results">>, ResultsStruct }
+	] };
 execute_command( _Connection, _Command, _Args ) ->
 	throw( { error, unsupported_command } ).
