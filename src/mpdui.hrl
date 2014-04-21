@@ -1,0 +1,1 @@
+-record( mdpui_command, [ cmd, args = [] ] );

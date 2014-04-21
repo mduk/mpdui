@@ -1,0 +1,12 @@
+{application, mpdui, [
+	{description, ""},
+	{vsn, "1"},
+	{registered, []},
+	{applications, [
+		kernel,
+		stdlib,
+		cowboy
+	]},
+	{mod, { mpdui_app, []}},
+	{env, []}
+]}.
