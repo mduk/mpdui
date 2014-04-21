@@ -14,6 +14,13 @@ execute( C, <<"pause">>, [ <<"true">> ] ) ->
 	ok( erlmpd:pause( C, true ) );
 execute( C, <<"pause">>, [ <<"false">> ] ) ->
 	ok( erlmpd:pause( C, false ) );
+execute( C, <<"play">>, [] ) ->
+	ok( erlmpd:play( C ) );
+execute( C, <<"play">>, [ Position ] ) when is_integer( Position ) ->
+	ok( erlmpd:play( C, Position ) );
+execute( _, <<"play">>, [ _ ] ) ->
+	error_msg( <<"First argument must be an integer">> );
+
 %% Current Playlist
 
 execute( C, <<"add">>, [ Uri ] ) ->
@@ -84,3 +91,8 @@ execute( _Connection, Command, Args ) ->
 
 ok( ok ) -> { struct, [ { <<"ok">>, true } ] };
 ok( _ ) -> { struct, [ { <<"ok">>, false } ] }.
+
+error_msg( Msg ) -> { struct, [
+	{ <<"ok">>, false },
+	{ <<"error">>, Msg }
+] }.
