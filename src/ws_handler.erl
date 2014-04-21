@@ -85,6 +85,9 @@ execute_command( C, <<"addid">>, [ Uri, Position ] ) ->
 	{ struct, [
 		{ <<"id">>, SongId }
 	] };
+execute_command( C, <<"clear">>, [] ) ->
+	ok = erlmpd:clear( C ),
+	{ struct, [ { <<"ok">>, true } ] };
 execute_command( _Connection, Command, Args ) ->
 	io:format(
 		"*** Unsupported Command~n"
