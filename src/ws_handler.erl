@@ -49,5 +49,18 @@ execute_command( C, <<"search">>, [ Type, What ] ) ->
 		{ <<"search">>, [ Type, What ] },
 		{ <<"results">>, ResultsStruct }
 	] };
+execute_command( C, <<"playlist">>, [] ) ->
+	Results = erlmpd:playlist( C ),
+	
+	ResultsStruct = lists:map( fun( Result ) ->
+		[ _, [ _ | Path ] ] = string:tokens( binary_to_list( Result ), ":" ),
+		{ struct, [
+			{ <<"file">>, list_to_binary( Path ) }
+		] }
+	end, Results ),
+
+	{ struct, [
+		{ <<"playlist">>, ResultsStruct }
+	] };
 execute_command( _Connection, _Command, _Args ) ->
 	throw( { error, unsupported_command } ).
