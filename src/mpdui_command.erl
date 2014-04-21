@@ -2,23 +2,14 @@
 
 -export( [ execute/3 ] ).
 
-execute( C, <<"search">>, [ Type, What ] ) ->
-	Results = erlmpd:search( C, binary_to_atom( Type, utf8 ), binary_to_list( What ) ),
-	
-	ResultsStruct = lists:map( fun( Result ) ->
-		{ struct, Result }
-	end, Results ),
-	
-	{ struct, [
-		{ <<"search">>, [ Type, What ] },
-		{ <<"results">>, ResultsStruct }
-	] };
+%% Status
 
-%% Playback
+%% Playback Options
+
+%% Controlling Playback
 
 execute( C, <<"next">>, [] ) ->
 	ok( erlmpd:next( C ) );
-
 
 %% Current Playlist
 
@@ -49,6 +40,31 @@ execute( C, <<"playlist">>, [] ) ->
 	{ struct, [
 		{ <<"playlist">>, ResultsStruct }
 	] };
+
+%% Stored Playlists
+
+%% Music Database
+
+execute( C, <<"search">>, [ Type, What ] ) ->
+	Results = erlmpd:search( C, 
+		binary_to_atom( Type, utf8 ), 
+		binary_to_list( What ) 
+	),
+
+	ResultsStruct = lists:map( fun( Result ) ->
+		{ struct, Result }
+	end, Results ),
+
+	{ struct, [
+		{ <<"search">>, [ Type, What ] },
+		{ <<"results">>, ResultsStruct }
+	] };
+
+%% Stickers
+
+%% Connection Settings
+
+%% Audio Output Devices
 
 %% Unknown command
 
