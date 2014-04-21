@@ -121,8 +121,15 @@
 
 		<hr/>
 
-      <div id="mpd-controls-currentplaylist">
+      <div id="mpd-controls-playback">
 		<h2>MPD: Current Playlist</h2>
+		<button type="button" onclick="sendCommand('next', []);">next</button>
+      </div>
+
+		<hr/>
+
+      <div id="mpd-controls-currentplaylist">
+		<h2>MPD: Playback</h2>
 		<button type="button" onclick="sendCommand('playlist', []);">playlist</button>
 		<button type="button" onclick="sendCommand('clear', []);">clear</button>
       </div>
