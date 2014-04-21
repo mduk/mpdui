@@ -125,7 +125,12 @@
 		<h2>MPD: Current Playlist</h2>
 		<button type="button" onclick="sendCommand('playlist', []);">playlist</button>
 		<button type="button" onclick="sendCommand('clear', []);">clear</button>
-		<br/>
+      </div>
+
+		<hr/>
+
+      <div id="mpd-controls-database">
+		<h2>MPD: Database</h2>
 		<input type='text' id="search_type" value="artist" readonly="readonly"/>
 		<input type='text' id="search_txt" value=""/>
 		<button type="button" onclick="sendSearch();">search</button>
