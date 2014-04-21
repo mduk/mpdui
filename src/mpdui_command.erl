@@ -26,7 +26,8 @@ execute( C, <<"playid">>, [ Id ] ) when is_integer( Id ) ->
 	ok( erlmpd:playid( C, Id ) );
 execute( _, <<"playid">>, [ _ ] ) ->
 	error_msg( <<"First argument must be an integer">> );
-
+execute( C, <<"previous">>, [] ) ->
+	ok( erlmpd:previous( C ) );
 
 %% Current Playlist
 

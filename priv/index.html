@@ -129,10 +129,11 @@
 
       <div id="mpd-controls-playback">
 		<h2>MPD: Current Playlist</h2>
-		<button type="button" onclick="sendCommand('next', []);">next</button>
+		<button type="button" onclick="sendCommand('previous', []);">&lt;&lt; previous</button>
 		<button type="button" onclick="sendCommand('play', []);">play</button>
 		<button type="button" onclick="sendCommand('pause', [ 'true' ]);">pause</button>
 		<button type="button" onclick="sendCommand('pause', [ 'false' ]);">unpause</button>
+		<button type="button" onclick="sendCommand('next', []);">next &gt;&gt;</button>
 
 		<br/>
 
