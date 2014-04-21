@@ -1,6 +1,6 @@
--module(ws_handler).
--behaviour(cowboy_websocket_handler).
+-module( mpdui_websocket ).
 
+-behaviour( cowboy_websocket_handler ).
 -export( [ init/3, websocket_init/3, websocket_handle/3, websocket_info/3, websocket_terminate/3 ] ).
 
 init( { tcp, http }, _Req, _Opts ) ->
