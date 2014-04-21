@@ -141,7 +141,10 @@
 
       <div id="mpd-controls-database">
 		<h2>MPD: Database</h2>
-		<input type='text' id="search_type" value="artist" readonly="readonly"/>
+		<select id="search_type">
+			<option>artist</option>
+			<option>title</option>
+		</select>
 		<input type='text' id="search_txt" value=""/>
 		<button type="button" onclick="sendSearch();">search</button>
       </div>
