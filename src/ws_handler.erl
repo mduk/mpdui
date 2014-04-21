@@ -8,7 +8,12 @@ init( { tcp, http }, _Req, _Opts ) ->
 
 websocket_init( _, Req, _ ) ->
 	{ ok, C } = erlmpd:connect(),
-	mpdui_poller_currentsong:start_link( self(), C ),
+	WsHandler = self(),
+	spawn_link( fun() ->
+		mpdui_poller_currentsong:start_link( WsHandler, C, 1000 ),
+		timer:sleep( 500 ),
+		mpdui_poller_status:start_link( WsHandler, C, 1000 )
+	end ),
 	{ ok, Req, C }.
 
 websocket_handle( { text, RawMsg }, Req, C ) ->
@@ -27,6 +32,11 @@ websocket_handle( _, Req, C ) ->
 websocket_info( { mpd_now_playing, Playing }, Req, C ) ->
 	Message = { struct, [
 		{ <<"now_playing">>, { struct, Playing } } 
+	] },
+	{ reply, { text, mochijson2:encode( Message ) }, Req, C };
+websocket_info( { mpd_status, Status }, Req, C ) ->
+	Message = { struct, [
+		{ <<"status">>, { struct, Status } } 
 	] },
 	{ reply, { text, mochijson2:encode( Message ) }, Req, C };
 websocket_info( _, Req, C ) ->
