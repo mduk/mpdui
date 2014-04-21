@@ -70,6 +70,12 @@
 		] );
       };
 
+	function sendPlayid() {
+		sendCommand( 'playid', [
+			parseInt( $("#playid_txt").val() )
+		] );
+	};
+
       function onOpen(evt) { 
           showScreen('<span style="color: green;">CONNECTED </span>'); 
           $("#connected").fadeIn('slow');
@@ -127,6 +133,12 @@
 		<button type="button" onclick="sendCommand('play', []);">play</button>
 		<button type="button" onclick="sendCommand('pause', [ 'true' ]);">pause</button>
 		<button type="button" onclick="sendCommand('pause', [ 'false' ]);">unpause</button>
+
+		<br/>
+
+		<input type='text' id="playid_txt" value=></input>
+		<button type="button" onclick="sendPlayid();">playid</button>
+
       </div>
 
 		<hr/>

@@ -20,6 +20,13 @@ execute( C, <<"play">>, [ Position ] ) when is_integer( Position ) ->
 	ok( erlmpd:play( C, Position ) );
 execute( _, <<"play">>, [ _ ] ) ->
 	error_msg( <<"First argument must be an integer">> );
+execute( C, <<"playid">>, [] ) ->
+	ok( erlmpd:playid( C ) );
+execute( C, <<"playid">>, [ Id ] ) when is_integer( Id ) ->
+	ok( erlmpd:playid( C, Id ) );
+execute( _, <<"playid">>, [ _ ] ) ->
+	error_msg( <<"First argument must be an integer">> );
+
 
 %% Current Playlist
 
