@@ -10,7 +10,10 @@
 
 execute( C, <<"next">>, [] ) ->
 	ok( erlmpd:next( C ) );
-
+execute( C, <<"pause">>, [ <<"true">> ] ) ->
+	ok( erlmpd:pause( C, true ) );
+execute( C, <<"pause">>, [ <<"false">> ] ) ->
+	ok( erlmpd:pause( C, false ) );
 %% Current Playlist
 
 execute( C, <<"add">>, [ Uri ] ) ->
