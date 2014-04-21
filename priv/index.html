@@ -76,6 +76,13 @@
 		] );
 	};
 
+	function sendSeek() {
+		sendCommand( 'seek', [
+			parseInt( $("#seek_position_txt").val() ),
+			parseInt( $("#seek_time_txt").val() )
+		] );
+	};
+
       function onOpen(evt) { 
           showScreen('<span style="color: green;">CONNECTED </span>'); 
           $("#connected").fadeIn('slow');
@@ -120,7 +127,7 @@
       </p>
       <div id="connected">				
 		<p>
-		  <input type='text' id="send_txt" value=></input>
+		  <input type='text' id="send_txt"</input>
 		  <button type="button" onclick="sendTxt();">send</button>
 		</p>
       </div>
@@ -137,8 +144,14 @@
 
 		<br/>
 
-		<input type='text' id="playid_txt" value=></input>
+		<input type='text' id="playid_txt"</input>
 		<button type="button" onclick="sendPlayid();">playid</button>
+
+		<br/>
+
+		<input type='text' id="seek_position_txt"</input>
+		<input type='text' id="seek_time_txt"></input>
+		<button type="button" onclick="sendSeek();">seek</button>
 
       </div>
 

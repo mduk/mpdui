@@ -28,6 +28,8 @@ execute( _, <<"playid">>, [ _ ] ) ->
 	error_msg( <<"First argument must be an integer">> );
 execute( C, <<"previous">>, [] ) ->
 	ok( erlmpd:previous( C ) );
+execute( C, <<"seek">>, [ Position, Time ] ) when is_integer( Position ) and is_integer( Time ) ->
+	ok( erlmpd:seek( C, Position, Time ) );
 
 %% Current Playlist
 
