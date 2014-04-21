@@ -10,26 +10,33 @@
 
 execute( C, <<"next">>, [] ) ->
 	ok( erlmpd:next( C ) );
+
 execute( C, <<"pause">>, [ <<"true">> ] ) ->
 	ok( erlmpd:pause( C, true ) );
 execute( C, <<"pause">>, [ <<"false">> ] ) ->
 	ok( erlmpd:pause( C, false ) );
+
 execute( C, <<"play">>, [] ) ->
 	ok( erlmpd:play( C ) );
 execute( C, <<"play">>, [ Position ] ) when is_integer( Position ) ->
 	ok( erlmpd:play( C, Position ) );
 execute( _, <<"play">>, [ _ ] ) ->
 	error_msg( <<"First argument must be an integer">> );
+
 execute( C, <<"playid">>, [] ) ->
 	ok( erlmpd:playid( C ) );
 execute( C, <<"playid">>, [ Id ] ) when is_integer( Id ) ->
 	ok( erlmpd:playid( C, Id ) );
 execute( _, <<"playid">>, [ _ ] ) ->
 	error_msg( <<"First argument must be an integer">> );
+
 execute( C, <<"previous">>, [] ) ->
 	ok( erlmpd:previous( C ) );
+
 execute( C, <<"seek">>, [ Position, Time ] ) when is_integer( Position ) and is_integer( Time ) ->
 	ok( erlmpd:seek( C, Position, Time ) );
+execute( C, <<"seek">>, [ _, _ ] ) ->
+	error_msg( <<"Position and Time arguments must be integers">> );
 
 %% Current Playlist
 
