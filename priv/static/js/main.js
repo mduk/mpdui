@@ -20,16 +20,59 @@ require( [ 'jquery', 'wsmpd' ], function( jquery, wsmpd ) {
 		wsmpd.send( jquery("#send_txt").val() );
 	} );
 
+	// Status
+
 	jquery('#cmd-currentsong').click( function() {
-		wsmpd.sendCommand( 'currentsong', [] );
+		wsmpd.currentsong();
 	} );
 
-	jquery('#cmd-search').click( function() {
-		wsmpd.sendCommand( 'search', [
-			jquery("#search_type").val(),
-			jquery("#search_txt").val()
-		] );
+	jquery('#cmd-status').click( function() {
+		wsmpd.status();
 	} );
+
+	jquery('#cmd-stats').click( function() {
+		wsmpd.stats();
+	} );
+
+	// Playback Options
+
+	jquery('#cmd-consume').click( function() {
+		wsmpd.consume(
+			parseInt( jquery("#consume_state_txt").val() )
+		);
+	} );
+
+	jquery('#cmd-crossfade').click( function() {
+		wsmpd.crossfade(
+			parseInt( jquery("#crossfade_seconds_txt").val() )
+		);
+	} );
+
+	jquery('#cmd-random').click( function() {
+		wsmpd.random(
+			parseInt( jquery("#random_state_txt").val() )
+		);
+	} );
+
+	jquery('#cmd-repeat').click( function() {
+		wsmpd.repeat(
+			parseInt( jquery("#repeat_state_txt").val() )
+		);
+	} );
+
+	jquery('#cmd-setvol').click( function() {
+		wsmpd.setvol(
+			parseInt( jquery("#setvol_vol_txt").val() )
+		);
+	} );
+
+	jquery('#cmd-single').click( function() {
+		wsmpd.single(
+			parseInt( jquery("#single_state_txt").val() )
+		);
+	} );
+
+	// Current Playlist
 
 	jquery('#cmd-previous').click( function() {
 		wsmpd.sendCommand( 'previous', [] );
@@ -81,6 +124,8 @@ require( [ 'jquery', 'wsmpd' ], function( jquery, wsmpd ) {
 		] );
 	} );
 
+	// Playback
+
 	jquery('#cmd-playlist').click( function() {
 		wsmpd.sendCommand( 'playlist', [] );
 	} );
@@ -92,6 +137,17 @@ require( [ 'jquery', 'wsmpd' ], function( jquery, wsmpd ) {
 	jquery('#cmd-clear').click( function() {
 		wsmpd.sendCommand( 'clear', [] );
 	} );
+
+	// Database
+
+	jquery('#cmd-search').click( function() {
+		wsmpd.sendCommand( 'search', [
+			jquery("#search_type").val(),
+			jquery("#search_txt").val()
+		] );
+	} );
+
+	// Output Device
 
 	jquery('#cmd-disableoutput').click( function() {
 		wsmpd.sendCommand( 'disableoutput', [
@@ -108,42 +164,6 @@ require( [ 'jquery', 'wsmpd' ], function( jquery, wsmpd ) {
 	jquery('#cmd-toggleoutput').click( function() {
 		wsmpd.sendCommand( 'toggleoutput', [
 			parseInt( jquery("#toggleoutput_id_txt").val() )
-		] );
-	} );
-
-	jquery('#cmd-consume').click( function() {
-		wsmpd.sendCommand( 'consume', [
-			parseInt( jquery("#consume_state_txt").val() )
-		] );
-	} );
-
-	jquery('#cmd-crossfade').click( function() {
-		wsmpd.sendCommand( 'crossfade', [
-			parseInt( jquery("#crossfade_seconds_txt").val() )
-		] );
-	} );
-
-	jquery('#cmd-random').click( function() {
-		wsmpd.sendCommand( 'random', [
-			parseInt( jquery("#random_state_txt").val() )
-		] );
-	} );
-
-	jquery('#cmd-repeat').click( function() {
-		wsmpd.sendCommand( 'repeat', [
-			parseInt( jquery("#repeat_state_txt").val() )
-		] );
-	} );
-
-	jquery('#cmd-setvol').click( function() {
-		wsmpd.sendCommand( 'setvol', [
-			parseInt( jquery("#setvol_vol_txt").val() )
-		] );
-	} );
-
-	jquery('#cmd-single').click( function() {
-		wsmpd.sendCommand( 'single', [
-			parseInt( jquery("#single_state_txt").val() )
 		] );
 	} );
 
