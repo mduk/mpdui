@@ -153,28 +153,29 @@
 		<button type="button" onclick="sendCommand('play', []);">play</button>
 		<button type="button" onclick="sendCommand('pause', [ 'true' ]);">pause</button>
 		<button type="button" onclick="sendCommand('pause', [ 'false' ]);">unpause</button>
+		<button type="button" onclick="sendCommand('stop', []);">stop</button>
 		<button type="button" onclick="sendCommand('next', []);">next &gt;&gt;</button>
 
 		<br/>
 
-		<input type='text' id="playid_txt"</input>
+		<input type='text' id="playid_txt" placeholder="id"/>
 		<button type="button" onclick="sendPlayid();">playid</button>
 
 		<br/>
 
-		<input type='text' id="seek_position_txt"</input>
-		<input type='text' id="seek_time_txt"></input>
+		<input type='text' id="seek_position_txt" placeholder="position"/>
+		<input type='text' id="seek_time_txt" placeholder="time"/>
 		<button type="button" onclick="sendSeek();">seek</button>
 
 		<br/>
 
-		<input type='text' id="seekid_id_txt"</input>
-		<input type='text' id="seekid_time_txt"></input>
+		<input type='text' id="seekid_id_txt" placeholder="id"/>
+		<input type='text' id="seekid_time_txt" placeholder="time"/>
 		<button type="button" onclick="sendSeekid();">seekid</button>
 
 		<br/>
 
-		<input type='text' id="seekcur_time_txt" disabled="disabled"></input>
+		<input type='text' id="seekcur_time_txt" placeholder="time" disabled="disabled"></input>
 		<button type="button" onclick="sendSeekcur();" disabled="disabled">seekcur</button>
 
       </div>

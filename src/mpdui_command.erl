@@ -46,6 +46,9 @@ execute( _, <<"seekid">>, _ ) ->
 execute( _, <<"seekcur">>, _ ) ->
 	error_msg( <<"erlmpd doesn't seem to have that one... :(">> );
 
+execute( C, <<"stop">>, [] ) ->
+	ok( erlmpd:stop( C ) );
+
 %% Current Playlist
 
 execute( C, <<"add">>, [ Uri ] ) ->
