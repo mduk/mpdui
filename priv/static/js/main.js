@@ -2,13 +2,20 @@ require.config( {
 	paths: {
 		"jquery"   : "/static/bower_components/jquery/dist/jquery.min",
 		"wsmpd"    : "/static/js/wsmpd",
-		"mustache" : "/static/bower_components/mustache/mustache"
+		"mustache" : "/static/bower_components/mustache/mustache",
+		"bootstrap": "/static/bower_components/bootstrap/dist/js/bootstrap.min"
+	},
+	shim: {
+		"bootstrap": {
+			deps: [ "jquery" ],
+			exports: "$"
+		}
 	},
     enforceDefine: true,
 	waitSeconds: 10
 } );
 
-require( [ 'jquery', 'wsmpd', 'mustache' ], function( jquery, wsmpd, mustache ) {
+require( [ 'jquery', 'wsmpd', 'mustache', 'bootstrap' ], function( jquery, wsmpd, mustache ) {
 
 	wsmpd.registerCurrentsongCallback( function( currentsong ) {
 		var template = jquery('#tpl-currentsong').html();
