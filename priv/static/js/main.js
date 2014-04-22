@@ -72,7 +72,7 @@ require( [ 'jquery', 'wsmpd' ], function( jquery, wsmpd ) {
 		);
 	} );
 
-	// Current Playlist
+	// Controlling Playback
 
 	jquery('#cmd-previous').click( function() {
 		wsmpd.previous();
@@ -124,18 +124,18 @@ require( [ 'jquery', 'wsmpd' ], function( jquery, wsmpd ) {
 		);
 	} );
 
-	// Playback
+	// Current Playlist
 
 	jquery('#cmd-playlist').click( function() {
-		wsmpd.sendCommand( 'playlist', [] );
+		wsmpd.playlist();
 	} );
 
 	jquery('#cmd-playlistinfo').click( function() {
-		wsmpd.sendCommand( 'playlistinfo', [] );
+		wsmpd.playlistinfo();
 	} );
 
 	jquery('#cmd-clear').click( function() {
-		wsmpd.sendCommand( 'clear', [] );
+		wsmpd.clear();
 	} );
 
 	// Database
@@ -150,21 +150,21 @@ require( [ 'jquery', 'wsmpd' ], function( jquery, wsmpd ) {
 	// Output Device
 
 	jquery('#cmd-disableoutput').click( function() {
-		wsmpd.sendCommand( 'disableoutput', [
+		wsmpd.disableoutput(
 			parseInt( jquery("#disableoutput_id_txt").val() )
-		] );
+		);
 	} );
 
 	jquery('#cmd-enableoutput').click( function() {
-		wsmpd.sendCommand( 'enableoutput', [
+		wsmpd.enableoutput(
 			parseInt( jquery("#enableoutput_id_txt").val() )
-		] );
+		);
 	} );
 
 	jquery('#cmd-toggleoutput').click( function() {
-		wsmpd.sendCommand( 'toggleoutput', [
+		wsmpd.toggleoutput(
 			parseInt( jquery("#toggleoutput_id_txt").val() )
-		] );
+		);
 	} );
 
 	jquery(document).ready( function() {

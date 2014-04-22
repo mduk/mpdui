@@ -161,6 +161,24 @@ define( [ 'jquery' ], function( jquery ) {
 		playlistinfo: function() {
 			return sendCommand( 'playlistinfo', [] );
 		},
+
+		// Output Devices
+
+		disableoutput: function( id ) {
+			return sendCommand( 'disableoutput', [ id ] );
+		},
+
+		enableoutput: function( id ) {
+			return sendCommand( 'enableoutput', [ id ] );
+		},
+
+		toggleoutput: function( id ) {
+			return sendCommand( 'toggleoutput', [ id ] );
+		},
+
+		outputs: function() {
+			return sendCommand( 'outputs', [] );
+		}
 	};
 
 } );
