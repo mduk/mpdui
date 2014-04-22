@@ -74,8 +74,8 @@ define( [ 'jquery' ], function( jquery ) {
 
 		// Playback Options
 
-		consume: function() {
-			return sendCommand( 'consume', [] );
+		consume: function( state ) {
+			return sendCommand( 'consume', [ state ] );
 		},
 
 		crossfade: function() {
