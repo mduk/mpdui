@@ -120,14 +120,10 @@ execute( C, <<"playlist">>, [] ) ->
 
 	ResultsStruct = lists:map( fun( Result ) ->
 		[ _, [ _ | Path ] ] = string:tokens( binary_to_list( Result ), ":" ),
-		{ struct, [
-			{ <<"file">>, list_to_binary( Path ) }
-		] }
+		object( <<"file">>, list_to_binary( Path ) )
 	end, Results ),
 
-	{ struct, [
-		{ <<"playlist">>, ResultsStruct }
-	] };
+	object( <<"playlist">>, ResultsStruct );
 execute( C, <<"playlistinfo">>, [] ) ->
 	Results = erlmpd:playlistinfo( C ),
 
