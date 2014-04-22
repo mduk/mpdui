@@ -114,6 +114,11 @@ execute( C, <<"search">>, [ Type, What ] ) ->
 
 %% Audio Output Devices
 
+execute( C, <<"disableoutput">>, [ Id ] ) when is_integer( Id ) ->
+	ok( erlmpd:disableoutput( C, Id ) );
+execute( _, <<"disableoutput">>, _ ) ->
+	error_msg( <<"Id argument must be an integer">> );
+
 execute( C, <<"outputs">>, [] ) ->
 	Results = erlmpd:outputs( C ),
 
