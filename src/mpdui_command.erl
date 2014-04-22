@@ -113,22 +113,21 @@ execute( C, <<"addid">>, [ Uri, Position ] ) ->
 	{ struct, [
 		{ <<"id">>, SongId }
 	] };
+
 execute( C, <<"clear">>, [] ) ->
 	ok( erlmpd:clear( C ) );
+
 execute( C, <<"playlist">>, [] ) ->
 	Results = erlmpd:playlist( C ),
-
 	ResultsStruct = lists:map( fun( Result ) ->
 		[ _, [ _ | Path ] ] = string:tokens( binary_to_list( Result ), ":" ),
 		object( <<"file">>, list_to_binary( Path ) )
 	end, Results ),
-
 	object( <<"playlist">>, ResultsStruct );
+
 execute( C, <<"playlistinfo">>, [] ) ->
 	Results = erlmpd:playlistinfo( C ),
-
 	ResultsStruct = lists:map( fun object/1, Results ),
-
 	object( <<"playlistinfo">>, ResultsStruct );
 
 %% Stored Playlists
@@ -140,9 +139,7 @@ execute( C, <<"search">>, [ Type, What ] ) ->
 		binary_to_atom( Type, utf8 ), 
 		binary_to_list( What ) 
 	),
-
 	ResultsStruct = lists:map( fun object/1, Results ),
-
 	{ struct, [
 		{ <<"search">>, [ Type, What ] },
 		{ <<"results">>, ResultsStruct }
@@ -190,6 +187,8 @@ execute( _Connection, Command, Args ) ->
 		{ <<"cmd">>, Command },
 		{ <<"args">>, Args }
 	] }.
+
+%% Private Functions
 
 ok( ok ) -> { struct, [ { <<"ok">>, true } ] };
 ok( _ ) -> { struct, [ { <<"ok">>, false } ] }.
