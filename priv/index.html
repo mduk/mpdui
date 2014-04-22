@@ -126,6 +126,12 @@
 		] );
 	};
 
+	function sendRandom() {
+		sendCommand( 'random', [
+			parseInt( $("#random_state_txt").val() )
+		] );
+	};
+
       function onOpen(evt) { 
           showScreen('<span style="color: green;">CONNECTED </span>'); 
           $("#connected").fadeIn('slow');
@@ -197,6 +203,11 @@
 
 		<input type='text' id="mixrampdelay_seconds_txt" placeholder="seconds" disabled="disabled"/>
 		<button type="button" disabled="disabled">mixrampdelay</button>
+
+		<br/>
+
+		<input type='text' id="random_state_txt" placeholder="state 0/1"/>
+		<button type="button" onclick="sendRandom();">random</button>
 
 		<br/>
 

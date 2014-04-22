@@ -21,6 +21,11 @@ execute( _, <<"mixrampdb">>, _ ) ->
 execute( _, <<"mixrampdelay">>, _ ) ->
 	unsupported();
 
+execute( C, <<"random">>, [ 1 ] ) ->
+	ok( erlmpd:random( C, true ) );
+execute( C, <<"random">>, [ 0 ] ) ->
+	ok( erlmpd:random( C, false ) );
+
 %% Controlling Playback
 
 execute( C, <<"next">>, [] ) ->
