@@ -2,7 +2,8 @@ define( [ 'jquery' ], function( jquery ) {
 
 	var websocket,
 	    currentsongCallback,
-	    statusCallback;
+	    statusCallback,
+	    generalCallback;
 	
 	function send( txt ) {
 		if ( websocket.readyState == websocket.OPEN ) {
@@ -35,19 +36,22 @@ define( [ 'jquery' ], function( jquery ) {
 				console.log( "recv", message );
 
 				var statusEnabled = ( typeof statusCallback == 'function' );
-				var currentsongEnabled = ( typeof statusCallback == 'function' );
+				var currentsongEnabled = ( typeof currentsongCallback == 'function' );
+				var generalEnabled = ( typeof generalCallback == 'function' );
 
 				if ( statusEnabled && typeof message.status == 'object' ) {
 					statusCallback( message.status );
 				}
-
-				if ( currentsongEnabled && typeof message.currentsong == 'object' ) {
+				else if ( currentsongEnabled && typeof message.currentsong == 'object' ) {
 					currentsongCallback( message.currentsong );
 				}
-
-				if ( currentsongEnabled && typeof message.now_playing == 'object' ) {
+				else if ( currentsongEnabled && typeof message.now_playing == 'object' ) {
 					currentsongCallback( message.now_playing );
 				}
+				else if ( generalEnabled ) {
+					generalCallback( message );
+				}
+				
 			};
 	
 			websocket.onerror = function(evt) {
@@ -72,6 +76,10 @@ define( [ 'jquery' ], function( jquery ) {
 
 		registerStatusCallback: function( callback ) {
 			statusCallback = callback;
+		},
+		
+		registerCallback: function( callback ) {
+			generalCallback = callback;
 		},
 		
 		// Status

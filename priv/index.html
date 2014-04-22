@@ -24,8 +24,15 @@
 			<p><span id="currentsong-position">{{position}}</span>/<span>{{duration}}</span></p>
 		</script>
 
+		<script id="tpl-queue-row" type="x-tmpl-mustache">
+			<tr>
+				<td>{{Title}}</td>
+				<td>{{Album}}</td>
+			</tr>
+		</script>
+
 		<div class="row">
-			<div class="col-md-10">
+			<div class="col-md-9">
 
 				<div id="currentsong" class="jumbotron">
 					<h1 id="currentsong-title">title</h1>
@@ -175,13 +182,12 @@
 				</div>
 			</div>
 
-			<div class="col-md-2">
+			<div class="col-md-3">
 				<h2>Queue</h2>
-				<table id="playlist">
+				<table id="queue">
 					<thead>
-						<th>Position</th>
 						<th>Title</th>
-						<th>Artist</th>
+						<th>Album</th>
 					</thead>
 					<tbody>
 					</tbody>

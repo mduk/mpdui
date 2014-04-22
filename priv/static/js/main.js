@@ -24,6 +24,20 @@ require( [ 'jquery', 'wsmpd', 'mustache' ], function( jquery, wsmpd, mustache ) 
 		jquery('#currentsong-position').html( Math.round( status.time ).toString() );
 	} );
 
+	wsmpd.registerCallback( function( message ) {
+		if ( typeof message.playlistinfo == 'object' ) {
+			var template = jquery('#tpl-queue-row').html();
+			mustache.parse( template );
+
+			jquery('#queue tbody').html('');
+			message.playlistinfo.forEach( function( Elem ) {
+				jquery('#queue tbody').append(
+					jquery( mustache.render( template, Elem ) )
+				);
+			} );
+		}
+	} );
+
 	jquery('#btn-toggleconnection').click( function() {
 		if ( wsmpd.isConnected() ) {
 			wsmpd.disconnect();
