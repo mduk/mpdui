@@ -1,7 +1,7 @@
 require.config( {
 	paths: {
-		"jquery" : "/static/bower_components/jquery/dist/jquery.min",
-		"wsmpd"  : "/static/js/wsmpd"
+		"jquery"   : "/static/bower_components/jquery/dist/jquery.min",
+		"wsmpd"    : "/static/js/wsmpd"
 	},
 	waitSeconds: 10
 } );
