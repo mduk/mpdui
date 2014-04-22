@@ -132,6 +132,12 @@
 		] );
 	};
 
+	function sendRepeat() {
+		sendCommand( 'repeat', [
+			parseInt( $("#repeat_state_txt").val() )
+		] );
+	};
+
       function onOpen(evt) { 
           showScreen('<span style="color: green;">CONNECTED </span>'); 
           $("#connected").fadeIn('slow');
@@ -211,7 +217,8 @@
 
 		<br/>
 
-		<!-- next -->
+		<input type='text' id="repeat_state_txt" placeholder="state 0/1"/>
+		<button type="button" onclick="sendRepeat();">repeat</button>
       </div>
 
 		<hr/>

@@ -26,6 +26,11 @@ execute( C, <<"random">>, [ 1 ] ) ->
 execute( C, <<"random">>, [ 0 ] ) ->
 	ok( erlmpd:random( C, false ) );
 
+execute( C, <<"repeat">>, [ 1 ] ) ->
+	ok( erlmpd:repeat( C, true ) );
+execute( C, <<"repeat">>, [ 0 ] ) ->
+	ok( erlmpd:repeat( C, false ) );
+
 %% Controlling Playback
 
 execute( C, <<"next">>, [] ) ->
