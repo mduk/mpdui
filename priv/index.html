@@ -18,162 +18,174 @@
 	</head>
 	<body>
 
-    <div id="navigation">
+		<div class="row">
+			<div class="col-md-8">
 
-      <p id="connecting">
-		<input type='text' id="server" value="ws://localhost:45001/websocket"></input>
-		<button type="button" class="btn btn-default" id="btn-toggleconnection">connection</button>
-      </p>
-      <div id="connected">				
-		<p>
-		  <input type='text' id="send_txt"</input>
-		  <button type="button" class="btn btn-default" id="cmd-sendtext">send</button>
-		</p>
-      </div>
 
-      <div id="mpd-controls-status">
-		<h2>MPD: Status</h2>
-		<button type="button" class="btn btn-default" id="cmd-currentsong">currentsong</button>
-		<button type="button" class="btn btn-default" id="cmd-status">status</button>
-		<button type="button" class="btn btn-default" id="cmd-stats">stats</button>
-      </div>
 
-		<hr/>
+				<div id="navigation">
 
-      <div id="mpd-controls-playbackoptions">
-		<h2>MPD: Playback Options</h2>
+					<p id="connecting">
+						<input type='text' id="server" value="ws://localhost:45001/websocket"></input>
+						<button type="button" class="btn btn-default" id="btn-toggleconnection">connection</button>
+					</p>
 
-		<input type='text' id="consume_state_txt" placeholder="state 0/1"/>
-		<button type="button" class="btn btn-default" id="cmd-consume">consume</button>
+					<div id="connected">
+						<p>
+							<input type='text' id="send_txt"</input>
+							<button type="button" class="btn btn-default" id="cmd-sendtext">send</button>
+						</p>
+					</div>
 
-		<br/>
+					<div id="mpd-controls-status">
+						<h2>MPD: Status</h2>
+						<button type="button" class="btn btn-default" id="cmd-currentsong">currentsong</button>
+						<button type="button" class="btn btn-default" id="cmd-status">status</button>
+						<button type="button" class="btn btn-default" id="cmd-stats">stats</button>
+					</div>
 
-		<input type='text' id="crossfade_seconds_txt" placeholder="seconds"/>
-		<button type="button" class="btn btn-default" id="cmd-crossfade">crossfade</button>
+					<hr/>
 
-		<br/>
+					<div id="mpd-controls-playbackoptions">
+						<h2>MPD: Playback Options</h2>
 
-		<input type='text' id="mixrampdb_decibels_txt" placeholder="decibels" disabled="disabled"/>
-		<button type="button" class="btn btn-default" disabled="disabled">mixrampdb</button>
+						<input type='text' id="consume_state_txt" placeholder="state 0/1"/>
+						<button type="button" class="btn btn-default" id="cmd-consume">consume</button>
 
-		<br/>
+						<br/>
 
-		<input type='text' id="mixrampdelay_seconds_txt" placeholder="seconds" disabled="disabled"/>
-		<button type="button" class="btn btn-default" disabled="disabled">mixrampdelay</button>
+						<input type='text' id="crossfade_seconds_txt" placeholder="seconds"/>
+						<button type="button" class="btn btn-default" id="cmd-crossfade">crossfade</button>
 
-		<br/>
+						<br/>
 
-		<input type='text' id="random_state_txt" placeholder="state 0/1"/>
-		<button type="button" class="btn btn-default" id="cmd-random">random</button>
+						<input type='text' id="mixrampdb_decibels_txt" placeholder="decibels" disabled="disabled"/>
+						<button type="button" class="btn btn-default" disabled="disabled">mixrampdb</button>
 
-		<br/>
+						<br/>
 
-		<input type='text' id="repeat_state_txt" placeholder="state 0/1"/>
-		<button type="button" class="btn btn-default" id="cmd-repeat">repeat</button>
+						<input type='text' id="mixrampdelay_seconds_txt" placeholder="seconds" disabled="disabled"/>
+						<button type="button" class="btn btn-default" disabled="disabled">mixrampdelay</button>
 
-		<br/>
+						<br/>
 
-		<input type='text' id="setvol_vol_txt" placeholder="vol 0-100"/>
-		<button type="button" class="btn btn-default" id="cmd-setvol">setvol</button>
+						<input type='text' id="random_state_txt" placeholder="state 0/1"/>
+						<button type="button" class="btn btn-default" id="cmd-random">random</button>
 
-		<br/>
+						<br/>
 
-		<input type='text' id="single_state_txt" placeholder="state 0-100"/>
-		<button type="button" class="btn btn-default" id="cmd-single">single</button>
-      </div>
+						<input type='text' id="repeat_state_txt" placeholder="state 0/1"/>
+						<button type="button" class="btn btn-default" id="cmd-repeat">repeat</button>
 
-		<hr/>
+						<br/>
 
-      <div id="mpd-controls-controllingplayback">
-		<h2>MPD: Controlling Playback</h2>
-		<button type="button" class="btn btn-default" id="cmd-previous">&lt;&lt; previous</button>
-		<button type="button" class="btn btn-default" id="cmd-pause">pause</button>
-		<button type="button" class="btn btn-default" id="cmd-unpause">unpause</button>
-		<button type="button" class="btn btn-default" id="cmd-stop">stop</button>
-		<button type="button" class="btn btn-default" id="cmd-next">next &gt;&gt;</button>
+						<input type='text' id="setvol_vol_txt" placeholder="vol 0-100"/>
+						<button type="button" class="btn btn-default" id="cmd-setvol">setvol</button>
 
-		<br/>
+						<br/>
 
-		<input type='text' id="cmd-play-position" placeholder="position"/>
-		<button type="button" class="btn btn-default" id="cmd-play">play</button>
+						<input type='text' id="single_state_txt" placeholder="state 0-100"/>
+						<button type="button" class="btn btn-default" id="cmd-single">single</button>
+					</div>
 
-		<br/>
+					<hr/>
 
-		<input type='text' id="playid_txt" placeholder="id"/>
-		<button type="button" class="btn btn-default" id="cmd-playid">playid</button>
+					<div id="mpd-controls-controllingplayback">
+						<h2>MPD: Controlling Playback</h2>
 
-		<br/>
+						<button type="button" class="btn btn-default" id="cmd-previous">&lt;&lt; previous</button>
+						<button type="button" class="btn btn-default" id="cmd-pause">pause</button>
+						<button type="button" class="btn btn-default" id="cmd-unpause">unpause</button>
+						<button type="button" class="btn btn-default" id="cmd-stop">stop</button>
+						<button type="button" class="btn btn-default" id="cmd-next">next &gt;&gt;</button>
 
-		<input type='text' id="seek_position_txt" placeholder="position"/>
-		<input type='text' id="seek_time_txt" placeholder="time"/>
-		<button type="button" class="btn btn-default" id="cmd-seek">seek</button>
+						<br/>
 
-		<br/>
+						<input type='text' id="cmd-play-position" placeholder="position"/>
+						<button type="button" class="btn btn-default" id="cmd-play">play</button>
 
-		<input type='text' id="seekid_id_txt" placeholder="id"/>
-		<input type='text' id="seekid_time_txt" placeholder="time"/>
-		<button type="button" class="btn btn-default" id="cmd-seekid">seekid</button>
+						<br/>
 
-		<br/>
+						<input type='text' id="playid_txt" placeholder="id"/>
+						<button type="button" class="btn btn-default" id="cmd-playid">playid</button>
 
-		<input type='text' id="seekcur_time_txt" placeholder="time" disabled="disabled"></input>
-		<button type="button" class="btn btn-default" id="cmd-seekcur" disabled="disabled">seekcur</button>
+						<br/>
 
-      </div>
+						<input type='text' id="seek_position_txt" placeholder="position"/>
+						<input type='text' id="seek_time_txt" placeholder="time"/>
+						<button type="button" class="btn btn-default" id="cmd-seek">seek</button>
 
-		<hr/>
+						<br/>
 
-      <div id="mpd-controls-currentplaylist">
-		<h2>MPD: Current Playlist</h2>
-		<button type="button" class="btn btn-default" id="cmd-playlist">playlist</button>
-		<button type="button" class="btn btn-default" id="cmd-playlistinfo">playlistinfo</button>
-		<button type="button" class="btn btn-default" id="cmd-clear">clear</button>
-      </div>
+						<input type='text' id="seekid_id_txt" placeholder="id"/>
+						<input type='text' id="seekid_time_txt" placeholder="time"/>
+						<button type="button" class="btn btn-default" id="cmd-seekid">seekid</button>
 
-		<hr/>
+						<br/>
 
-      <div id="mpd-controls-database">
-		<h2>MPD: Database</h2>
-		<select id="search_type">
-			<option>artist</option>
-			<option>title</option>
-		</select>
-		<input type='text' id="search_txt" value=""/>
-		<button type="button" class="btn btn-default" id="cmd-search">search</button>
-      </div>
+						<input type='text' id="seekcur_time_txt" placeholder="time" disabled="disabled"></input>
+						<button type="button" class="btn btn-default" id="cmd-seekcur" disabled="disabled">seekcur</button>
 
-		<hr/>
+					</div>
 
-      <div id="mpd-controls-outputdevices">
-		<h2>MPD: Output Device</h2>
-		<button type="button" class="btn btn-default" id="cmd-outputs">outputs</button>
+					<hr/>
 
-		<br/>
+					<div id="mpd-controls-currentplaylist">
+						<h2>MPD: Current Playlist</h2>
 
-		<input type='text' id="disableoutput_id_txt" placeholder="id"></input>
-		<button type="button" class="btn btn-default" id="cmd-disableoutput">disableoutput</button>
+						<button type="button" class="btn btn-default" id="cmd-playlist">playlist</button>
+						<button type="button" class="btn btn-default" id="cmd-playlistinfo">playlistinfo</button>
+						<button type="button" class="btn btn-default" id="cmd-clear">clear</button>
+					</div>
 
-		<br/>
+					<hr/>
 
-		<input type='text' id="enableoutput_id_txt" placeholder="id"></input>
-		<button type="button" class="btn btn-default" id="cmd-enableoutput">enableoutput</button>
+					<div id="mpd-controls-database">
+						<h2>MPD: Database</h2>
 
-		<br/>
+						<select id="search_type">
+							<option>artist</option>
+							<option>title</option>
+						</select>
+						<input type='text' id="search_txt" value=""/>
+						<button type="button" class="btn btn-default" id="cmd-search">search</button>
+					</div>
 
-		<input type='text' id="toggleoutput_id_txt" placeholder="id" disabled="disabled"></input>
-		<button type="button" class="btn btn-default" id="cmd-toggleoutput" disabled="disabled">toggleoutput</button>
-      </div>
+					<hr/>
 
-		<hr/>
+					<div id="mpd-controls-outputdevices">
+						<h2>MPD: Output Device</h2>
 
-      <div id="content">						
-		<div id="output"></div>
-      </div>
+						<button type="button" class="btn btn-default" id="cmd-outputs">outputs</button>
 
-    </div>
+						<br/>
+
+						<input type='text' id="disableoutput_id_txt" placeholder="id"></input>
+						<button type="button" class="btn btn-default" id="cmd-disableoutput">disableoutput</button>
+
+						<br/>
+
+						<input type='text' id="enableoutput_id_txt" placeholder="id"></input>
+						<button type="button" class="btn btn-default" id="cmd-enableoutput">enableoutput</button>
+
+						<br/>
+
+						<input type='text' id="toggleoutput_id_txt" placeholder="id" disabled="disabled"></input>
+						<button type="button" class="btn btn-default" id="cmd-toggleoutput" disabled="disabled">toggleoutput</button>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="jumbotron">
+					<h1>Hello, world!</h1>
+					<p>...</p>
+					<p><a class="btn btn-primary btn-lg" role="button">Learn more</a></p>
+				</div>
+			</div>
+		</div>
+
+
 
 		<script data-main="static/js/main" src="static/bower_components/requirejs/require.js"></script>
-		<!-- Include all compiled plugins (below), or include individual files as needed -->
-		<script src="js/bootstrap.min.js"></script>
 	</body>
 </html>
