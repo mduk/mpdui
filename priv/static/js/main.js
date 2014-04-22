@@ -75,53 +75,53 @@ require( [ 'jquery', 'wsmpd' ], function( jquery, wsmpd ) {
 	// Current Playlist
 
 	jquery('#cmd-previous').click( function() {
-		wsmpd.sendCommand( 'previous', [] );
+		wsmpd.previous();
 	} );
 
 	jquery('#cmd-play').click( function() {
-		wsmpd.sendCommand( 'play', [] );
+		wsmpd.play();
 	} );
 
 	jquery('#cmd-pause').click( function() {
-		wsmpd.sendCommand( 'pause', [ 1 ] );
+		wsmpd.pause( 1 );
 	} );
 
 	jquery('#cmd-unpause').click( function() {
-		wsmpd.sendCommand( 'pause', [ 0 ] );
+		wsmpd.pause( 0 );
 	} );
 
 	jquery('#cmd-stop').click( function() {
-		wsmpd.sendCommand( 'stop', [] );
+		wsmpd.stop();
 	} );
 
 	jquery('#cmd-next').click( function() {
-		wsmpd.sendCommand( 'next', [] );
+		wsmpd.next();
 	} );
 
 	jquery('#cmd-playid').click( function() {
-		wsmpd.sendCommand( 'playid', [
+		wsmpd.playid(
 			parseInt( jquery("#playid_txt").val() )
-		] );
+		);
 	} );
 
 	jquery('#cmd-seek').click( function() {
-		wsmpd.sendCommand( 'seek', [
+		wsmpd.seek(
 			parseInt( jquery("#seek_position_txt").val() ),
 			parseInt( jquery("#seek_time_txt").val() )
-		] );
+		);
 	} );
 
 	jquery('#cmd-seekid').click( function() {
-		wsmpd.sendCommand( 'seekid', [
+		wsmpd.seekid(
 			parseInt( jquery("#seekid_id_txt").val() ),
 			parseInt( jquery("#seekid_time_txt").val() )
-		] );
+		);
 	} );
 
 	jquery('#cmd-seekcur').click( function() {
-		wsmpd.sendCommand( 'seekcur', [
+		wsmpd.seekcur(
 			parseInt( jquery("#seekcur_time_txt").val() )
-		] );
+		);
 	} );
 
 	// Playback

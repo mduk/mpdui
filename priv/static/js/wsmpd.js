@@ -110,7 +110,47 @@ define( [ 'jquery' ], function( jquery ) {
 			return sendCommand( 'single', [ state ] );
 		},
 
+		// Controlling Playback
+
+		next: function() {
+			return sendCommand( 'next', [] );
+		},
+
+		pause: function( state ) {
+			return sendCommand( 'pause', [ state ] );
+		},
+
+		play: function( position ) {
+			return sendCommand( 'play', [ position ] );
+		},
+
+		playid: function( id ) {
+			return sendCommand( 'playid', [ id ] );
+		},
+
+		previous: function() {
+			return sendCommand( 'previous', [] );
+		},
+
+		seek: function( position, time ) {
+			return sendCommand( 'seek', [ position, time ] );
+		},
+
+		seekid: function( id, time ) {
+			return sendCommand( 'seekid', [ id, time ] );
+		},
+
+		seekcur: function( time ) {
+			return sendCommand( 'seekcur', [ time ] );
+		},
+
+		stop: function() {
+			return sendCommand( 'stop', [] );
+		}
+
 		// Current Playlist
+
+
 	};
 
 } );
