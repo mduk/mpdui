@@ -1,6 +1,8 @@
 define( [ 'jquery' ], function( jquery ) {
 
-	var websocket;
+	var websocket,
+	    currentsongCallback,
+	    statusCallback;
 	
 	function showScreen(txt) {
 		jquery('#output').prepend('<p>' + txt + '</p>');
@@ -38,7 +40,23 @@ define( [ 'jquery' ], function( jquery ) {
 	
 			websocket.onmessage = function(evt) {
 				var message = JSON.parse( evt.data );
-				console.log( "wsmpd received", message );
+
+				console.log( "recv", message );
+
+				var statusEnabled = ( typeof statusCallback == 'function' );
+				var currentsongEnabled = ( typeof statusCallback == 'function' );
+
+				if ( statusEnabled && typeof message.status == 'object' ) {
+					statusCallback( message.status );
+				}
+
+				if ( currentsongEnabled && typeof message.currentsong == 'object' ) {
+					currentsongCallback( message.currentsong );
+				}
+
+				if ( currentsongEnabled && typeof message.now_playing == 'object' ) {
+					currentsongCallback( message.now_playing );
+				}
 			};
 	
 			websocket.onerror = function(evt) {
@@ -56,6 +74,14 @@ define( [ 'jquery' ], function( jquery ) {
 			} else {
 				return false;
 			}
+		},
+
+		registerCurrentsongCallback: function( callback ) {
+			currentsongCallback = callback;
+		},
+
+		registerStatusCallback: function( callback ) {
+			statusCallback = callback;
 		},
 		
 		// Status

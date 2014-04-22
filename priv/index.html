@@ -19,9 +19,14 @@
 	<body>
 
 		<div class="row">
-			<div class="col-md-8">
+			<div class="col-md-10">
 
-
+				<div class="jumbotron">
+					<h1 id="currentsong-title">title</h1>
+					<h2 id="currentsong-artist">artist</h2>
+					<p><span id="currentsong-position">0:00</span> - <span id="currentsong-duration">0:00</span></p>
+					<p><a class="btn btn-primary btn-lg" role="button">Learn more</a></p>
+				</div>
 
 				<div id="navigation">
 
@@ -175,13 +180,20 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-md-4">
-				<div class="jumbotron">
-					<h1>Hello, world!</h1>
-					<p>...</p>
-					<p><a class="btn btn-primary btn-lg" role="button">Learn more</a></p>
-				</div>
+
+			<div class="col-md-2">
+				<h2>Queue</h2>
+				<table id="playlist">
+					<thead>
+						<th>Position</th>
+						<th>Title</th>
+						<th>Artist</th>
+					</thead>
+					<tbody>
+					</tbody>
+				</table>
 			</div>
+
 		</div>
 
 

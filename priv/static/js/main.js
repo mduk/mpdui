@@ -8,6 +8,16 @@ require.config( {
 
 require( [ 'jquery', 'wsmpd' ], function( jquery, wsmpd ) {
 
+	wsmpd.registerCurrentsongCallback( function( currentsong ) {
+		jquery('#currentsong-title').html( currentsong.Title );
+		jquery('#currentsong-artist').html( currentsong.Artist );
+		jquery('#currentsong-duration').html( currentsong.Time );
+	} );
+
+	wsmpd.registerStatusCallback( function( status ) {
+		jquery('#currentsong-position').html( status.time.toString() );
+	} );
+
 	jquery('#btn-toggleconnection').click( function() {
 		if ( wsmpd.isConnected() ) {
 			wsmpd.disconnect();
