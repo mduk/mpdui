@@ -25,7 +25,7 @@ execute( C, <<"random">>, [ 1 ] ) ->
 	ok( erlmpd:random( C, true ) );
 execute( C, <<"random">>, [ 0 ] ) ->
 	ok( erlmpd:random( C, false ) );
-execute( _, <<"repeat">>, _ ) ->
+execute( _, <<"random">>, _ ) ->
 	error_msg( <<"State argument must be an integer, 0 or 1">> );
 
 execute( C, <<"repeat">>, [ 1 ] ) ->
@@ -39,6 +39,13 @@ execute( C, <<"setvol">>, [ Vol ] ) when is_integer( Vol ); Vol >= 0; Vol =< 100
 	ok( erlmpd:setvol( C, Vol ) );
 execute( _, <<"setvol">>, [ 0 ] ) ->
 	error_msg( <<"Volume argument must be an integer between 0 and 100 inclusive">> );
+
+execute( C, <<"single">>, [ 1 ] ) ->
+	ok( erlmpd:single( C, true ) );
+execute( C, <<"single">>, [ 0 ] ) ->
+	ok( erlmpd:single( C, false ) );
+execute( _, <<"single">>, _ ) ->
+	error_msg( <<"State argument must be an integer, 0 or 1">> );
 
 %% Controlling Playback
 

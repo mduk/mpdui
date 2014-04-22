@@ -144,6 +144,12 @@
 		] );
 	};
 
+	function sendSingle() {
+		sendCommand( 'single', [
+			parseInt( $("#single_state_txt").val() )
+		] );
+	};
+
       function onOpen(evt) { 
           showScreen('<span style="color: green;">CONNECTED </span>'); 
           $("#connected").fadeIn('slow');
@@ -230,6 +236,11 @@
 
 		<input type='text' id="setvol_vol_txt" placeholder="vol 0-100"/>
 		<button type="button" onclick="sendSetvol();">setvol</button>
+
+		<br/>
+
+		<input type='text' id="single_state_txt" placeholder="state 0/1"/>
+		<button type="button" onclick="sendSingle();">single</button>
       </div>
 
 		<hr/>
