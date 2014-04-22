@@ -31,6 +31,11 @@ execute( C, <<"repeat">>, [ 1 ] ) ->
 execute( C, <<"repeat">>, [ 0 ] ) ->
 	ok( erlmpd:repeat( C, false ) );
 
+execute( C, <<"setvol">>, [ Vol ] ) when is_integer( Vol ); Vol >= 0; Vol =< 100 ->
+	ok( erlmpd:setvol( C, Vol ) );
+execute( _, <<"setvol">>, [ 0 ] ) ->
+	error_msg( <<"Volume argument must be an integer between 0 and 100 inclusive">> );
+
 %% Controlling Playback
 
 execute( C, <<"next">>, [] ) ->
