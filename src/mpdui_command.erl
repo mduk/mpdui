@@ -140,9 +140,7 @@ execute( C, <<"playlist">>, [] ) ->
 execute( C, <<"playlistinfo">>, [] ) ->
 	Results = erlmpd:playlistinfo( C ),
 
-	ResultsStruct = lists:map( fun( Result ) ->
-		{ struct, Result }
-	end, Results ),
+	ResultsStruct = lists:map( fun object/1, Results ),
 
 	{ struct, [
 		{ <<"playlistinfo">>, ResultsStruct }
@@ -158,9 +156,7 @@ execute( C, <<"search">>, [ Type, What ] ) ->
 		binary_to_list( What ) 
 	),
 
-	ResultsStruct = lists:map( fun( Result ) ->
-		{ struct, Result }
-	end, Results ),
+	ResultsStruct = lists:map( fun object/1, Results ),
 
 	{ struct, [
 		{ <<"search">>, [ Type, What ] },
@@ -212,6 +208,8 @@ execute( _Connection, Command, Args ) ->
 
 ok( ok ) -> { struct, [ { <<"ok">>, true } ] };
 ok( _ ) -> { struct, [ { <<"ok">>, false } ] }.
+
+object( Proplist ) -> { struct, Proplist }.
 
 error_msg( Msg ) -> { struct, [
 	{ <<"ok">>, false },
