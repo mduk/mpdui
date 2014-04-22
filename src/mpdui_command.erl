@@ -5,22 +5,13 @@
 %% Status
 
 execute( C, <<"currentsong">>, [] ) ->
-	CurrentSong = erlmpd:currentsong( C ),
-	{ struct, [
-		{ <<"currentsong">>, { struct, CurrentSong } }
-	] };
+	object( <<"currentsong">>, object( erlmpd:currentsong( C ) ) );
 
 execute( C, <<"status">>, [] ) ->
-	Status = erlmpd:status( C ),
-	{ struct, [
-		{ <<"status">>, { struct, Status } }
-	] };
+	object( <<"status">>, object( erlmpd:status( C ) ) );
 
 execute( C, <<"stats">>, [] ) ->
-	Status = erlmpd:stats( C ),
-	{ struct, [
-		{ <<"stats">>, { struct, Status } }
-	] };
+	object( <<"stats">>, object( erlmpd:stats( C ) ) );
 
 %% Playback Options
 
@@ -210,6 +201,10 @@ ok( ok ) -> { struct, [ { <<"ok">>, true } ] };
 ok( _ ) -> { struct, [ { <<"ok">>, false } ] }.
 
 object( Proplist ) -> { struct, Proplist }.
+
+object( Key, Proplist ) -> { struct, [
+	{ Key, Proplist }
+] }.
 
 error_msg( Msg ) -> { struct, [
 	{ <<"ok">>, false },
