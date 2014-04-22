@@ -114,6 +114,17 @@ execute( C, <<"search">>, [ Type, What ] ) ->
 
 %% Audio Output Devices
 
+execute( C, <<"outputs">>, [] ) ->
+	Results = erlmpd:outputs( C ),
+
+	ResultsStruct = lists:map( fun( Result ) ->
+		{ struct, Result }
+	end, Results ),
+
+	{ struct, [
+		{ <<"outputs">>, ResultsStruct }
+	] };
+
 %% Unknown command
 
 execute( _Connection, Command, Args ) ->
