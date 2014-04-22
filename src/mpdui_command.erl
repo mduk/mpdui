@@ -63,10 +63,12 @@ execute( _, <<"single">>, _ ) ->
 execute( C, <<"next">>, [] ) ->
 	ok( erlmpd:next( C ) );
 
-execute( C, <<"pause">>, [ <<"true">> ] ) ->
+execute( C, <<"pause">>, [ 1 ] ) ->
 	ok( erlmpd:pause( C, true ) );
-execute( C, <<"pause">>, [ <<"false">> ] ) ->
+execute( C, <<"pause">>, [ 0 ] ) ->
 	ok( erlmpd:pause( C, false ) );
+execute( _, <<"pause">>, _ ) ->
+	error_msg( <<"State argument must be an integer, 0 or 1">> );
 
 execute( C, <<"play">>, [] ) ->
 	ok( erlmpd:play( C ) );

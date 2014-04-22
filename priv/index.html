@@ -2,181 +2,10 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <title>Websocket client</title>
-    <script src="/static/jquery.min.js"></script>
     <script data-main="static/js/main" src="static/bower_components/requirejs/require.js"></script>
     <script type="text/javascript">
       
-      var websocket;
-      $(document).ready(init);
       
-      function init() {
-          if(!("WebSocket" in window)){  
-              $('#status').append('<p><span style="color: red;">websockets are not supported </span></p>');
-              $("#navigation").hide();  
-          } else {
-              $('#status').append('<p><span style="color: green;">websockets are supported </span></p>');
-              connect();
-          };
-              $("#connected").hide(); 	
-              $("#content").hide(); 	
-      };
-
-      function connect()
-      {
-          wsHost = $("#server").val()
-          websocket = new WebSocket(wsHost);
-          
-          websocket.onopen = function(evt) { onOpen(evt) }; 
-          websocket.onclose = function(evt) { onClose(evt) }; 
-          websocket.onmessage = function(evt) { onMessage(evt) }; 
-          websocket.onerror = function(evt) { onError(evt) }; 
-      };  
-      
-      function disconnect() {
-          websocket.close();
-      }; 
-
-      function toggle_connection(){
-          if(websocket.readyState == websocket.OPEN){
-              disconnect();
-          } else {
-              connect();
-          };
-      };
-
-      function send( txt ) {
-          if(websocket.readyState == websocket.OPEN){
-              websocket.send(txt);
-              showScreen('sending: ' + txt); 
-          } else {
-               showScreen('websocket is not connected'); 
-          };
-      };
-
-      function sendTxt() {
-		send( $("#send_txt").val() );
-      };
-
-      function sendCommand( command, arguments ) {
-          send( JSON.stringify( {
-			cmd: command,
-			args: arguments
-          } ) );
-      };
-
-      function sendSearch() {
-		sendCommand( 'search', [
-			$("#search_type").val(),
-			$("#search_txt").val()
-		] );
-      };
-
-	function sendPlayid() {
-		sendCommand( 'playid', [
-			parseInt( $("#playid_txt").val() )
-		] );
-	};
-
-	function sendSeek() {
-		sendCommand( 'seek', [
-			parseInt( $("#seek_position_txt").val() ),
-			parseInt( $("#seek_time_txt").val() )
-		] );
-	};
-
-	function sendSeekid() {
-		sendCommand( 'seekid', [
-			parseInt( $("#seekid_id_txt").val() ),
-			parseInt( $("#seekid_time_txt").val() )
-		] );
-	};
-
-	function sendSeekcur() {
-		sendCommand( 'seekcur', [
-			parseInt( $("#seekcur_time_txt").val() )
-		] );
-	};
-
-	function sendDisableoutput() {
-		sendCommand( 'disableoutput', [
-			parseInt( $("#disableoutput_id_txt").val() )
-		] );
-	};
-
-	function sendEnableoutput() {
-		sendCommand( 'enableoutput', [
-			parseInt( $("#enableoutput_id_txt").val() )
-		] );
-	};
-
-	function sendToggleoutput() {
-		sendCommand( 'toggleoutput', [
-			parseInt( $("#toggleoutput_id_txt").val() )
-		] );
-	};
-
-	function sendConsume() {
-		sendCommand( 'consume', [
-			parseInt( $("#consume_state_txt").val() )
-		] );
-	};
-
-	function sendCrossfade() {
-		sendCommand( 'crossfade', [
-			parseInt( $("#crossfade_seconds_txt").val() )
-		] );
-	};
-
-	function sendRandom() {
-		sendCommand( 'random', [
-			parseInt( $("#random_state_txt").val() )
-		] );
-	};
-
-	function sendRepeat() {
-		sendCommand( 'repeat', [
-			parseInt( $("#repeat_state_txt").val() )
-		] );
-	};
-
-	function sendSetvol() {
-		sendCommand( 'setvol', [
-			parseInt( $("#setvol_vol_txt").val() )
-		] );
-	};
-
-	function sendSingle() {
-		sendCommand( 'single', [
-			parseInt( $("#single_state_txt").val() )
-		] );
-	};
-
-      function onOpen(evt) { 
-          showScreen('<span style="color: green;">CONNECTED </span>'); 
-          $("#connected").fadeIn('slow');
-          $("#content").fadeIn('slow');
-      };  
-
-      function onClose(evt) { 
-          showScreen('<span style="color: red;">DISCONNECTED </span>');
-      };  
-
-      function onMessage(evt) { 
-          console.log( JSON.parse( evt.data ) );
-      };  
-
-      function onError(evt) {
-          showScreen('<span style="color: red;">ERROR: ' + evt.data+ '</span>');
-      };
-
-      function showScreen(txt) { 
-          $('#output').prepend('<p>' + txt + '</p>');
-      };
-
-      function clearScreen() 
-      { 
-          $('#output').html("");
-      };
     </script>
   </head>
 
@@ -191,20 +20,20 @@
 
       <p id="connecting">
 		<input type='text' id="server" value="ws://localhost:45001/websocket"></input>
-		<button type="button" onclick="toggle_connection()">connection</button>
+		<button type="button" id="btn-toggleconnection">connection</button>
       </p>
       <div id="connected">				
 		<p>
 		  <input type='text' id="send_txt"</input>
-		  <button type="button" onclick="sendTxt();">send</button>
+		  <button type="button" id="cmd-sendtext">send</button>
 		</p>
       </div>
 
       <div id="mpd-controls-status">
 		<h2>MPD: Status</h2>
-		<button type="button" onclick="sendCommand('currentsong', []);">currentsong</button>
-		<button type="button" onclick="sendCommand('status', []);">status</button>
-		<button type="button" onclick="sendCommand('stats', []);">stats</button>
+		<button type="button" id="cmd-currentsong">currentsong</button>
+		<button type="button" id="cmd-status">status</button>
+		<button type="button" id="cmd-stats">stats</button>
       </div>
 
 		<hr/>
@@ -213,12 +42,12 @@
 		<h2>MPD: Playback Options</h2>
 
 		<input type='text' id="consume_state_txt" placeholder="state 0/1"/>
-		<button type="button" onclick="sendConsume();">consume</button>
+		<button type="button" id="cmd-consume">consume</button>
 
 		<br/>
 
 		<input type='text' id="crossfade_seconds_txt" placeholder="seconds"/>
-		<button type="button" onclick="sendCrossfade();">crossfade</button>
+		<button type="button" id="cmd-crossfade">crossfade</button>
 
 		<br/>
 
@@ -233,56 +62,56 @@
 		<br/>
 
 		<input type='text' id="random_state_txt" placeholder="state 0/1"/>
-		<button type="button" onclick="sendRandom();">random</button>
+		<button type="button" id="cmd-random">random</button>
 
 		<br/>
 
 		<input type='text' id="repeat_state_txt" placeholder="state 0/1"/>
-		<button type="button" onclick="sendRepeat();">repeat</button>
+		<button type="button" id="cmd-repeat">repeat</button>
 
 		<br/>
 
 		<input type='text' id="setvol_vol_txt" placeholder="vol 0-100"/>
-		<button type="button" onclick="sendSetvol();">setvol</button>
+		<button type="button" id="cmd-setvol">setvol</button>
 
 		<br/>
 
 		<input type='text' id="single_state_txt" placeholder="state 0-100"/>
-		<button type="button" onclick="sendSingle();">single</button>
+		<button type="button" id="cmd-single">single</button>
       </div>
 
 		<hr/>
 
       <div id="mpd-controls-playback">
 		<h2>MPD: Current Playlist</h2>
-		<button type="button" onclick="sendCommand('previous', []);">&lt;&lt; previous</button>
-		<button type="button" onclick="sendCommand('play', []);">play</button>
-		<button type="button" onclick="sendCommand('pause', [ 'true' ]);">pause</button>
-		<button type="button" onclick="sendCommand('pause', [ 'false' ]);">unpause</button>
-		<button type="button" onclick="sendCommand('stop', []);">stop</button>
-		<button type="button" onclick="sendCommand('next', []);">next &gt;&gt;</button>
+		<button type="button" id="cmd-previous">&lt;&lt; previous</button>
+		<button type="button" id="cmd-play">play</button>
+		<button type="button" id="cmd-pause">pause</button>
+		<button type="button" id="cmd-unpause">unpause</button>
+		<button type="button" id="cmd-stop">stop</button>
+		<button type="button" id="cmd-next">next &gt;&gt;</button>
 
 		<br/>
 
 		<input type='text' id="playid_txt" placeholder="id"/>
-		<button type="button" onclick="sendPlayid();">playid</button>
+		<button type="button" id="cmd-playid">playid</button>
 
 		<br/>
 
 		<input type='text' id="seek_position_txt" placeholder="position"/>
 		<input type='text' id="seek_time_txt" placeholder="time"/>
-		<button type="button" onclick="sendSeek();">seek</button>
+		<button type="button" id="cmd-seek">seek</button>
 
 		<br/>
 
 		<input type='text' id="seekid_id_txt" placeholder="id"/>
 		<input type='text' id="seekid_time_txt" placeholder="time"/>
-		<button type="button" onclick="sendSeekid();">seekid</button>
+		<button type="button" id="cmd-seekid">seekid</button>
 
 		<br/>
 
 		<input type='text' id="seekcur_time_txt" placeholder="time" disabled="disabled"></input>
-		<button type="button" onclick="sendSeekcur();" disabled="disabled">seekcur</button>
+		<button type="button" id="cmd-seekcur" disabled="disabled">seekcur</button>
 
       </div>
 
@@ -290,9 +119,9 @@
 
       <div id="mpd-controls-currentplaylist">
 		<h2>MPD: Playback</h2>
-		<button type="button" onclick="sendCommand('playlist', []);">playlist</button>
-		<button type="button" onclick="sendCommand('playlistinfo', []);">playlistinfo</button>
-		<button type="button" onclick="sendCommand('clear', []);">clear</button>
+		<button type="button" id="cmd-playlist">playlist</button>
+		<button type="button" id="cmd-playlistinfo">playlistinfo</button>
+		<button type="button" id="cmd-clear">clear</button>
       </div>
 
 		<hr/>
@@ -304,35 +133,34 @@
 			<option>title</option>
 		</select>
 		<input type='text' id="search_txt" value=""/>
-		<button type="button" onclick="sendSearch();">search</button>
+		<button type="button" id="cmd-search">search</button>
       </div>
 
 		<hr/>
 
       <div id="mpd-controls-outputdevices">
 		<h2>MPD: Output Device</h2>
-		<button type="button" onclick="sendCommand('outputs');">outputs</button>
+		<button type="button" id="cmd-outputs">outputs</button>
 
 		<br/>
 
 		<input type='text' id="disableoutput_id_txt" placeholder="id"></input>
-		<button type="button" onclick="sendDisableoutput();">disableoutput</button>
+		<button type="button" id="cmd-disableoutput">disableoutput</button>
 
 		<br/>
 
 		<input type='text' id="enableoutput_id_txt" placeholder="id"></input>
-		<button type="button" onclick="sendEnableoutput();">enableoutput</button>
+		<button type="button" id="cmd-enableoutput">enableoutput</button>
 
 		<br/>
 
 		<input type='text' id="toggleoutput_id_txt" placeholder="id" disabled="disabled"></input>
-		<button type="button" onclick="sendToggleoutput();" disabled="disabled">toggleoutput</button>
+		<button type="button" id="cmd-toggleoutput" disabled="disabled">toggleoutput</button>
       </div>
 
 		<hr/>
 
       <div id="content">						
-		<button id="clear" onclick="clearScreen()" >Clear text</button>
 		<div id="output"></div>
       </div>
 
