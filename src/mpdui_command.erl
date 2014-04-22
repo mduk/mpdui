@@ -133,9 +133,7 @@ execute( C, <<"playlistinfo">>, [] ) ->
 
 	ResultsStruct = lists:map( fun object/1, Results ),
 
-	{ struct, [
-		{ <<"playlistinfo">>, ResultsStruct }
-	] };
+	object( <<"playlistinfo">>, ResultsStruct );
 
 %% Stored Playlists
 
