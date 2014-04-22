@@ -6,6 +6,12 @@
 
 %% Playback Options
 
+execute( C, <<"consume">>, [ 1 ] ) ->
+	ok( erlmpd:consume( C, true ) );
+execute( C, <<"consume">>, [ 0 ] ) ->
+	ok( erlmpd:consume( C, false ) );
+	
+
 %% Controlling Playback
 
 execute( C, <<"next">>, [] ) ->

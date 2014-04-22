@@ -114,6 +114,12 @@
 		] );
 	};
 
+	function sendConsume() {
+		sendCommand( 'consume', [
+			parseInt( $("#consume_state_txt").val() )
+		] );
+	};
+
       function onOpen(evt) { 
           showScreen('<span style="color: green;">CONNECTED </span>'); 
           $("#connected").fadeIn('slow');
@@ -161,6 +167,18 @@
 		  <input type='text' id="send_txt"</input>
 		  <button type="button" onclick="sendTxt();">send</button>
 		</p>
+      </div>
+
+		<hr/>
+
+      <div id="mpd-controls-playbackoptions">
+		<h2>MPD: Playback Options</h2>
+		<input type='text' id="consume_state_txt" placeholder="state 0/1"/>
+		<button type="button" onclick="sendConsume();">consume</button>
+
+		<br/>
+
+		<!-- next -->
       </div>
 
 		<hr/>
