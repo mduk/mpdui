@@ -4,16 +4,9 @@ define( [ 'jquery' ], function( jquery ) {
 	    currentsongCallback,
 	    statusCallback;
 	
-	function showScreen(txt) {
-		jquery('#output').prepend('<p>' + txt + '</p>');
-	};
-
 	function send( txt ) {
 		if ( websocket.readyState == websocket.OPEN ) {
 			websocket.send(txt);
-			showScreen('sending: ' + txt);
-		} else {
-			showScreen('websocket is not connected');
 		}
 	}
 
@@ -29,13 +22,11 @@ define( [ 'jquery' ], function( jquery ) {
 			websocket = new WebSocket("ws://localhost:45001/websocket");
 	
 			websocket.onopen = function(evt) {
-				showScreen('<span style="color: green;">CONNECTED</span>');
 				jquery("#connected").fadeIn('slow');
 				jquery("#content").fadeIn('slow');
 			};
 	
 			websocket.onclose = function(evt) {
-				showScreen('<span style="color: red;">DISCONNECTED</span>');
 			};
 	
 			websocket.onmessage = function(evt) {
@@ -60,7 +51,6 @@ define( [ 'jquery' ], function( jquery ) {
 			};
 	
 			websocket.onerror = function(evt) {
-				showScreen('<span style="color: red;">ERROR: ' + evt.data + '</span>');
 			};
 		},
 		

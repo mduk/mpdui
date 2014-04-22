@@ -181,7 +181,5 @@ require( [ 'jquery', 'wsmpd' ], function( jquery, wsmpd ) {
 
 	jquery(document).ready( function() {
 		wsmpd.connect();
-		jquery("#connected").hide();
-		jquery("#content").hide();
 	} );
 });
