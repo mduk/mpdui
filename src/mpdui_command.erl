@@ -43,6 +43,9 @@ execute( C, <<"seekid">>, [ Id, Time ] ) when is_integer( Id ) and is_integer( T
 execute( _, <<"seekid">>, [ _, _ ] ) ->
 	error_msg( <<"Id and Time arguments must be integers">> );
 
+execute( _, <<"seekcur">>, _ ) ->
+	error_msg( <<"erlmpd doesn't seem to have that one... :(">> );
+
 %% Current Playlist
 
 execute( C, <<"add">>, [ Uri ] ) ->

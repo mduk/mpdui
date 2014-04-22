@@ -90,6 +90,12 @@
 		] );
 	};
 
+	function sendSeekcur() {
+		sendCommand( 'seekcur', [
+			parseInt( $("#seekcur_time_txt").val() )
+		] );
+	};
+
       function onOpen(evt) { 
           showScreen('<span style="color: green;">CONNECTED </span>'); 
           $("#connected").fadeIn('slow');
@@ -165,6 +171,11 @@
 		<input type='text' id="seekid_id_txt"</input>
 		<input type='text' id="seekid_time_txt"></input>
 		<button type="button" onclick="sendSeekid();">seekid</button>
+
+		<br/>
+
+		<input type='text' id="seekcur_time_txt" disabled="disabled"></input>
+		<button type="button" onclick="sendSeekcur();" disabled="disabled">seekcur</button>
 
       </div>
 
