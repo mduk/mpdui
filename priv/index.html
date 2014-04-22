@@ -18,13 +18,19 @@
 	</head>
 	<body>
 
+		<script id="tpl-currentsong" type="x-tmpl-mustache">
+			<h1>{{title}}</h1>
+			<h2>{{artist}}</h2>
+			<p><span id="currentsong-position">{{position}}</span>/<span>{{duration}}</span></p>
+		</script>
+
 		<div class="row">
 			<div class="col-md-10">
 
-				<div class="jumbotron">
+				<div id="currentsong" class="jumbotron">
 					<h1 id="currentsong-title">title</h1>
 					<h2 id="currentsong-artist">artist</h2>
-					<p><span id="currentsong-position">0:00</span> - <span id="currentsong-duration">0:00</span></p>
+					<p><span id="currentsong-position">0:00</span>/<span id="currentsong-duration">0:00</span></p>
 					<p><a class="btn btn-primary btn-lg" role="button">Learn more</a></p>
 				</div>
 

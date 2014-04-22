@@ -2,28 +2,26 @@ require.config( {
 	paths: {
 		"jquery"   : "/static/bower_components/jquery/dist/jquery.min",
 		"wsmpd"    : "/static/js/wsmpd",
-		"bootstrap": "/static/bower_components/bootstrap/dist/js/bootstrap.min"
+		"mustache" : "/static/bower_components/mustache/mustache"
 	},
-	shim: {
-        "bootstrap": {
-          deps: ["jquery"],
-          exports: "$"
-        }
-    },
     enforceDefine: true,
 	waitSeconds: 10
 } );
 
-require( [ 'jquery', 'wsmpd', 'bootstrap' ], function( jquery, wsmpd, bootstrap ) {
+require( [ 'jquery', 'wsmpd', 'mustache' ], function( jquery, wsmpd, mustache ) {
 
 	wsmpd.registerCurrentsongCallback( function( currentsong ) {
-		jquery('#currentsong-title').html( currentsong.Title );
-		jquery('#currentsong-artist').html( currentsong.Artist );
-		jquery('#currentsong-duration').html( currentsong.Time );
+		var template = jquery('#tpl-currentsong').html();
+		mustache.parse( template );
+		jquery('#currentsong').html( mustache.render( template, {
+			title: currentsong.Title,
+			artist: currentsong.Artist,
+			duration: currentsong.Time
+		} ) );
 	} );
 
 	wsmpd.registerStatusCallback( function( status ) {
-		jquery('#currentsong-position').html( status.time.toString() );
+		jquery('#currentsong-position').html( Math.round( status.time ).toString() );
 	} );
 
 	jquery('#btn-toggleconnection').click( function() {
