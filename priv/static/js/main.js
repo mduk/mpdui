@@ -1,12 +1,20 @@
 require.config( {
 	paths: {
 		"jquery"   : "/static/bower_components/jquery/dist/jquery.min",
-		"wsmpd"    : "/static/js/wsmpd"
+		"wsmpd"    : "/static/js/wsmpd",
+		"bootstrap": "/static/bower_components/bootstrap/dist/js/bootstrap.min"
 	},
+	shim: {
+        "bootstrap": {
+          deps: ["jquery"],
+          exports: "$"
+        }
+    },
+    enforceDefine: true,
 	waitSeconds: 10
 } );
 
-require( [ 'jquery', 'wsmpd' ], function( jquery, wsmpd ) {
+require( [ 'jquery', 'wsmpd', 'bootstrap' ], function( jquery, wsmpd, bootstrap ) {
 
 	wsmpd.registerCurrentsongCallback( function( currentsong ) {
 		jquery('#currentsong-title').html( currentsong.Title );
