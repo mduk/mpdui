@@ -120,6 +120,12 @@
 		] );
 	};
 
+	function sendCrossfade() {
+		sendCommand( 'crossfade', [
+			parseInt( $("#crossfade_seconds_txt").val() )
+		] );
+	};
+
       function onOpen(evt) { 
           showScreen('<span style="color: green;">CONNECTED </span>'); 
           $("#connected").fadeIn('slow');
@@ -173,8 +179,14 @@
 
       <div id="mpd-controls-playbackoptions">
 		<h2>MPD: Playback Options</h2>
+
 		<input type='text' id="consume_state_txt" placeholder="state 0/1"/>
 		<button type="button" onclick="sendConsume();">consume</button>
+
+		<br/>
+
+		<input type='text' id="crossfade_seconds_txt" placeholder="seconds"/>
+		<button type="button" onclick="sendCrossfade();">crossfade</button>
 
 		<br/>
 

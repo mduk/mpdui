@@ -10,6 +10,11 @@ execute( C, <<"consume">>, [ 1 ] ) ->
 	ok( erlmpd:consume( C, true ) );
 execute( C, <<"consume">>, [ 0 ] ) ->
 	ok( erlmpd:consume( C, false ) );
+
+execute( C, <<"crossfade">>, [ Seconds ] ) when is_integer( Seconds ) ->
+	ok( erlmpd:crossfade( C, Seconds ) );
+execute( _, <<"crossfade">>, _ ) ->
+	error_msg( <<"Seconds argument must be an integer">> );
 	
 
 %% Controlling Playback
