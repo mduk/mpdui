@@ -162,6 +162,12 @@ define( [ 'jquery' ], function( jquery ) {
 			return sendCommand( 'playlistinfo', [] );
 		},
 
+		// Database
+
+		search: function( type, what ) {
+			return sendCommand( 'search', [ type, what ] );
+		},
+
 		// Output Devices
 
 		disableoutput: function( id ) {

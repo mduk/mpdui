@@ -141,10 +141,10 @@ require( [ 'jquery', 'wsmpd' ], function( jquery, wsmpd ) {
 	// Database
 
 	jquery('#cmd-search').click( function() {
-		wsmpd.sendCommand( 'search', [
+		wsmpd.search(
 			jquery("#search_type").val(),
 			jquery("#search_txt").val()
-		] );
+		);
 	} );
 
 	// Output Device
