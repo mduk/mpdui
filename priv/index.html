@@ -199,6 +199,11 @@
 		</p>
       </div>
 
+      <div id="mpd-controls-status">
+		<h2>MPD: Status</h2>
+		<button type="button" onclick="sendCommand('currentsong', []);">currentsong</button>
+      </div>
+
 		<hr/>
 
       <div id="mpd-controls-playbackoptions">
@@ -239,7 +244,7 @@
 
 		<br/>
 
-		<input type='text' id="single_state_txt" placeholder="state 0/1"/>
+		<input type='text' id="single_state_txt" placeholder="state 0-100"/>
 		<button type="button" onclick="sendSingle();">single</button>
       </div>
 

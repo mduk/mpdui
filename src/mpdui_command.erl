@@ -4,6 +4,12 @@
 
 %% Status
 
+execute( C, <<"currentsong">>, [] ) ->
+	CurrentSong = erlmpd:currentsong( C ),
+	{ struct, [
+		{ <<"currentsong">>, { struct, CurrentSong } }
+	] };
+
 %% Playback Options
 
 execute( C, <<"consume">>, [ 1 ] ) ->
