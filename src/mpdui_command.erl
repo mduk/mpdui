@@ -19,6 +19,8 @@ execute( C, <<"consume">>, [ 1 ] ) ->
 	ok( erlmpd:consume( C, true ) );
 execute( C, <<"consume">>, [ 0 ] ) ->
 	ok( erlmpd:consume( C, false ) );
+execute( _, <<"consume">>, _ ) ->
+	error_msg( <<"Consume argument must be an integer, 0 or 1">> );
 
 execute( C, <<"crossfade">>, [ Seconds ] ) when is_integer( Seconds ) ->
 	ok( erlmpd:crossfade( C, Seconds ) );
