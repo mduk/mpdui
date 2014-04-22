@@ -42,7 +42,7 @@ define( [ 'jquery' ], function( jquery ) {
 			};
 	
 			websocket.onerror = function(evt) {
-				showScreen('<span style="color: red;">ERROR: ' + evt.data+ '</span>');
+				showScreen('<span style="color: red;">ERROR: ' + evt.data + '</span>');
 			};
 		},
 		
@@ -146,11 +146,21 @@ define( [ 'jquery' ], function( jquery ) {
 
 		stop: function() {
 			return sendCommand( 'stop', [] );
-		}
+		},
 
 		// Current Playlist
 
+		clear: function() {
+			return sendCommand( 'clear', [] );
+		},
 
+		playlist: function() {
+			return sendCommand( 'playlist', [] );
+		},
+
+		playlistinfo: function() {
+			return sendCommand( 'playlistinfo', [] );
+		},
 	};
 
 } );
