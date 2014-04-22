@@ -79,7 +79,9 @@ require( [ 'jquery', 'wsmpd' ], function( jquery, wsmpd ) {
 	} );
 
 	jquery('#cmd-play').click( function() {
-		wsmpd.play();
+		wsmpd.play(
+			parseInt( jquery('#cmd-play-position').val() )
+		);
 	} );
 
 	jquery('#cmd-pause').click( function() {
