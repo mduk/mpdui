@@ -15,7 +15,11 @@ execute( C, <<"crossfade">>, [ Seconds ] ) when is_integer( Seconds ) ->
 	ok( erlmpd:crossfade( C, Seconds ) );
 execute( _, <<"crossfade">>, _ ) ->
 	error_msg( <<"Seconds argument must be an integer">> );
-	
+
+execute( _, <<"mixrampdb">>, _ ) ->
+	unsupported();
+execute( _, <<"mixrampdelay">>, _ ) ->
+	unsupported();
 
 %% Controlling Playback
 
@@ -55,7 +59,7 @@ execute( _, <<"seekid">>, _ ) ->
 	error_msg( <<"Id and Time arguments must be integers">> );
 
 execute( _, <<"seekcur">>, _ ) ->
-	error_msg( <<"erlmpd doesn't seem to have that one... :(">> );
+	unsupported();
 
 execute( C, <<"stop">>, [] ) ->
 	ok( erlmpd:stop( C ) );
@@ -136,7 +140,7 @@ execute( _, <<"enableoutput">>, _ ) ->
 	error_msg( <<"Id argument must be an integer">> );
 
 execute( _, <<"toggleoutput">>, _ ) ->
-	error_msg( <<"erlmpd doesn't seem to have that one... :(">> );
+	unsupported();
 
 execute( C, <<"outputs">>, [] ) ->
 	Results = erlmpd:outputs( C ),
@@ -169,3 +173,5 @@ error_msg( Msg ) -> { struct, [
 	{ <<"ok">>, false },
 	{ <<"error">>, Msg }
 ] }.
+
+unsupported() -> error_msg( <<"erlmpd doesn't seem to have that one... :(">> ).
