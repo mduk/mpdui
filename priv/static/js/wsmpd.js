@@ -33,6 +33,14 @@ define( [ 'jquery' ], function( jquery ) {
 			websocket.close();
 		},
 		
+		isConnected: function() {
+			if ( websocket.readyState == websocket.OPEN ) {
+				return true;
+			} else {
+				return false;
+			}
+		},
+		
 		send: function( txt ) {
 			if ( websocket.readyState == websocket.OPEN ) {
 				websocket.send(txt);

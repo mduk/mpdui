@@ -9,7 +9,7 @@ require.config( {
 require( [ 'jquery', 'wsmpd' ], function( jquery, wsmpd ) {
 
 	jquery('#btn-toggleconnection').click( function() {
-		if(websocket.readyState == websocket.OPEN){
+		if ( wsmpd.isConnected() ) {
 			wsmpd.disconnect();
 		} else {
 			wsmpd.connect();
