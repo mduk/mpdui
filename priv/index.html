@@ -102,6 +102,12 @@
 		] );
 	};
 
+	function sendEnableoutput() {
+		sendCommand( 'enableoutput', [
+			parseInt( $("#enableoutput_id_txt").val() )
+		] );
+	};
+
       function onOpen(evt) { 
           showScreen('<span style="color: green;">CONNECTED </span>'); 
           $("#connected").fadeIn('slow');
@@ -217,6 +223,11 @@
 
 		<input type='text' id="disableoutput_id_txt" placeholder="id"></input>
 		<button type="button" onclick="sendDisableoutput();">disableoutput</button>
+
+		<br/>
+
+		<input type='text' id="enableoutput_id_txt" placeholder="id"></input>
+		<button type="button" onclick="sendEnableoutput();">enableoutput</button>
       </div>
 
 		<hr/>

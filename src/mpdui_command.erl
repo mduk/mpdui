@@ -119,6 +119,11 @@ execute( C, <<"disableoutput">>, [ Id ] ) when is_integer( Id ) ->
 execute( _, <<"disableoutput">>, _ ) ->
 	error_msg( <<"Id argument must be an integer">> );
 
+execute( C, <<"enableoutput">>, [ Id ] ) when is_integer( Id ) ->
+	ok( erlmpd:enableoutput( C, Id ) );
+execute( _, <<"enableoutput">>, _ ) ->
+	error_msg( <<"Id argument must be an integer">> );
+
 execute( C, <<"outputs">>, [] ) ->
 	Results = erlmpd:outputs( C ),
 
