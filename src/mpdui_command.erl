@@ -16,6 +16,12 @@ execute( C, <<"status">>, [] ) ->
 		{ <<"status">>, { struct, Status } }
 	] };
 
+execute( C, <<"stats">>, [] ) ->
+	Status = erlmpd:stats( C ),
+	{ struct, [
+		{ <<"stats">>, { struct, Status } }
+	] };
+
 %% Playback Options
 
 execute( C, <<"consume">>, [ 1 ] ) ->
