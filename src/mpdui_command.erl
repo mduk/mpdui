@@ -20,14 +20,14 @@ execute( C, <<"play">>, [] ) ->
 	ok( erlmpd:play( C ) );
 execute( C, <<"play">>, [ Position ] ) when is_integer( Position ) ->
 	ok( erlmpd:play( C, Position ) );
-execute( _, <<"play">>, [ _ ] ) ->
+execute( _, <<"play">>, _ ) ->
 	error_msg( <<"First argument must be an integer">> );
 
 execute( C, <<"playid">>, [] ) ->
 	ok( erlmpd:playid( C ) );
 execute( C, <<"playid">>, [ Id ] ) when is_integer( Id ) ->
 	ok( erlmpd:playid( C, Id ) );
-execute( _, <<"playid">>, [ _ ] ) ->
+execute( _, <<"playid">>, _ ) ->
 	error_msg( <<"First argument must be an integer">> );
 
 execute( C, <<"previous">>, [] ) ->
@@ -35,12 +35,12 @@ execute( C, <<"previous">>, [] ) ->
 
 execute( C, <<"seek">>, [ Position, Time ] ) when is_integer( Position ) and is_integer( Time ) ->
 	ok( erlmpd:seek( C, Position, Time ) );
-execute( _, <<"seek">>, [ _, _ ] ) ->
+execute( _, <<"seek">>, _ ) ->
 	error_msg( <<"Position and Time arguments must be integers">> );
 
 execute( C, <<"seekid">>, [ Id, Time ] ) when is_integer( Id ) and is_integer( Time ) ->
 	ok( erlmpd:seekid( C, Id, Time ) );
-execute( _, <<"seekid">>, [ _, _ ] ) ->
+execute( _, <<"seekid">>, _ ) ->
 	error_msg( <<"Id and Time arguments must be integers">> );
 
 execute( _, <<"seekcur">>, _ ) ->
