@@ -103,16 +103,11 @@ execute( C, <<"stop">>, [] ) ->
 
 execute( C, <<"add">>, [ Uri ] ) ->
 	ok( erlmpd:add( C, binary_to_list( Uri ) ) );
+
 execute( C, <<"addid">>, [ Uri ] ) ->
-	SongId = erlmpd:addid( C, Uri ),
-	{ struct, [
-		{ <<"id">>, SongId }
-	] };
+	object( <<"id">>, erlmpd:addid( C, binary_to_list( Uri ) ) );
 execute( C, <<"addid">>, [ Uri, Position ] ) ->
-	SongId = erlmpd:addid( C, Uri, Position ),
-	{ struct, [
-		{ <<"id">>, SongId }
-	] };
+	object( <<"id">>, erlmpd:addid( C, binary_to_list( Uri ), Position ) );
 
 execute( C, <<"clear">>, [] ) ->
 	ok( erlmpd:clear( C ) );
