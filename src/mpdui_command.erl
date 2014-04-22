@@ -25,11 +25,15 @@ execute( C, <<"random">>, [ 1 ] ) ->
 	ok( erlmpd:random( C, true ) );
 execute( C, <<"random">>, [ 0 ] ) ->
 	ok( erlmpd:random( C, false ) );
+execute( _, <<"repeat">>, _ ) ->
+	error_msg( <<"State argument must be an integer, 0 or 1">> );
 
 execute( C, <<"repeat">>, [ 1 ] ) ->
 	ok( erlmpd:repeat( C, true ) );
 execute( C, <<"repeat">>, [ 0 ] ) ->
 	ok( erlmpd:repeat( C, false ) );
+execute( _, <<"repeat">>, _ ) ->
+	error_msg( <<"State argument must be an integer, 0 or 1">> );
 
 execute( C, <<"setvol">>, [ Vol ] ) when is_integer( Vol ); Vol >= 0; Vol =< 100 ->
 	ok( erlmpd:setvol( C, Vol ) );
