@@ -58,10 +58,6 @@ define( [ 'jquery' ], function( jquery ) {
 			}
 		},
 		
-		sendCommand: function( command, args ) {
-			sendCommand( command, args );
-		},
-
 		// Status
 
 		currentsong: function() {
