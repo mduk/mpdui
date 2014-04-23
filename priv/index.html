@@ -22,6 +22,11 @@
 			<h1>{{title}}</h1>
 			<h2>{{artist}}</h2>
 			<p><span id="currentsong-position">{{position}}</span>/<span>{{duration}}</span></p>
+			<div class="btn-group btn-group-lg">
+				<button type="button" id="currentsong-previous" class="btn btn-lg"><span class="glyphicon glyphicon-fast-backward"></span></button>
+				<button type="button" id="currentsong-playpause" class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-play"></span></button>
+				<button type="button" id="currentsong-next" class="btn btn-lg"><span class="glyphicon glyphicon-fast-forward"></button>
+			</div>
 		</script>
 
 		<script id="tpl-queue-row" type="x-tmpl-mustache">
@@ -34,12 +39,7 @@
 		<div class="row">
 			<div class="col-md-9">
 
-				<div id="currentsong" class="jumbotron">
-					<h1 id="currentsong-title">title</h1>
-					<h2 id="currentsong-artist">artist</h2>
-					<p><span id="currentsong-position">0:00</span>/<span id="currentsong-duration">0:00</span></p>
-					<p><a class="btn btn-primary btn-lg" role="button">Learn more</a></p>
-				</div>
+				<div id="currentsong" class="jumbotron"></div>
 
 				<!-- Nav tabs -->
 				<ul class="nav nav-tabs">

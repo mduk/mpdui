@@ -25,13 +25,44 @@ require( [ 'jquery', 'wsmpd', 'mustache', 'bootstrap' ], function( jquery, wsmpd
 			artist: currentsong.Artist,
 			duration: currentsong.Time
 		} ) );
+
+		jquery('#currentsong-previous').click( function() {
+			wsmpd.previous();
+		} );
+
+		jquery('#currentsong-next').click( function() {
+			wsmpd.next();
+		} );
+
+		wsmpd.playlistinfo();
 	} );
 
 	wsmpd.registerStatusCallback( function( status ) {
 		jquery('#currentsong-position').html( Math.round( status.time ).toString() );
+
+		// Now Playing: Play/Pause button
+		var playpause = jquery('#currentsong-playpause');
+		switch ( status.state ) {
+			case 'play':
+				playpause.html('<span class="glyphicon glyphicon-pause"></span>');
+				playpause.click( function() {
+					wsmpd.pause( 1 );
+				} );
+				break;
+
+			case 'pause':
+				playpause.html('<span class="glyphicon glyphicon-play"></span>');
+				playpause.click( function() {
+					wsmpd.pause( 0 );
+				} );
+				break;
+		}
+
 	} );
 
 	wsmpd.registerCallback( function( message ) {
+
+		// Received playlistinfo
 		if ( typeof message.playlistinfo == 'object' ) {
 			var template = jquery('#tpl-queue-row').html();
 			mustache.parse( template );
@@ -43,18 +74,7 @@ require( [ 'jquery', 'wsmpd', 'mustache', 'bootstrap' ], function( jquery, wsmpd
 				);
 			} );
 		}
-	} );
 
-	jquery('#btn-toggleconnection').click( function() {
-		if ( wsmpd.isConnected() ) {
-			wsmpd.disconnect();
-		} else {
-			wsmpd.connect();
-		}
-	} );
-
-	jquery('#cmd-sendtext').click( function() {
-		wsmpd.send( jquery("#send_txt").val() );
 	} );
 
 	// Status
