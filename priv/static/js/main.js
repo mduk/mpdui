@@ -50,7 +50,18 @@ require( [ 'jquery', 'wsmpd', 'mustache', 'bootstrap' ], function( jquery, wsmpd
 				break;
 		}
 
+		updateBtn( jquery('#currentsong-random'), status.random );
+		updateBtn( jquery('#currentsong-repeat'), status.repeat );
 	} );
+
+	function updateBtn( $btn, state ) {
+		if ( state ) {
+			$btn.removeClass('btn-default').addClass('btn-primary');
+		}
+		else {
+			$btn.addClass('btn-default').removeClass('btn-primary');
+		}
+	}
 
 	wsmpd.registerCallback( function( message ) {
 
@@ -75,6 +86,24 @@ require( [ 'jquery', 'wsmpd', 'mustache', 'bootstrap' ], function( jquery, wsmpd
 
 	jquery('#currentsong-next').click( function() {
 		wsmpd.next();
+	} );
+
+	jquery('#currentsong-repeat').click( function( e ) {
+		if ( jquery('#currentsong-repeat').hasClass( 'btn-primary' ) ) {
+			wsmpd.repeat( 0 );
+		}
+		else {
+			wsmpd.repeat( 1 );
+		}
+	} );
+
+	jquery('#currentsong-random').click( function() {
+		if ( jquery('#currentsong-random').hasClass( 'btn-primary' ) ) {
+			wsmpd.random( 0 );
+		}
+		else {
+			wsmpd.random( 1 );
+		}
 	} );
 
 	// Status
