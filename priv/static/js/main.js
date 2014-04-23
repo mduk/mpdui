@@ -26,14 +26,6 @@ require( [ 'jquery', 'wsmpd', 'mustache', 'bootstrap' ], function( jquery, wsmpd
 			duration: currentsong.Time
 		} ) );
 
-		jquery('#currentsong-previous').click( function() {
-			wsmpd.previous();
-		} );
-
-		jquery('#currentsong-next').click( function() {
-			wsmpd.next();
-		} );
-
 		wsmpd.playlistinfo();
 	} );
 
@@ -67,14 +59,22 @@ require( [ 'jquery', 'wsmpd', 'mustache', 'bootstrap' ], function( jquery, wsmpd
 			var template = jquery('#tpl-queue-row').html();
 			mustache.parse( template );
 
-			jquery('#queue tbody').html('');
+			jquery('#queue').html('');
 			message.playlistinfo.forEach( function( Elem ) {
-				jquery('#queue tbody').append(
+				jquery('#queue').append(
 					jquery( mustache.render( template, Elem ) )
 				);
 			} );
 		}
 
+	} );
+
+	jquery('#currentsong-previous').click( function() {
+		wsmpd.previous();
+	} );
+
+	jquery('#currentsong-next').click( function() {
+		wsmpd.next();
 	} );
 
 	// Status

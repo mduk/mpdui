@@ -15,6 +15,8 @@
 		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
 		<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 		<![endif]-->
+
+		<style>body { padding-top: 70px; }</style>
 	</head>
 	<body>
 
@@ -22,32 +24,75 @@
 			<h1>{{title}}</h1>
 			<h2>{{artist}}</h2>
 			<p><span id="currentsong-position">{{position}}</span>/<span>{{duration}}</span></p>
-			<div class="btn-group btn-group-lg">
-				<button type="button" id="currentsong-previous" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-fast-backward"></span></button>
-				<button type="button" id="currentsong-playpause" class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-play"></span></button>
-				<button type="button" id="currentsong-next" class="btn btn-default  btn-lg"><span class="glyphicon glyphicon-fast-forward"></button>
-			</div>
 		</script>
 
 		<script id="tpl-queue-row" type="x-tmpl-mustache">
-			<li class="list-group-item">{{Title}} ({{Album}})</li>
+			<li class="list-group-item">
+				<!--button type="button" class="btn btn-default btn-xs">
+					<span class="glyphicon glyphicon-play"></span>
+				</button-->
+				{{Title}} ({{Album}})
+			</li>
 		</script>
+
+		<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+			<div class="container-fluid">
+
+				<!-- Brand and toggle get grouped for better mobile display -->
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="#">MPDUI</a>
+				</div>
+
+				<!-- Collect the nav links, forms, and other content for toggling -->
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+					<ul class="nav navbar-nav">
+						<li class="active"><a href="#nowplaying" data-toggle="tab">Now Playing</a></li>
+						<li><a href="#library" data-toggle="tab">Library</a></li>
+						<li><a href="#settings" data-toggle="tab">Settings</a></li>
+					</ul>
+
+					<div class="btn-group navbar-form navbar-right">
+						<button type="button"
+							id="currentsong-previous"
+							class="btn btn-default">
+							<span class="glyphicon glyphicon-fast-backward"></span>
+						</button>
+						<button type="button"
+							id="currentsong-playpause"
+							class="btn btn-primary">
+							<span class="glyphicon glyphicon-play"></span>
+						</button>
+						<button type="button"
+							id="currentsong-next"
+							class="btn btn-default">
+							<span class="glyphicon glyphicon-fast-forward">
+						</button>
+					</div>
+
+					<!--form class="navbar-form navbar-right" role="search">
+						<div class="form-group">
+							<input type="text" class="form-control" placeholder="Search Library">
+						</div>
+						<button type="submit" class="btn btn-default">Search</button>
+					</form-->
+				</div>
+			</div>
+		</nav>
 
 		<div class="row">
 			<div class="col-md-9">
 
-				<div id="currentsong" class="jumbotron"></div>
-
-				<!-- Nav tabs -->
-				<ul class="nav nav-tabs">
-					<li class="active"><a href="#nowplaying" data-toggle="tab">Now Playing</a></li>
-					<li><a href="#library" data-toggle="tab">Library</a></li>
-					<li><a href="#settings" data-toggle="tab">Settings</a></li>
-				</ul>
-				
-				<!-- Tab panes -->
 				<div class="tab-content">
 					<div class="tab-pane active" id="nowplaying">
+
+						<div id="currentsong" class="jumbotron"></div>
 
 						<div class="panel panel-default">
 							<div class="panel-heading">
@@ -183,11 +228,7 @@
 						<h3 class="panel-title">Queue</h3>
 					</div>
 					<ul class="list-group" id="queue">
-						<li class="list-group-item">Cras justo odio</li>
-						<li class="list-group-item">Dapibus ac facilisis in</li>
-						<li class="list-group-item">Morbi leo risus</li>
-						<li class="list-group-item">Porta ac consectetur ac</li>
-						<li class="list-group-item">Vestibulum at eros</li>
+						<li class="list-group-item">WOW! Such item!</li>
 					</ul>
 			</div>
 
