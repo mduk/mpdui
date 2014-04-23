@@ -1,5 +1,4 @@
 #!/bin/bash
 erl \
 	-pa deps/*/ebin ebin \
-	-s mpdui \
-	-name mpdui
+	-s mpdui
