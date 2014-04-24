@@ -174,10 +174,6 @@ define( [ 'jquery' ], function( jquery ) {
 			return sendCommand( 'clear', [] );
 		},
 
-		playlist: function() {
-			return sendCommand( 'playlist', [] );
-		},
-
 		playlistinfo: function() {
 			return sendCommand( 'playlistinfo', [] );
 		},

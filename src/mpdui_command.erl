@@ -116,14 +116,6 @@ execute( C, <<"addid">>, [ Uri, Position ] ) ->
 execute( C, <<"clear">>, [] ) ->
 	ok( erlmpd:clear( C ) );
 
-execute( C, <<"playlist">>, [] ) ->
-	Results = erlmpd:playlist( C ),
-	ResultsStruct = lists:map( fun( Result ) ->
-		[ _, [ _ | Path ] ] = string:tokens( binary_to_list( Result ), ":" ),
-		object( <<"file">>, list_to_binary( Path ) )
-	end, Results ),
-	object( <<"playlist">>, ResultsStruct );
-
 execute( C, <<"playlistinfo">>, [] ) ->
 	Results = erlmpd:playlistinfo( C ),
 	ResultsStruct = lists:map( fun object/1, Results ),

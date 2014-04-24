@@ -229,10 +229,6 @@ require( [ 'jquery', 'wsmpd', 'mustache', 'bootstrap' ], function( jquery, wsmpd
 
 	// Current Playlist
 
-	jquery('#cmd-playlist').click( function() {
-		wsmpd.playlist();
-	} );
-
 	jquery('#cmd-playlistinfo').click( function() {
 		wsmpd.playlistinfo();
 	} );
