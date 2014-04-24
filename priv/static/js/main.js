@@ -78,6 +78,21 @@ require( [ 'jquery', 'wsmpd', 'mustache', 'bootstrap' ], function( jquery, wsmpd
 			} );
 		}
 
+		// Library search results
+		if ( typeof message.results == 'object' && typeof message.search == 'object' ) {
+			var template = jquery('#tpl-library-row').html();
+			mustache.parse( template );
+
+			var $viewBody = jquery('#library tbody');
+			$viewBody.html('');
+
+			message.results.forEach( function( Elem ) {
+				$viewBody.append(
+					jquery( mustache.render( template, Elem ) )
+				);
+			} );
+		}
+
 	} );
 
 	jquery('#currentsong-previous').click( function() {
