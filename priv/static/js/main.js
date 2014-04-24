@@ -266,6 +266,8 @@ require( [ 'jquery', 'wsmpd', 'mustache', 'bootstrap' ], function( jquery, wsmpd
 		);
 	} );
 
+	jquery('button').tooltip();
+
 	jquery(document).ready( function() {
 		wsmpd.connect();
 	} );
