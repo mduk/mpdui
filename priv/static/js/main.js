@@ -11,7 +11,6 @@ require.config( {
 			exports: "$"
 		}
 	},
-    enforceDefine: true,
 	waitSeconds: 10
 } );
 
