@@ -159,18 +159,6 @@ require( [ 'jquery', 'wsmpd', 'mustache', 'bootstrap' ], function( jquery, wsmpd
 		);
 	} );
 
-	jquery('#cmd-random').click( function() {
-		wsmpd.random(
-			parseInt( jquery("#random_state_txt").val() )
-		);
-	} );
-
-	jquery('#cmd-repeat').click( function() {
-		wsmpd.repeat(
-			parseInt( jquery("#repeat_state_txt").val() )
-		);
-	} );
-
 	jquery('#cmd-setvol').click( function() {
 		wsmpd.setvol(
 			parseInt( jquery("#setvol_vol_txt").val() )
