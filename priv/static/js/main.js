@@ -1,9 +1,10 @@
 require.config( {
+	baseUrl: '/static/',
 	paths: {
-		"jquery"   : "/static/bower_components/jquery/dist/jquery.min",
-		"wsmpd"    : "/static/js/wsmpd",
-		"mustache" : "/static/bower_components/mustache/mustache",
-		"bootstrap": "/static/bower_components/bootstrap/dist/js/bootstrap.min"
+		"jquery"   : "bower_components/jquery/dist/jquery.min",
+		"mustache" : "bower_components/mustache/mustache",
+		"bootstrap": "bower_components/bootstrap/dist/js/bootstrap.min",
+		"wsmpd"    : "js/wsmpd",
 	},
 	shim: {
 		"bootstrap": {
