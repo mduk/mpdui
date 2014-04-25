@@ -8,8 +8,7 @@ require.config( {
 	},
 	shim: {
 		"bootstrap": {
-			deps: [ "jquery" ],
-			exports: "$"
+			deps: [ "jquery" ]
 		}
 	},
 	waitSeconds: 10
