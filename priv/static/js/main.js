@@ -91,8 +91,18 @@ require( [ 'jquery', 'wsmpd', 'mustache', 'bootstrap' ], function( jquery, wsmpd
 					jquery( mustache.render( template, Elem ) )
 				);
 			} );
+
+			jquery('#tab-library').click();
 		}
 
+	} );
+
+	jquery('#nav-search button[type=submit]').click( function( e ) {
+		e.preventDefault();
+		wsmpd.search(
+			'album',
+			jquery("#nav-search input[type=text]").val()
+		);
 	} );
 
 	jquery('#currentsong-previous').click( function() {
