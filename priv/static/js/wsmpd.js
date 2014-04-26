@@ -22,13 +22,9 @@ define( [ 'jquery' ], function( jquery ) {
 		connect: function() {
 			websocket = new WebSocket("ws://localhost:45001/websocket");
 	
-			websocket.onopen = function(evt) {
-				jquery("#connected").fadeIn('slow');
-				jquery("#content").fadeIn('slow');
-			};
+			websocket.onopen = function(evt) {};
 	
-			websocket.onclose = function(evt) {
-			};
+			websocket.onclose = function(evt) {};
 	
 			websocket.onmessage = function(evt) {
 				var message = JSON.parse( evt.data );
@@ -54,8 +50,7 @@ define( [ 'jquery' ], function( jquery ) {
 				
 			};
 	
-			websocket.onerror = function(evt) {
-			};
+			websocket.onerror = function(evt) {};
 		},
 		
 		disconnect: function() {
