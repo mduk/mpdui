@@ -23,30 +23,6 @@ body { padding: 70px 15px 15px 15px; }
 	</head>
 	<body>
 
-		<script id="tpl-currentsong" type="x-tmpl-mustache">
-			<h1>{{title}}</h1>
-			<h2>{{artist}}</h2>
-			<p><span id="currentsong-position">{{position}}</span>/<span>{{duration}}</span></p>
-		</script>
-
-		<script id="tpl-queue-row" type="x-tmpl-mustache">
-			<li class="list-group-item">
-				<!--button type="button" class="btn btn-default btn-xs">
-					<span class="glyphicon glyphicon-play"></span>
-				</button-->
-				{{Title}} ({{Album}})
-			</li>
-		</script>
-
-		<script id="tpl-library-row" type="x-tmpl-mustache">
-			<tr>
-				<td>{{Track}}</td>
-				<td>{{Title}}</td>
-				<td>{{Album}}</td>
-				<td>{{Artist}}</td>
-			</tr>
-		</script>
-
 		<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
 			<div class="container-fluid">
 

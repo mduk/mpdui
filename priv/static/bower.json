@@ -17,7 +17,7 @@
   "dependencies": {
     "requirejs": "~2.1.11",
     "jquery": "~2.1.0",
-    "mustache": "~0.8.1",
+    "hogan.js": "https://github.com/jgoodall/hogan.js.git#3788a084371d918f36d834858a7eea97322763e4",
     "bootstrap": "~3.1.1"
   },
   "devDependencies": {}

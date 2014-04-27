@@ -2,8 +2,8 @@ require.config( {
 	baseUrl: '/static/',
 	paths: {
 		"jquery"   : "bower_components/jquery/dist/jquery.min",
-		"mustache" : "bower_components/mustache/mustache",
 		"bootstrap": "bower_components/bootstrap/dist/js/bootstrap.min",
+		"hogan"    : "bower_components/hogan.js/web/builds/3.0.0/hogan-3.0.0.amd",
 		"wsmpd"    : "js/wsmpd",
 	},
 	shim: {
@@ -14,12 +14,11 @@ require.config( {
 	waitSeconds: 10
 } );
 
-require( [ 'jquery', 'wsmpd', 'mustache', 'bootstrap' ], function( jquery, wsmpd, mustache ) {
+require( [ 'jquery', 'wsmpd', 'js/templates', 'bootstrap' ], 
+	function( jquery, wsmpd, templates ) {
 
 	wsmpd.registerCurrentsongCallback( function( currentsong ) {
-		var template = jquery('#tpl-currentsong').html();
-		mustache.parse( template );
-		jquery('#currentsong').html( mustache.render( template, {
+		jquery('#currentsong').html( templates.currentsong.render( {
 			title: currentsong.Title,
 			artist: currentsong.Artist,
 			duration: currentsong.Time
@@ -66,28 +65,22 @@ require( [ 'jquery', 'wsmpd', 'mustache', 'bootstrap' ], function( jquery, wsmpd
 
 		// Received playlistinfo
 		if ( typeof message.playlistinfo == 'object' ) {
-			var template = jquery('#tpl-queue-row').html();
-			mustache.parse( template );
-
 			jquery('#queue').html('');
 			message.playlistinfo.forEach( function( Elem ) {
 				jquery('#queue').append(
-					jquery( mustache.render( template, Elem ) )
+					jquery( templates.queue_row.render( Elem ) )
 				);
 			} );
 		}
 
 		// Library search results
 		if ( typeof message.results == 'object' && typeof message.search == 'object' ) {
-			var template = jquery('#tpl-library-row').html();
-			mustache.parse( template );
-
 			var $viewBody = jquery('#library tbody');
 			$viewBody.html('');
 
 			message.results.forEach( function( Elem ) {
 				$viewBody.append(
-					jquery( mustache.render( template, Elem ) )
+					jquery( templates.library_row.render( Elem ) )
 				);
 			} );
 
