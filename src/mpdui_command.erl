@@ -184,7 +184,10 @@ execute( _Connection, Command, Args ) ->
 ok( ok ) -> { struct, [ { <<"ok">>, true } ] };
 ok( _ ) -> { struct, [ { <<"ok">>, false } ] }.
 
-object( Proplist ) -> { struct, Proplist }.
+object( Proplist ) when is_list( Proplist ) ->
+	{ struct, Proplist };
+object( _ ) ->
+	{ struct, [] }.
 
 object( Key, Proplist ) -> { struct, [
 	{ Key, Proplist }
