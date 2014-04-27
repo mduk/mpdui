@@ -104,6 +104,12 @@ require( [ 'jquery', 'wsmpd', 'mustache', 'bootstrap' ], function( jquery, wsmpd
 		);
 	} );
 
+	jquery('#cmd-list').click( function() {
+		wsmpd.list(
+			jquery("#cmd-list-type").val()
+		);
+	} );
+
 	jquery('#currentsong-previous').click( function() {
 		wsmpd.previous();
 	} );

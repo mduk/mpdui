@@ -179,6 +179,17 @@ define( [ 'jquery' ], function( jquery ) {
 			return sendCommand( 'search', [ type, what ] );
 		},
 
+		list: function( type, artist ) {
+			var args = [];
+			if ( typeof artist == 'undefined' ) {
+				args = [ type ];
+			}
+			else {
+				args = [ type, artist ];
+			}
+			return sendCommand( 'list', args );
+		},
+
 		// Output Devices
 
 		disableoutput: function( id ) {

@@ -136,6 +136,28 @@ execute( C, <<"search">>, [ Type, What ] ) ->
 		{ <<"results">>, ResultsStruct }
 	] };
 
+execute( C, <<"list">>, [ Type ] ) ->
+	Results = erlmpd:list( C, binary_to_atom( Type, utf8 ) ),
+	ResultsStruct = lists:map( fun( Elem ) ->
+		object( Type, Elem )
+	end, Results ),
+	{ struct, [
+		{ <<"list">>, [ Type ] },
+		{ <<"results">>, ResultsStruct }
+	] };
+
+execute( C, <<"list">>, [ Type, Artist ] ) ->
+	Results = erlmpd:list( C,
+		binary_to_atom( Type, utf8 ),
+		binary_to_list( Artist )
+	),
+	ResultsStruct = lists:map( fun( Elem ) ->
+		object( Type, Elem )
+	end, Results ),
+	{ struct, [
+		{ <<"list">>, [ Type, Artist ] },
+		{ <<"results">>, ResultsStruct }
+	] };
 %% Stickers
 
 %% Connection Settings
@@ -186,11 +208,12 @@ ok( _ ) -> { struct, [ { <<"ok">>, false } ] }.
 
 object( Proplist ) when is_list( Proplist ) ->
 	{ struct, Proplist };
-object( _ ) ->
+object( Invalid ) ->
+	error_logger:warning_msg( "Not a list! ~p~n", [ Invalid ] ),
 	{ struct, [] }.
 
-object( Key, Proplist ) -> { struct, [
-	{ Key, Proplist }
+object( Key, Val ) -> { struct, [
+	{ Key, Val }
 ] }.
 
 error_msg( Msg ) -> { struct, [
