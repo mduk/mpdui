@@ -65,12 +65,9 @@ require( [ 'jquery', 'wsmpd', 'js/templates', 'bootstrap' ],
 
 		// Received playlistinfo
 		if ( typeof message.playlistinfo == 'object' ) {
-			jquery('#queue').html('');
-			message.playlistinfo.forEach( function( Elem ) {
-				jquery('#queue').append(
-					jquery( templates.queue_row.render( Elem ) )
-				);
-			} );
+			jquery('#queue-container').html( templates.queue.render( {
+				items: message.playlistinfo
+			} ) );
 		}
 
 		// Library search results
