@@ -91,7 +91,17 @@ require( [ 'jquery', 'wsmpd', 'mustache', 'bootstrap' ], function( jquery, wsmpd
 				);
 			} );
 
-			jquery('#tab-library').click();
+			jquery('#nav-library').click();
+		}
+
+		if ( typeof message.results == 'object' && typeof message.list == 'object' && message.list[0] == 'artist' ) {
+			var $viewBody = jquery('#artists');
+			$viewBody.html('');
+
+			message.results.forEach( function( Elem ) {
+				console.log( Elem.artist );
+				$viewBody.append('<ul class="list-group-item">' + Elem.artist + '</ul>');
+			} );
 		}
 
 	} );
@@ -102,6 +112,10 @@ require( [ 'jquery', 'wsmpd', 'mustache', 'bootstrap' ], function( jquery, wsmpd
 			'album',
 			jquery("#nav-search input[type=text]").val()
 		);
+	} );
+	
+	jquery('#nav-library').click( function() {
+		wsmpd.list('artist');
 	} );
 
 	jquery('#cmd-list').click( function() {

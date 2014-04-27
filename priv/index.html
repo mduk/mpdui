@@ -16,7 +16,10 @@
 		<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 		<![endif]-->
 
-		<style>body { padding: 70px 15px 15px 15px; }</style>
+		<style>
+body { padding: 70px 15px 15px 15px; }
+#artists { max-height: 400px; overflow-y: scroll; }
+		</style>
 	</head>
 	<body>
 
@@ -62,9 +65,9 @@
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
 					<ul class="nav navbar-nav">
-						<li class="active"><a href="#nowplaying" id="tab-nowplaying" data-toggle="tab">Now Playing</a></li>
-						<li><a href="#library" id="tab-library" data-toggle="tab">Library</a></li>
-						<li><a href="#settings" id="tab-settings" data-toggle="tab">Settings</a></li>
+						<li class="active"><a href="#nowplaying" id="nav-nowplaying" data-toggle="tab">Now Playing</a></li>
+						<li><a href="#library" id="nav-library" data-toggle="tab">Library</a></li>
+						<li><a href="#settings" id="nav-settings" data-toggle="tab">Settings</a></li>
 					</ul>
 
 					<div class="btn-group navbar-form navbar-right">
@@ -169,35 +172,67 @@
 
 					<!-- Library -->
 					<div class="tab-pane" id="library">
-
+						<div class="row">
+							<div class="col-md-6">
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<h3 class="panel-title">Artists</h3>
+									</div>
+									<ul class="list-group" id="artists">
+										<li class="list-group-item">one</li>
+										<li class="list-group-item">two</li>
+										<li class="list-group-item">three</li>
+									</ul>
+								</div>
+							</div>
+	
+							<div class="col-md-6">
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<h3 class="panel-title">bar</h3>
+									</div>
+									<div class="panel-body">
+										bar
+									</div>
+								</div>
+							</div>
+						</div>
 						<!-- Buttons -->
-						<div class="panel panel-default">
-							<div class="panel-heading">
-								<h3 class="panel-title">Browse</h3>
-							</div>
-							<div class="panel-body">
-								<input type='text' id="cmd-list-type" placeholder="type"/>
-								<button type="button" class="btn btn-default" id="cmd-list">list</button>
-								<br/>
-								<select id="search_type">
-									<option>artist</option>
-									<option>title</option>
-								</select>
-								<input type='text' id="search_txt" value=""/>
-								<button type="button" class="btn btn-default" id="cmd-search">search</button>
+						
+						<div class="row">
+							<div class="col-md-12">
+	
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<h3 class="panel-title">Browse</h3>
+									</div>
+									<div class="panel-body">
+										<input type='text' id="cmd-list-type" placeholder="type"/>
+										<button type="button" class="btn btn-default" id="cmd-list">list</button>
+										<br/>
+										<select id="search_type">
+											<option>artist</option>
+											<option>title</option>
+										</select>
+										<input type='text' id="search_txt" value=""/>
+										<button type="button" class="btn btn-default" id="cmd-search">search</button>
+									</div>
+		
+									<table class="table table-condensed table-striped table-hover">
+										<thead>
+											<tr>
+												<th>&nbsp;</th>
+												<th>#</th>
+												<th>Title</th>
+												<th>Album</th>
+												<th>Artist</th>
+											</tr>
+										</thead>
+										<tbody></tbody>
+									</table>
+								</div>
 							</div>
 
-							<table class="table table-condensed table-striped table-hover">
-								<thead>
-									<tr>
-										<th>#</th>
-										<th>Title</th>
-										<th>Album</th>
-										<th>Artist</th>
-									</tr>
-								</thead>
-								<tbody></tbody>
-							</table>
 						</div>
 					</div>
 					
