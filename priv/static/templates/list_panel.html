@@ -1,0 +1,14 @@
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h3 class="panel-title">{{title}}</h3>
+	</div>
+	{{#body}}<div class="panel-body">{{{body}}}</div>{{/body}}
+	<ul class="list-group" id="{{list_id}}">
+		{{#items}}
+		<li class="list-group-item">
+			{{#title}}<h4 class="list-group-item-heading">{{{title}}}</h4>{{/title}}
+			{{#body}}<p class="list-group-item-text">{{{body}}}</p>{{/body}}
+		</li>
+		{{/items}}
+	</ul>
+</div>
