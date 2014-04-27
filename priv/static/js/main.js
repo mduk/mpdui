@@ -99,8 +99,16 @@ require( [ 'jquery', 'wsmpd', 'mustache', 'bootstrap' ], function( jquery, wsmpd
 			$viewBody.html('');
 
 			message.results.forEach( function( Elem ) {
-				console.log( Elem.artist );
 				$viewBody.append('<ul class="list-group-item">' + Elem.artist + '</ul>');
+			} );
+		}
+
+		if ( typeof message.results == 'object' && typeof message.list == 'object' && message.list[0] == 'album' ) {
+			var $viewBody = jquery('#albums');
+			$viewBody.html('');
+
+			message.results.forEach( function( Elem ) {
+				$viewBody.append('<ul class="list-group-item">' + Elem.album + '</ul>');
 			} );
 		}
 
@@ -116,6 +124,7 @@ require( [ 'jquery', 'wsmpd', 'mustache', 'bootstrap' ], function( jquery, wsmpd
 	
 	jquery('#nav-library').click( function() {
 		wsmpd.list('artist');
+		wsmpd.list('album');
 	} );
 
 	jquery('#cmd-list').click( function() {
