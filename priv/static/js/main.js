@@ -87,22 +87,25 @@ require( [ 'jquery', 'wsmpd', 'js/templates', 'bootstrap' ],
 			jquery('#nav-library').click();
 		}
 
+		// Received artist list
 		if ( typeof message.results == 'object' && typeof message.list == 'object' && message.list[0] == 'artist' ) {
-			var $viewBody = jquery('#artists');
-			$viewBody.html('');
-
-			message.results.forEach( function( Elem ) {
-				$viewBody.append('<ul class="list-group-item">' + Elem.artist + '</ul>');
-			} );
+			jquery('#artists-container').html(templates.list_panel.render( {
+				title: "Artists",
+				items: message.results.map( function( elem ) {
+					return { title: elem.artist };
+				} )
+			} ));
 		}
 
+		// Received album list
 		if ( typeof message.results == 'object' && typeof message.list == 'object' && message.list[0] == 'album' ) {
-			var $viewBody = jquery('#albums');
-			$viewBody.html('');
-
-			message.results.forEach( function( Elem ) {
-				$viewBody.append('<ul class="list-group-item">' + Elem.album + '</ul>');
-			} );
+			
+			jquery('#albums-container').html(templates.list_panel.render({
+				title: "Albums",
+				items: message.results.map( function( elem ) {
+					return { title: elem.album };
+				} )
+			}));
 		}
 
 	} );

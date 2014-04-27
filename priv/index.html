@@ -17,8 +17,15 @@
 		<![endif]-->
 
 		<style>
-body { padding: 70px 15px 15px 15px; }
-#artists, #albums { max-height: 400px; overflow-y: scroll; }
+body {
+	padding: 70px 15px 15px 15px;
+}
+
+#artists-container ul,
+#albums-container ul {
+	max-height: 400px;
+	overflow-y: scroll;
+}
 		</style>
 	</head>
 	<body>
@@ -150,31 +157,9 @@ body { padding: 70px 15px 15px 15px; }
 					<div class="tab-pane" id="library">
 						<div class="row">
 
-							<div class="col-md-6">
-								<div class="panel panel-default">
-									<div class="panel-heading">
-										<h3 class="panel-title">Artists</h3>
-									</div>
-									<ul class="list-group" id="artists">
-										<li class="list-group-item">one</li>
-										<li class="list-group-item">two</li>
-										<li class="list-group-item">three</li>
-									</ul>
-								</div>
-							</div>
+							<div class="col-md-6" id="artists-container"></div>
 	
-							<div class="col-md-6">
-								<div class="panel panel-default">
-									<div class="panel-heading">
-										<h3 class="panel-title">Albums</h3>
-									</div>
-									<ul class="list-group" id="albums">
-										<li class="list-group-item">one</li>
-										<li class="list-group-item">two</li>
-										<li class="list-group-item">three</li>
-									</ul>
-								</div>
-							</div>
+							<div class="col-md-6" id="albums-container"></div>
 
 						</div>
 						<!-- Buttons -->
