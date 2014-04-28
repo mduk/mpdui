@@ -13,5 +13,5 @@ loop( Pid, C, Interval, LastPoll ) ->
 
 notifyChange( _, LastPoll, LastPoll ) -> LastPoll;
 notifyChange( Pid, _, Poll ) ->
-	Pid ! { mpd_now_playing, Poll },
+	Pid ! { mpd_currentsong, Poll },
 	Poll.

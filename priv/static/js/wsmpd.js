@@ -35,19 +35,20 @@ define( [ 'jquery' ], function( jquery ) {
 				var currentsongEnabled = ( typeof currentsongCallback == 'function' );
 				var generalEnabled = ( typeof generalCallback == 'function' );
 
-				if ( statusEnabled && typeof message.status == 'object' ) {
+				var isCurrentSong = ( typeof message.currentsong == 'object' );
+				var isStatus = ( typeof message.status == 'object');
+
+				if ( statusEnabled && isStatus ) {
 					statusCallback( message.status );
 				}
-				else if ( currentsongEnabled && typeof message.currentsong == 'object' ) {
+				else if ( currentsongEnabled && isCurrentSong ) {
 					currentsongCallback( message.currentsong );
-				}
-				else if ( currentsongEnabled && typeof message.now_playing == 'object' ) {
-					currentsongCallback( message.now_playing );
 				}
 				else if ( generalEnabled ) {
 					generalCallback( message );
 				}
-				
+
+			
 			};
 	
 			websocket.onerror = function(evt) {};
