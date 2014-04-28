@@ -1,20 +1,14 @@
 define( function( require ) {
 	var jquery = require( 'jquery' ),
 		wsmpd = require( 'wsmpd' ),
-		templates = require( 'js/templates' ),
-		miniControl = require( 'js/mini-control' );
+		templates = require( 'js/templates' );
 	
 	require( 'bootstrap' );
 	
-	miniControl.attachTo( '#mini-control' );
+	require( 'js/mini-control' ).attachTo( '#mini-control' );
+	require( 'js/now-playing' ).attachTo( '#now-playing .jumbotron' );
 
 	wsmpd.registerCurrentsongCallback( function( currentsong ) {
-		jquery('#currentsong').html( templates.currentsong.render( {
-			title: currentsong.Title,
-			artist: currentsong.Artist,
-			duration: currentsong.Time
-		} ) );
-
 		wsmpd.playlistinfo();
 	} );
 
