@@ -23,6 +23,10 @@ define( function( require ) {
 		this.playlistinfo = [];
 
 		this.onStatus = function( e, status ) {
+			if ( this.state == status.state ) {
+				return;
+			}
+			
 			this.state = status.state;
 			this.renderQueue();
 		};
