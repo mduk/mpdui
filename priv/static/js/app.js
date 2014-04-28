@@ -276,12 +276,12 @@ define( function( require ) {
 		);
 	} );
 
-	jquery('button').tooltip();
-
 	// return init function (main)
 	return function() {
 		jquery(document).ready( function() {
 			wsmpd.connect();
 		} );
+
+		jquery('button').tooltip();
 	};
 } );
