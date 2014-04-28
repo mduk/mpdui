@@ -21,17 +21,7 @@ define( function( require ) {
 	wsmpd.registerStatusCallback( function( status ) {
 		jquery('#currentsong-position').html( Math.round( status.time ).toString() );
 
-		updateBtn( jquery('#currentsong-repeat'), status.repeat );
 	} );
-
-	function updateBtn( $btn, state ) {
-		if ( state ) {
-			$btn.removeClass('btn-default').addClass('btn-primary');
-		}
-		else {
-			$btn.addClass('btn-default').removeClass('btn-primary');
-		}
-	}
 
 	wsmpd.registerCallback( function( message ) {
 
@@ -104,15 +94,6 @@ define( function( require ) {
 		wsmpd.list(
 			jquery("#cmd-list-type").val()
 		);
-	} );
-
-	jquery('#currentsong-repeat').click( function( e ) {
-		if ( jquery('#currentsong-repeat').hasClass( 'btn-primary' ) ) {
-			wsmpd.repeat( 0 );
-		}
-		else {
-			wsmpd.repeat( 1 );
-		}
 	} );
 
 	// Status

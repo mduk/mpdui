@@ -16,10 +16,12 @@ define( function( require ) {
 			this.on( '#minicontrol-playpause', 'click', this.clickPlayPause );
 			this.on( '#minicontrol-next', 'click', this.clickNext );
 			this.on( '#minicontrol-random', 'click', this.clickRandom );
+			this.on( '#minicontrol-repeat', 'click', this.clickRepeat );
 		});
 
 		this.playpauseState = 'pause';
 		this.randomState = false;
+		this.repeatState = false;
 
 		this.clickPrevious = function() {
 			wsmpd.previous();
@@ -58,23 +60,38 @@ define( function( require ) {
 			}
 		};
 
+		this.clickRepeat = function() {
+			switch ( this.repeatState ) {
+				case true:
+					wsmpd.repeat( 0 );
+					this.updateRepeatButton( false );
+					break;
+
+				case false:
+					wsmpd.repeat( 1 );
+					this.updateRepeatButton( true );
+					break;
+			}
+		};
+
 		this.onStatus = function( e, status ) {
 			this.updatePlayPauseButton( status.state );
 			this.updateRandomButton( status.random );
+			this.updateRepeatButton( status.repeat );
 		};
-		
+
 		this.updatePlayPauseButton = function( state ) {
 			if ( state == this.playPauseState ) {
 				return;
 			}
-			
+
 			var btn = this.$node.find('#minicontrol-playpause');
 
 			switch ( state ) {
 				case 'play':
 					btn.html('<span class="glyphicon glyphicon-pause"></span>');
 					break;
-	
+
 				case 'pause':
 					btn.html('<span class="glyphicon glyphicon-play"></span>');
 					break;
@@ -101,6 +118,26 @@ define( function( require ) {
 			}
 
 			this.randomState = state;
+		};
+		
+		this.updateRepeatButton = function( state ) {
+			if ( state == this.repeatState ) {
+				return;
+			}
+			
+			var btn = this.$node.find('#minicontrol-repeat');
+			
+			switch ( state ) {
+				case false:
+					btn.removeClass('btn-primary');
+					break;
+
+				case true:
+					btn.addClass('btn-primary');
+					break;
+			}
+
+			this.repeatState = state;
 		}
 	}
 
