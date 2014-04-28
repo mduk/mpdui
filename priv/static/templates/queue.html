@@ -6,12 +6,12 @@
 		<button type="button" class="btn btn-default" id="cmd-playlistinfo" data-toggle="tooltip" data-placement="top" title="Refresh"><span class="glyphicon glyphicon-refresh"></span></button>
 		<button type="button" class="btn btn-default" id="cmd-clear" data-toggle="tooltip" data-placement="top" title="Clear Queue"><span class="glyphicon glyphicon-remove"></span></button>
 	</div>
-	<ul class="list-group" id="{{list_id}}">
-		{{#items}}
-		<li class="list-group-item">
+	<div class="list-group" id="{{list_id}}">
+		{{#playlistinfo}}
+		<a class="list-group-item {{#playing}}active{{/playing}}" href='#play:{{Pos}}'>
 			<h4 class="list-group-item-heading">{{Title}}</h4>
 			<p class="list-group-item-text">{{Artist}} - {{Album}}</p>
-		</li>
-		{{/items}}
-	</ul>
+		</a>
+		{{/playlistinfo}}
+	</div>
 </div>

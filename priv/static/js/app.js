@@ -7,10 +7,7 @@ define( function( require ) {
 	
 	require( 'js/mini-control' ).attachTo( '#mini-control' );
 	require( 'js/now-playing' ).attachTo( '#now-playing .jumbotron' );
-
-	wsmpd.registerCurrentsongCallback( function( currentsong ) {
-		wsmpd.playlistinfo();
-	} );
+	require( 'js/queue' ).attachTo( '#queue-container' );
 
 	wsmpd.registerStatusCallback( function( status ) {
 		jquery('#currentsong-position').html( Math.round( status.time ).toString() );
@@ -19,11 +16,10 @@ define( function( require ) {
 
 	wsmpd.registerCallback( function( message ) {
 
-		// Received playlistinfo
 		if ( typeof message.playlistinfo == 'object' ) {
-			jquery('#queue-container').html( templates.queue.render( {
-				items: message.playlistinfo
-			} ) );
+			// Not unpacking message message contents 'cause 
+			// flightjs gets funky with non-object values apparently
+			$(document).trigger( 'playlistinfo', message );
 		}
 
 		// Library search results
@@ -69,6 +65,11 @@ define( function( require ) {
 
 	jquery(document).on( 'currentsong', function(e, msg) {
 		console.log( 'currentsong', msg );
+		wsmpd.playlistinfo();
+	} );
+
+	jquery(document).on( 'playlistinfo', function(e, msg) {
+		console.log( 'playlistinfo', msg );
 	} );
 
 	jquery('#nav-search button[type=submit]').click( function( e ) {

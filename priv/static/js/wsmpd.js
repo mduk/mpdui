@@ -30,7 +30,6 @@ define( [ 'jquery' ], function( jquery ) {
 				var message = JSON.parse( evt.data );
 
 				var statusEnabled = ( typeof statusCallback == 'function' );
-				var currentsongEnabled = ( typeof currentsongCallback == 'function' );
 				var generalEnabled = ( typeof generalCallback == 'function' );
 
 				var isCurrentSong = ( typeof message.currentsong == 'object' );
@@ -38,9 +37,6 @@ define( [ 'jquery' ], function( jquery ) {
 
 				if ( statusEnabled && isStatus ) {
 					statusCallback( message.status );
-				}
-				else if ( currentsongEnabled && isCurrentSong ) {
-					currentsongCallback( message.currentsong );
 				}
 				else if ( generalEnabled ) {
 					generalCallback( message );
