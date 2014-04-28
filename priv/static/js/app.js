@@ -98,6 +98,14 @@ define( function( require ) {
 
 	} );
 
+	jquery(document).on( 'status', function(e, msg) {
+		console.log( 'status', msg );
+	} );
+
+	jquery(document).on( 'currentsong', function(e, msg) {
+		console.log( 'currentsong', msg );
+	} );
+
 	jquery('#nav-search button[type=submit]').click( function( e ) {
 		e.preventDefault();
 		wsmpd.search(

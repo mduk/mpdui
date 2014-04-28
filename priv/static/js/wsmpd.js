@@ -48,7 +48,13 @@ define( [ 'jquery' ], function( jquery ) {
 					generalCallback( message );
 				}
 
-			
+				if ( isStatus ) {
+					$(document).trigger('status', message.status);
+				}
+
+				if ( isCurrentSong ) {
+					$(document).trigger('currentsong', message.currentsong);
+				}
 			};
 	
 			websocket.onerror = function(evt) {};
