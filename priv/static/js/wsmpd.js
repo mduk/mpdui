@@ -29,8 +29,6 @@ define( [ 'jquery' ], function( jquery ) {
 			websocket.onmessage = function(evt) {
 				var message = JSON.parse( evt.data );
 
-				console.log( "recv", message );
-
 				var statusEnabled = ( typeof statusCallback == 'function' );
 				var currentsongEnabled = ( typeof currentsongCallback == 'function' );
 				var generalEnabled = ( typeof generalCallback == 'function' );

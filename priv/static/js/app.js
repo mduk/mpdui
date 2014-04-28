@@ -1,12 +1,12 @@
 define( function( require ) {
 	var jquery = require( 'jquery' ),
 		wsmpd = require( 'wsmpd' ),
-		templates = require( 'js/templates' ), 
-		flightmpd = require( 'js/wsflightmpd' );
+		templates = require( 'js/templates' ),
+		miniControl = require( 'js/mini-control' );
 	
 	require( 'bootstrap' );
-
-	flightmpd.attachTo(document);
+	
+	miniControl.attachTo( '#mini-control' );
 
 	wsmpd.registerCurrentsongCallback( function( currentsong ) {
 		jquery('#currentsong').html( templates.currentsong.render( {
@@ -20,24 +20,6 @@ define( function( require ) {
 
 	wsmpd.registerStatusCallback( function( status ) {
 		jquery('#currentsong-position').html( Math.round( status.time ).toString() );
-
-		// Now Playing: Play/Pause button
-		var playpause = jquery('#currentsong-playpause');
-		switch ( status.state ) {
-			case 'play':
-				playpause.html('<span class="glyphicon glyphicon-pause"></span>');
-				playpause.click( function() {
-					wsmpd.pause( 1 );
-				} );
-				break;
-
-			case 'pause':
-				playpause.html('<span class="glyphicon glyphicon-play"></span>');
-				playpause.click( function() {
-					wsmpd.pause( 0 );
-				} );
-				break;
-		}
 
 		updateBtn( jquery('#currentsong-random'), status.random );
 		updateBtn( jquery('#currentsong-repeat'), status.repeat );
@@ -123,14 +105,6 @@ define( function( require ) {
 		wsmpd.list(
 			jquery("#cmd-list-type").val()
 		);
-	} );
-
-	jquery('#currentsong-previous').click( function() {
-		wsmpd.previous();
-	} );
-
-	jquery('#currentsong-next').click( function() {
-		wsmpd.next();
 	} );
 
 	jquery('#currentsong-repeat').click( function( e ) {
