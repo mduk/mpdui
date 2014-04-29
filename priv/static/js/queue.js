@@ -33,18 +33,31 @@ define( function( require ) {
 
 		this.onCurrentsong = function( e, currentsong ) {
 			this.position = currentsong.Pos;
+			this.updatePlaylistinfo();
 			this.renderQueue();
 		};
 
 		this.onPlaylistinfo = function( e, playlistinfo ) {
 			this.playlistinfo = playlistinfo.playlistinfo; // 'cause flightjs gets funky with non-object values apparently
+			this.updatePlaylistinfo();
 			this.renderQueue();
 		};
 
+		this.updatePlaylistinfo = function() {
+			var position = this.position;
+			this.playlistinfo = this.playlistinfo.map( function( track ) {
+				if ( track.Pos == position ) {
+					track.playing = true;
+				}
+				else {
+					track.playing = false;
+				}
+
+				return track;
+			} );
+		};
+
 		this.renderQueue = function() {
-			if ( typeof this.playlistinfo[this.position] == 'object' ) {
-				this.playlistinfo[this.position].playing = true;
-			}
 			this.$node.html( templates.queue.render( this ) );
 		};
 	}
