@@ -69,7 +69,7 @@ define( function( require ) {
 			this.$node.html( templates.queue.render( this ) );
 
 			this.on( '#queue-clear', 'click', this.clickClear );
-			this.on( 'a', 'click', this.clickTrack );
+			this.on( '#queue a', 'click', this.clickTrack );
 		};
 	}
 
