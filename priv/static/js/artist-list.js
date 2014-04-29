@@ -11,7 +11,7 @@ define( function( require ) {
 	function queue() {
 
 		this.after('initialize', function() {
-			this.on( document, 'artist-list', this.onArtistList );
+			this.on( document, 'list-artist', this.onListArtist );
 
 			this.renderList();
 		} );
@@ -23,7 +23,7 @@ define( function( require ) {
 			console.log( 'click', jquery( e.delegateTarget ) );
 		};
 
-		this.onArtistList = function( e, artistList ) {
+		this.onListArtist = function( e, artistList ) {
 			this.updateArtistList( artistList.result );
 			this.renderList();
 		};

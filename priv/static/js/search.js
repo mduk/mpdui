@@ -11,7 +11,7 @@ define( function( require ) {
 	function queue() {
 
 		this.after('initialize', function() {
-			this.on( document, 'search-results', this.onSearchResults );
+			this.on( document, 'search', this.onSearch );
 
 			this.renderLibrary();
 		} );
@@ -32,7 +32,7 @@ define( function( require ) {
 			wsmpd.playlistinfo();
 		};
 
-		this.onSearchResults = function( e, msg ) {
+		this.onSearch = function( e, msg ) {
 			this.searchType = msg.command.args[0];
 			this.searchTerm = msg.command.args[1];
 			this.results = msg.result;

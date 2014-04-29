@@ -117,9 +117,7 @@ execute( C, <<"clear">>, [] ) ->
 	ok( erlmpd:clear( C ) );
 
 execute( C, <<"playlistinfo">>, [] ) ->
-	Results = erlmpd:playlistinfo( C ),
-	ResultsStruct = lists:map( fun object/1, Results ),
-	object( <<"playlistinfo">>, ResultsStruct );
+	lists:map( fun object/1, erlmpd:playlistinfo( C ) );
 
 %% Stored Playlists
 

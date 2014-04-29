@@ -46,7 +46,7 @@ define( function( require ) {
 		};
 
 		this.onPlaylistinfo = function( e, playlistinfo ) {
-			this.playlistinfo = playlistinfo.playlistinfo; // 'cause flightjs gets funky with non-object values apparently
+			this.playlistinfo = playlistinfo.result;
 			this.updatePlaylistinfo();
 			this.renderQueue();
 		};

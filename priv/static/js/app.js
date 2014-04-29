@@ -12,33 +12,6 @@ define( function( require ) {
 	require( 'js/artist-list' ).attachTo( '#artists-container' );
 	require( 'js/album-list' ).attachTo( '#albums-container' );
 
-	wsmpd.registerCallback( function( message ) {
-		
-		var command = message.command;
-		var result = message.result;
-		
-		if ( typeof result.playlistinfo == 'object' ) {
-			// Not unpacking message message contents 'cause 
-			// flightjs gets funky with non-object values apparently
-			$(document).trigger( 'playlistinfo', message.result );
-		}
-
-		if ( command.cmd == 'search' ) {
-			$(document).trigger( 'search-results', message );
-		}
-
-		// Received artist list
-		if ( command.cmd == 'list' && command.args[0] == 'artist' ) {
-			$(document).trigger( 'artist-list', message );
-		}
-
-		// Received album list
-		if ( command.cmd == 'list' && command.args[0] == 'album' ) {
-			$(document).trigger( 'album-list', message );
-		}
-
-	} );
-
 	jquery(document).on( 'currentsong', function(e, msg) {
 		wsmpd.playlistinfo();
 	} );

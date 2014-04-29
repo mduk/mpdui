@@ -1,22 +1,34 @@
 define( [ 'jquery' ], function( jquery ) {
 
-	var websocket,
-	    currentsongCallback,
-	    statusCallback,
-	    generalCallback;
+	var websocket;
 	
 	function send( txt ) {
 		if ( websocket.readyState == websocket.OPEN ) {
 			websocket.send(txt);
 		}
-	}
+	};
 
 	function sendCommand( command, arguments ) {
 		send( JSON.stringify( {
 			cmd: command,
 			args: arguments
 		} ) );
-	}
+	};
+
+	function getEventName( message ) {
+		var cmdName = function( message ) {
+			return message.command.cmd;
+		};
+
+		var cmdAndFirstArg = function( message ) {
+			return message.command.cmd + '-' + message.command.args[0];
+		};
+
+		switch ( message.command.cmd ) {
+			case 'list': return cmdAndFirstArg( message );
+			default: return cmdName( message );
+		}
+	};
 	
 	return {
 		connect: function() {
@@ -28,17 +40,18 @@ define( [ 'jquery' ], function( jquery ) {
 	
 			websocket.onmessage = function(evt) {
 				var message = JSON.parse( evt.data );
+				
 				if ( typeof message.status == 'object') {
 					jquery(document).trigger('status', message.status);
+					return;
 				}
 
-				else if ( typeof message.currentsong == 'object' ) {
+				if ( typeof message.currentsong == 'object' ) {
 					jquery(document).trigger('currentsong', message.currentsong);
+					return;
 				}
-				
-				else if ( typeof generalCallback == 'function' ) {
-					generalCallback( message );
-				}
+
+				jquery(document).trigger( getEventName( message ), message );
 			};
 	
 			websocket.onerror = function(evt) {};
@@ -54,10 +67,6 @@ define( [ 'jquery' ], function( jquery ) {
 			} else {
 				return false;
 			}
-		},
-
-		registerCallback: function( callback ) {
-			generalCallback = callback;
 		},
 
 		addid: function( songid ) {
