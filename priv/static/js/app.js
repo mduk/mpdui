@@ -13,31 +13,33 @@ define( function( require ) {
 	require( 'js/album-list' ).attachTo( '#albums-container' );
 
 	wsmpd.registerCallback( function( message ) {
-
-		if ( typeof message.playlistinfo == 'object' ) {
+		
+		var command = message.command;
+		var result = message.result;
+		
+		if ( typeof result.playlistinfo == 'object' ) {
 			// Not unpacking message message contents 'cause 
 			// flightjs gets funky with non-object values apparently
-			$(document).trigger( 'playlistinfo', message );
+			$(document).trigger( 'playlistinfo', message.result );
 		}
 
-		if ( typeof message.results == 'object' && typeof message.search == 'object' ) {
-			$(document).trigger( 'search-results', message );
+		if ( typeof result.results == 'object' && typeof result.search == 'object' ) {
+			$(document).trigger( 'search-results', message.result );
 		}
 
 		// Received artist list
-		if ( typeof message.results == 'object' && typeof message.list == 'object' && message.list[0] == 'artist' ) {
-			$(document).trigger( 'artist-list', message );
+		if ( typeof result.results == 'object' && typeof result.list == 'object' && result.list[0] == 'artist' ) {
+			$(document).trigger( 'artist-list', message.result );
 		}
 
 		// Received album list
-		if ( typeof message.results == 'object' && typeof message.list == 'object' && message.list[0] == 'album' ) {
-			$(document).trigger( 'album-list', message );
+		if ( typeof result.results == 'object' && typeof result.list == 'object' && result.list[0] == 'album' ) {
+			$(document).trigger( 'album-list', message.result );
 		}
 
 	} );
 
 	jquery(document).on( 'currentsong', function(e, msg) {
-		console.log( 'currentsong', msg );
 		wsmpd.playlistinfo();
 	} );
 

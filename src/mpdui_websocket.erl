@@ -18,10 +18,11 @@ websocket_init( _, Req, _ ) ->
 
 websocket_handle( { text, RawMsg }, Req, C ) ->
 	{ struct, MsgData } = mochijson2:decode( RawMsg ),
-	ReplyData = mpdui_command:execute( C,
+	ReplyData = execute_command( C,
 		proplists:get_value( <<"cmd">>, MsgData ),
 		proplists:get_value( <<"args">>, MsgData, [] )
 	),
+
 	{ reply, { text, mochijson2:encode( ReplyData ) }, Req, C };
 websocket_handle( _, Req, C ) ->
 	{ ok, Req, C }.
@@ -42,4 +43,11 @@ websocket_info( _, Req, C ) ->
 websocket_terminate( _Reason, _Req, _C ) ->
 	ok.
 
-
+execute_command( C, Command, Args ) ->
+	{ struct, [
+		{ <<"command">>, { struct, [
+			{ <<"cmd">>, Command },
+			{ <<"args">>, Args }
+		] } },
+		{ <<"result">>, mpdui_command:execute( C, Command, Args ) }
+	] }.

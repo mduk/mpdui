@@ -28,16 +28,15 @@ define( [ 'jquery' ], function( jquery ) {
 	
 			websocket.onmessage = function(evt) {
 				var message = JSON.parse( evt.data );
-
 				if ( typeof message.status == 'object') {
-					$(document).trigger('status', message.status);
+					jquery(document).trigger('status', message.status);
 				}
 
-				if ( typeof message.currentsong == 'object' ) {
-					$(document).trigger('currentsong', message.currentsong);
+				else if ( typeof message.currentsong == 'object' ) {
+					jquery(document).trigger('currentsong', message.currentsong);
 				}
-
-				if ( typeof generalCallback == 'function' ) {
+				
+				else if ( typeof generalCallback == 'function' ) {
 					generalCallback( message );
 				}
 			};
