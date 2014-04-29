@@ -55,12 +55,13 @@ define( function( require ) {
 		wsmpd.playlistinfo();
 	} );
 
-	jquery('#nav-search button[type=submit]').click( function( e ) {
+	jquery('#nav-search-form button[type=submit]').click( function( e ) {
 		e.preventDefault();
 		wsmpd.search(
 			'album',
-			jquery("#nav-search input[type=text]").val()
+			jquery("#nav-search-form input[type=text]").val()
 		);
+		jquery('#nav-library').click();
 	} );
 	
 	jquery('#nav-library').click( function() {
