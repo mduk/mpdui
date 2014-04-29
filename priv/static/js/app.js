@@ -4,7 +4,8 @@ define( function( require ) {
 		templates = require( 'js/templates' );
 	
 	require( 'bootstrap' );
-	
+
+	require( 'js/nav' ).attachTo( 'nav ul.nav' );
 	require( 'js/mini-control' ).attachTo( '#mini-control-container' );
 	require( 'js/now-playing' ).attachTo( '#now-playing .jumbotron' );
 	require( 'js/queue' ).attachTo( '#queue-container' );
@@ -19,10 +20,6 @@ define( function( require ) {
 
 	jquery('#nav-artists').click( function() {
 		wsmpd.list('artist');
-	} );
-	
-	jquery('#nav-albums').click( function() {
-		wsmpd.list('album');
 	} );
 	
 	jquery('#nav-settings').click( function() {

@@ -4,6 +4,7 @@ define( function( require ) {
 	var defineComponent = require('flight/component'),
 	    jquery = require('jquery'),
 	    templates = require('js/templates'),
+	    nav = require('js/nav'),
 	    wsmpd = require('wsmpd');
 
 	return defineComponent( queue );
@@ -12,6 +13,7 @@ define( function( require ) {
 
 		this.after('initialize', function() {
 			this.on( document, 'list-album', this.onListAlbum );
+			this.on( nav, 'tab-change', this.onTabChange );
 
 			this.renderList();
 		} );
@@ -27,6 +29,12 @@ define( function( require ) {
 		this.onListAlbum = function( e, albumList ) {
 			this.updateAlbumList( albumList.result );
 			this.renderList();
+		};
+
+		this.onTabChange = function( e, msg ) {
+			if ( msg.$to.attr('id') == 'nav-albums' ) {
+				wsmpd.list('album');
+			}
 		};
 
 		this.updateAlbumList = function( albumList ) {
