@@ -21,7 +21,6 @@ define( function( require ) {
 		this.results = [];
 
 		this.clickSearch = function() {
-			console.log('searching...');
 			wsmpd.search(
 				this.$node.find("select").val(),
 				this.$node.find("input[type=text]").val()
