@@ -21,7 +21,11 @@ define( function( require ) {
 		this.state = '';
 		this.position = 0;
 		this.playlistinfo = [];
-		
+
+		this.clickTrack = function( e ) {
+			wsmpd.play( $( e.delegateTarget ).data('pos') );
+		};
+
 		this.clickClear = function() {
 			wsmpd.clear();
 		};
@@ -65,6 +69,7 @@ define( function( require ) {
 			this.$node.html( templates.queue.render( this ) );
 
 			this.on( '#queue-clear', 'click', this.clickClear );
+			this.on( 'a', 'click', this.clickTrack );
 		};
 	}
 

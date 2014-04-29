@@ -9,7 +9,7 @@
 	</div>
 	<div class="list-group">
 		{{#playlistinfo}}
-		<a class="list-group-item {{#playing}}active{{/playing}}" href='#play:{{Pos}}'>
+		<a class="list-group-item {{#playing}}active{{/playing}}" href='#play:{{Pos}}' data-pos="{{Pos}}">
 			<h4 class="list-group-item-heading">{{Title}}</h4>
 			<p class="list-group-item-text">{{Artist}} - {{Album}}</p>
 		</a>
