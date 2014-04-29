@@ -20,9 +20,9 @@ define( function( require ) {
 		this.searchTerm = '';
 		this.results = [];
 
-		this.clickSearch = function() {
+		this.submitSearch = function() {
 			wsmpd.search(
-				this.$node.find("select").val(),
+				this.$node.find("input[type=hidden]").val(),
 				this.$node.find("input[type=text]").val()
 			);
 		};
@@ -43,8 +43,8 @@ define( function( require ) {
 		this.renderLibrary = function() {
 			this.$node.html( templates.search.render( this ) );
 			
-			this.on( '#library-search', 'click', this.clickSearch );
-			this.on( '#library-container table button', 'click', this.clickAddToQueue );
+			this.on( '#search-container form', 'submit', this.submitSearch );
+			this.on( '#search-container table button', 'click', this.clickAddToQueue );
 		};
 	}
 
