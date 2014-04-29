@@ -72,27 +72,7 @@ define( function( require ) {
 		wsmpd.list('album');
 	} );
 
-	jquery('#cmd-list').click( function() {
-		wsmpd.list(
-			jquery("#cmd-list-type").val()
-		);
-	} );
-
-	// Status
-
-	jquery('#cmd-currentsong').click( function() {
-		wsmpd.currentsong();
-	} );
-
-	jquery('#cmd-status').click( function() {
-		wsmpd.status();
-	} );
-
-	jquery('#cmd-stats').click( function() {
-		wsmpd.stats();
-	} );
-
-	// Playback Options
+	// Settings
 
 	jquery('#cmd-consume').click( function() {
 		wsmpd.consume(
@@ -117,62 +97,6 @@ define( function( require ) {
 			parseInt( jquery("#single_state_txt").val() )
 		);
 	} );
-
-	// Controlling Playback
-
-	jquery('#cmd-previous').click( function() {
-		wsmpd.previous();
-	} );
-
-	jquery('#cmd-play').click( function() {
-		wsmpd.play(
-			parseInt( jquery('#cmd-play-position').val() )
-		);
-	} );
-
-	jquery('#cmd-pause').click( function() {
-		wsmpd.pause( 1 );
-	} );
-
-	jquery('#cmd-unpause').click( function() {
-		wsmpd.pause( 0 );
-	} );
-
-	jquery('#cmd-stop').click( function() {
-		wsmpd.stop();
-	} );
-
-	jquery('#cmd-next').click( function() {
-		wsmpd.next();
-	} );
-
-	jquery('#cmd-playid').click( function() {
-		wsmpd.playid(
-			parseInt( jquery("#playid_txt").val() )
-		);
-	} );
-
-	jquery('#cmd-seek').click( function() {
-		wsmpd.seek(
-			parseInt( jquery("#seek_position_txt").val() ),
-			parseInt( jquery("#seek_time_txt").val() )
-		);
-	} );
-
-	jquery('#cmd-seekid').click( function() {
-		wsmpd.seekid(
-			parseInt( jquery("#seekid_id_txt").val() ),
-			parseInt( jquery("#seekid_time_txt").val() )
-		);
-	} );
-
-	jquery('#cmd-seekcur').click( function() {
-		wsmpd.seekcur(
-			parseInt( jquery("#seekcur_time_txt").val() )
-		);
-	} );
-
-	// Output Device
 
 	jquery('#cmd-disableoutput').click( function() {
 		wsmpd.disableoutput(
