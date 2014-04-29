@@ -21,6 +21,10 @@ define( function( require ) {
 		this.state = '';
 		this.position = 0;
 		this.playlistinfo = [];
+		
+		this.clickClear = function() {
+			wsmpd.clear();
+		};
 
 		this.onStatus = function( e, status ) {
 			if ( this.state == status.state ) {
@@ -59,6 +63,8 @@ define( function( require ) {
 
 		this.renderQueue = function() {
 			this.$node.html( templates.queue.render( this ) );
+
+			this.on( '#queue-clear', 'click', this.clickClear );
 		};
 	}
 

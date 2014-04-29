@@ -185,16 +185,6 @@ define( function( require ) {
 		);
 	} );
 
-	// Current Playlist
-
-	jquery('#cmd-playlistinfo').click( function() {
-		wsmpd.playlistinfo();
-	} );
-
-	jquery('#cmd-clear').click( function() {
-		wsmpd.clear();
-	} );
-
 	// Database
 
 	jquery('#cmd-search').click( function() {
