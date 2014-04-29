@@ -23,10 +23,12 @@ define( function( require ) {
 		this.album = '';
 		this.duration = 0;
 		this.position = 0;
+		this.position_percent = 0;
 
 		this.onStatus = function( e, status ) {
 			this.state = status.state;
 			this.position = status.time;
+			this.updatePositionPercent();
 			this.renderNowPlaying();
 		};
 
@@ -35,7 +37,12 @@ define( function( require ) {
 			this.artist = currentsong.Artist;
 			this.album = currentsong.Album;
 			this.duration = currentsong.Time;
+			this.updatePositionPercent();
 			this.renderNowPlaying();
+		};
+
+		this.updatePositionPercent = function() {
+			this.position_percent = ( 100 / this.duration ) * this.position;
 		};
 
 		this.renderNowPlaying = function() {

@@ -1,3 +1,10 @@
 <h1>{{title}}</h1>
-<h2>{{artist}}</h2>
-<p><span id="currentsong-position">{{position}}</span>/<span>{{duration}}</span></p>
+<h2>{{artist}} <small>{{album}}</small></h2>
+<div class="progress">
+	<div class="progress-bar" 
+		role="progressbar"
+		aria-valuenow="{{position_percent}}"
+		aria-valuemin="0"
+		aria-valuemax="100"
+		style="width: {{position_percent}}%;"></div>
+</div>
