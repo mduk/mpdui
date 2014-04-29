@@ -38,6 +38,11 @@ define( function( require ) {
 					wsmpd.pause( 1 );
 					this.updatePlayPauseButton( 'pause' );
 					break;
+
+				case 'stop':
+					wsmpd.play( 0 );
+					this.updatePlayPauseButton( 'play' );
+					break;
 			}
 			
 		};
@@ -93,6 +98,7 @@ define( function( require ) {
 					break;
 
 				case 'pause':
+				case 'stop':
 					btn.html('<span class="glyphicon glyphicon-play"></span>');
 					break;
 			}
