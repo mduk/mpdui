@@ -8,6 +8,7 @@ define( function( require ) {
 	require( 'js/mini-control' ).attachTo( '#mini-control' );
 	require( 'js/now-playing' ).attachTo( '#now-playing .jumbotron' );
 	require( 'js/queue' ).attachTo( '#queue-container' );
+	require( 'js/library' ).attachTo( '#library-container' );
 
 	wsmpd.registerStatusCallback( function( status ) {
 		jquery('#currentsong-position').html( Math.round( status.time ).toString() );
@@ -22,18 +23,8 @@ define( function( require ) {
 			$(document).trigger( 'playlistinfo', message );
 		}
 
-		// Library search results
 		if ( typeof message.results == 'object' && typeof message.search == 'object' ) {
-			var $viewBody = jquery('#library tbody');
-			$viewBody.html('');
-
-			message.results.forEach( function( Elem ) {
-				$viewBody.append(
-					jquery( templates.library_row.render( Elem ) )
-				);
-			} );
-
-			jquery('#nav-library').click();
+			$(document).trigger( 'search-results', message );
 		}
 
 		// Received artist list
@@ -59,17 +50,9 @@ define( function( require ) {
 
 	} );
 
-	jquery(document).on( 'status', function(e, msg) {
-		console.log( 'status', msg );
-	} );
-
 	jquery(document).on( 'currentsong', function(e, msg) {
 		console.log( 'currentsong', msg );
 		wsmpd.playlistinfo();
-	} );
-
-	jquery(document).on( 'playlistinfo', function(e, msg) {
-		console.log( 'playlistinfo', msg );
 	} );
 
 	jquery('#nav-search button[type=submit]').click( function( e ) {
@@ -182,15 +165,6 @@ define( function( require ) {
 	jquery('#cmd-seekcur').click( function() {
 		wsmpd.seekcur(
 			parseInt( jquery("#seekcur_time_txt").val() )
-		);
-	} );
-
-	// Database
-
-	jquery('#cmd-search').click( function() {
-		wsmpd.search(
-			jquery("#search_type").val(),
-			jquery("#search_txt").val()
 		);
 	} );
 
