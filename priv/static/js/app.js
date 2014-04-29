@@ -5,7 +5,7 @@ define( function( require ) {
 	
 	require( 'bootstrap' );
 	
-	require( 'js/mini-control' ).attachTo( '#mini-control' );
+	require( 'js/mini-control' ).attachTo( '#mini-control-container' );
 	require( 'js/now-playing' ).attachTo( '#now-playing .jumbotron' );
 	require( 'js/queue' ).attachTo( '#queue-container' );
 	require( 'js/search' ).attachTo( '#search-container' );
