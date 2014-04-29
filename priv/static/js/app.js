@@ -11,6 +11,7 @@ define( function( require ) {
 	require( 'js/search' ).attachTo( '#search-container' );
 	require( 'js/artist-list' ).attachTo( '#artists-container' );
 	require( 'js/album-list' ).attachTo( '#albums-container' );
+	require( 'js/outputs' ).attachTo( '#settings-outputs-container' );
 
 	jquery(document).on( 'currentsong', function(e, msg) {
 		wsmpd.playlistinfo();
@@ -22,6 +23,10 @@ define( function( require ) {
 	
 	jquery('#nav-albums').click( function() {
 		wsmpd.list('album');
+	} );
+	
+	jquery('#nav-settings').click( function() {
+		wsmpd.outputs();
 	} );
 
 	// Settings

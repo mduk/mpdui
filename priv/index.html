@@ -96,68 +96,24 @@ body {
 
 				<div class="tab-content">
 
-					<div class="tab-pane" id="artists">
-						<div id="artists-container"></div>
-					</div>
-					<div class="tab-pane" id="albums">
-						<div id="albums-container"></div>
-					</div>
-
 					<div class="tab-pane active" id="now-playing">
 						<div id="currentsong" class="jumbotron"></div>
 					</div>
 
 					<div class="tab-pane" id="search">
-						<div class="row">
-							<div class="col-md-12" id="search-container"></div>
-						</div>
+						<div id="search-container"></div>
+					</div>
+
+					<div class="tab-pane" id="artists">
+						<div id="artists-container"></div>
+					</div>
+
+					<div class="tab-pane" id="albums">
+						<div id="albums-container"></div>
 					</div>
 					
 					<div class="tab-pane" id="settings">
-						
-						<div class="panel panel-default">
-							<div class="panel-heading">
-								<h3 class="panel-title">Playback Options</h3>
-							</div>
-							<div class="panel-body">
-								<input type='text' id="consume_state_txt" placeholder="state 0/1"/>
-								<button type="button" class="btn btn-default" id="cmd-consume">consume</button>
-								<br/>
-								<input type='text' id="crossfade_seconds_txt" placeholder="seconds"/>
-								<button type="button" class="btn btn-default" id="cmd-crossfade">crossfade</button>
-								<br/>
-								<input type='text' id="mixrampdb_decibels_txt" placeholder="decibels" disabled="disabled"/>
-								<button type="button" class="btn btn-default" disabled="disabled">mixrampdb</button>
-								<br/>
-								<input type='text' id="mixrampdelay_seconds_txt" placeholder="seconds" disabled="disabled"/>
-								<button type="button" class="btn btn-default" disabled="disabled">mixrampdelay</button>
-								<br/>
-								<input type='text' id="setvol_vol_txt" placeholder="vol 0-100"/>
-								<button type="button" class="btn btn-default" id="cmd-setvol">setvol</button>
-								<br/>
-								<input type='text' id="single_state_txt" placeholder="state 0-100"/>
-								<button type="button" class="btn btn-default" id="cmd-single">single</button>
-							</div>
-						</div>
-
-						<div class="panel panel-default">
-							<div class="panel-heading">
-								<h3 class="panel-title">Output Devices</h3>
-							</div>
-							<div class="panel-body">
-								<button type="button" class="btn btn-default" id="cmd-outputs">outputs</button>
-								<br/>
-								<input type='text' id="disableoutput_id_txt" placeholder="id"></input>
-								<button type="button" class="btn btn-default" id="cmd-disableoutput">disableoutput</button>
-								<br/>
-								<input type='text' id="enableoutput_id_txt" placeholder="id"></input>
-								<button type="button" class="btn btn-default" id="cmd-enableoutput">enableoutput</button>
-								<br/>
-								<input type='text' id="toggleoutput_id_txt" placeholder="id" disabled="disabled"></input>
-								<button type="button" class="btn btn-default" id="cmd-toggleoutput" disabled="disabled">toggleoutput</button>
-							</div>
-						</div>
-
+						<div id="settings-outputs-container"></div>
 					</div>
 				</div>
 			</div>

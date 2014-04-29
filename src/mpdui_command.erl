@@ -160,15 +160,7 @@ execute( _, <<"toggleoutput">>, _ ) ->
 	unsupported();
 
 execute( C, <<"outputs">>, [] ) ->
-	Results = erlmpd:outputs( C ),
-
-	ResultsStruct = lists:map( fun( Result ) ->
-		{ struct, Result }
-	end, Results ),
-
-	{ struct, [
-		{ <<"outputs">>, ResultsStruct }
-	] };
+	lists:map( fun object/1, erlmpd:outputs( C ) );
 
 %% Unknown command
 
