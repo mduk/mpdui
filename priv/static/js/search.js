@@ -32,10 +32,10 @@ define( function( require ) {
 			wsmpd.playlistinfo();
 		};
 
-		this.onSearchResults = function( e, results ) {
-			this.searchType = results.search[0];
-			this.searchTerm = results.search[1];
-			this.results = results.results;
+		this.onSearchResults = function( e, msg ) {
+			this.searchType = msg.command.args[0];
+			this.searchTerm = msg.command.args[1];
+			this.results = msg.result;
 
 			this.renderLibrary();
 		};

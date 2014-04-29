@@ -24,7 +24,7 @@ define( function( require ) {
 		};
 
 		this.onArtistList = function( e, artistList ) {
-			this.updateArtistList( artistList.results );
+			this.updateArtistList( artistList.result );
 			this.renderList();
 		};
 

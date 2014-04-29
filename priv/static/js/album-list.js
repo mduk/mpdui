@@ -24,7 +24,7 @@ define( function( require ) {
 		};
 
 		this.onAlbumList = function( e, albumList ) {
-			this.updateAlbumList( albumList.results );
+			this.updateAlbumList( albumList.result );
 			this.renderList();
 		};
 

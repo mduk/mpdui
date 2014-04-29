@@ -23,18 +23,18 @@ define( function( require ) {
 			$(document).trigger( 'playlistinfo', message.result );
 		}
 
-		if ( typeof result.results == 'object' && typeof result.search == 'object' ) {
-			$(document).trigger( 'search-results', message.result );
+		if ( command.cmd == 'search' ) {
+			$(document).trigger( 'search-results', message );
 		}
 
 		// Received artist list
-		if ( typeof result.results == 'object' && typeof result.list == 'object' && result.list[0] == 'artist' ) {
-			$(document).trigger( 'artist-list', message.result );
+		if ( command.cmd == 'list' && command.args[0] == 'artist' ) {
+			$(document).trigger( 'artist-list', message );
 		}
 
 		// Received album list
-		if ( typeof result.results == 'object' && typeof result.list == 'object' && result.list[0] == 'album' ) {
-			$(document).trigger( 'album-list', message.result );
+		if ( command.cmd == 'list' && command.args[0] == 'album' ) {
+			$(document).trigger( 'album-list', message );
 		}
 
 	} );

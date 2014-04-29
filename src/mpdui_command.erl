@@ -126,38 +126,22 @@ execute( C, <<"playlistinfo">>, [] ) ->
 %% Music Database
 
 execute( C, <<"search">>, [ Type, What ] ) ->
-	Results = erlmpd:search( C, 
+	lists:map( fun object/1, erlmpd:search( C,
 		binary_to_atom( Type, utf8 ), 
 		binary_to_list( What ) 
-	),
-	ResultsStruct = lists:map( fun object/1, Results ),
-	{ struct, [
-		{ <<"search">>, [ Type, What ] },
-		{ <<"results">>, ResultsStruct }
-	] };
+	) );
 
 execute( C, <<"list">>, [ Type ] ) ->
-	Results = erlmpd:list( C, binary_to_atom( Type, utf8 ) ),
-	ResultsStruct = lists:map( fun( Elem ) ->
-		object( Type, Elem )
-	end, Results ),
-	{ struct, [
-		{ <<"list">>, [ Type ] },
-		{ <<"results">>, ResultsStruct }
-	] };
+	Map = fun( Elem ) -> object( Type, Elem ) end,
+	lists:map( Map, erlmpd:list( C, binary_to_atom( Type, utf8 ) ) );
 
 execute( C, <<"list">>, [ Type, Artist ] ) ->
-	Results = erlmpd:list( C,
+	Map = fun( Elem ) -> object( Type, Elem ) end,
+	lists:map( Map, erlmpd:list( C,
 		binary_to_atom( Type, utf8 ),
 		binary_to_list( Artist )
-	),
-	ResultsStruct = lists:map( fun( Elem ) ->
-		object( Type, Elem )
-	end, Results ),
-	{ struct, [
-		{ <<"list">>, [ Type, Artist ] },
-		{ <<"results">>, ResultsStruct }
-	] };
+	) );
+
 %% Stickers
 
 %% Connection Settings
