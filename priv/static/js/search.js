@@ -41,7 +41,7 @@ define( function( require ) {
 		};
 
 		this.renderLibrary = function() {
-			this.$node.html( templates.library.render( this ) );
+			this.$node.html( templates.search.render( this ) );
 			
 			this.on( '#library-search', 'click', this.clickSearch );
 			this.on( '#library-container table button', 'click', this.clickAddToQueue );

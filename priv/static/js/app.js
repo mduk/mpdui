@@ -8,7 +8,7 @@ define( function( require ) {
 	require( 'js/mini-control' ).attachTo( '#mini-control' );
 	require( 'js/now-playing' ).attachTo( '#now-playing .jumbotron' );
 	require( 'js/queue' ).attachTo( '#queue-container' );
-	require( 'js/library' ).attachTo( '#library-container' );
+	require( 'js/search' ).attachTo( '#search-container' );
 
 	wsmpd.registerStatusCallback( function( status ) {
 		jquery('#currentsong-position').html( Math.round( status.time ).toString() );
