@@ -186,6 +186,10 @@ define( [ 'jquery' ], function( jquery ) {
 			return sendCommand( 'list', args );
 		},
 
+		findadd: function( type, what ) {
+			return sendCommand( 'findadd', [ type, what ] );
+		},
+
 		// Output Devices
 
 		disableoutput: function( id ) {

@@ -140,6 +140,12 @@ execute( C, <<"list">>, [ Type, Artist ] ) ->
 		binary_to_list( Artist )
 	) );
 
+execute( C, <<"findadd">>, [ Type, What ] ) ->
+	ok( erlmpd:findadd( C,
+		binary_to_atom( Type, utf8 ),
+		binary_to_list( What )
+	) );
+
 %% Stickers
 
 %% Connection Settings

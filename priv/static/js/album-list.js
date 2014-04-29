@@ -17,10 +17,11 @@ define( function( require ) {
 		} );
 
 		this.title = "Albums";
-		this.list = [];
+		this.albums = [];
 
-		this.clickRow = function( e ) {
-			console.log( 'click', jquery( e.delegateTarget ) );
+		this.clickAddToQueue = function( e ) {
+			var album = jquery(e.currentTarget).data('album');
+			wsmpd.findadd( 'album', album);	
 		};
 
 		this.onListAlbum = function( e, albumList ) {
@@ -29,15 +30,17 @@ define( function( require ) {
 		};
 
 		this.updateAlbumList = function( albumList ) {
-			this.list = albumList.map( function( elem ) {
+			this.albums = albumList.map( function( elem ) {
 				return { title: elem.album };
 			} );
 		};
 
 		this.renderList = function() {
-			this.$node.html( templates.list_panel.render( this ) );
+			this.$node.html( templates.albums.render( this ) );
 
 			jquery('button').tooltip();
+
+			this.on( '#albums-container button.add-to-queue', 'click', this.clickAddToQueue );
 		};
 	}
 
