@@ -77,7 +77,11 @@ define( [ 'jquery' ], function( jquery ) {
 		registerCallback: function( callback ) {
 			generalCallback = callback;
 		},
-		
+
+		addid: function( songid ) {
+			return sendCommand( 'addid', [ songid ] );
+		},
+
 		// Status
 
 		currentsong: function() {

@@ -8,12 +8,13 @@
 			<option>title</option>
 		</select>
 		<input type='text' id="search_txt" value="{{searchTerm}}"/>
-		<button type="button" class="btn btn-default" id="library-search">search</button>
+		<button type="button" class="btn btn-default" id="library-search"><span class="glyphicon glyphicon-search"></span> Search</button>
 	</div>
 
 	<table class="table table-condensed table-striped table-hover">
 		<thead>
 			<tr>
+				<th>&nbsp;</th>
 				<th>#</th>
 				<th>Title</th>
 				<th>Album</th>
@@ -23,6 +24,7 @@
 		<tbody>
 			{{#results}}
 			<tr>
+				<td><button class="btn btn-default btn-xs" class="add-to-queue" data-songid="{{file}}"><span class="glyphicon glyphicon-plus"></span></button></td>
 				<td>{{Track}}</td>
 				<td>{{Title}}</td>
 				<td>{{Album}}</td>

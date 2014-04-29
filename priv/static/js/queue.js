@@ -23,7 +23,7 @@ define( function( require ) {
 		this.playlistinfo = [];
 
 		this.clickTrack = function( e ) {
-			wsmpd.play( $( e.delegateTarget ).data('pos') );
+			wsmpd.play( jquery( e.delegateTarget ).data('pos') );
 		};
 
 		this.clickClear = function() {

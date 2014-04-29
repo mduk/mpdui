@@ -27,6 +27,11 @@ define( function( require ) {
 			);
 		};
 
+		this.clickAddToQueue = function( e ) {
+			wsmpd.addid( jquery( e.delegateTarget ).data('songid') );
+			wsmpd.playlistinfo();
+		};
+
 		this.onSearchResults = function( e, results ) {
 			this.searchType = results.search[0];
 			this.searchTerm = results.search[1];
@@ -39,6 +44,7 @@ define( function( require ) {
 			this.$node.html( templates.library.render( this ) );
 			
 			this.on( '#library-search', 'click', this.clickSearch );
+			this.on( '#library-container table button', 'click', this.clickAddToQueue );
 		};
 	}
 
