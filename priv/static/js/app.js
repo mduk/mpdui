@@ -10,7 +10,7 @@ define( function( require ) {
 	require( 'js/queue' ).attachTo( '#queue-container' );
 	require( 'js/search' ).attachTo( '#search-container' );
 	require( 'js/artist-list' ).attachTo( '#artists-container' );
-	require( 'js/album-list' ).attachTo( '#albums-container' );
+	require( 'js/albums' ).attachTo( '#albums-container' );
 	require( 'js/outputs' ).attachTo( '#settings-outputs-container' );
 
 	jquery(document).on( 'currentsong', function(e, msg) {
