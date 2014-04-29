@@ -4,11 +4,11 @@
 	</div>
 	{{#body}}<div class="panel-body">{{{body}}}</div>{{/body}}
 	<ul class="list-group" id="{{list_id}}">
-		{{#items}}
+		{{#list}}
 		<li class="list-group-item">
 			{{#title}}<h4 class="list-group-item-heading">{{{title}}}</h4>{{/title}}
 			{{#body}}<p class="list-group-item-text">{{{body}}}</p>{{/body}}
 		</li>
-		{{/items}}
+		{{/list}}
 	</ul>
 </div>

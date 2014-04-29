@@ -9,6 +9,8 @@ define( function( require ) {
 	require( 'js/now-playing' ).attachTo( '#now-playing .jumbotron' );
 	require( 'js/queue' ).attachTo( '#queue-container' );
 	require( 'js/search' ).attachTo( '#search-container' );
+	require( 'js/artist-list' ).attachTo( '#artists-container' );
+	require( 'js/album-list' ).attachTo( '#albums-container' );
 
 	wsmpd.registerStatusCallback( function( status ) {
 		jquery('#currentsong-position').html( Math.round( status.time ).toString() );
@@ -29,23 +31,12 @@ define( function( require ) {
 
 		// Received artist list
 		if ( typeof message.results == 'object' && typeof message.list == 'object' && message.list[0] == 'artist' ) {
-			jquery('#artists-container').html(templates.list_panel.render( {
-				title: "Artists",
-				items: message.results.map( function( elem ) {
-					return { title: elem.artist };
-				} )
-			} ));
+			$(document).trigger( 'artist-list', message );
 		}
 
 		// Received album list
 		if ( typeof message.results == 'object' && typeof message.list == 'object' && message.list[0] == 'album' ) {
-			
-			jquery('#albums-container').html(templates.list_panel.render({
-				title: "Albums",
-				items: message.results.map( function( elem ) {
-					return { title: elem.album };
-				} )
-			}));
+			$(document).trigger( 'album-list', message );
 		}
 
 	} );

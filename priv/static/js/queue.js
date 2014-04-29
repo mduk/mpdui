@@ -70,6 +70,8 @@ define( function( require ) {
 
 			this.on( '#queue-clear', 'click', this.clickClear );
 			this.on( '#queue-container a', 'click', this.clickTrack );
+
+			jquery('button').tooltip();
 		};
 	}
 
