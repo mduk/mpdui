@@ -64,8 +64,11 @@ define( function( require ) {
 		jquery('#nav-library').click();
 	} );
 	
-	jquery('#nav-library').click( function() {
+	jquery('#nav-artists').click( function() {
 		wsmpd.list('artist');
+	} );
+	
+	jquery('#nav-albums').click( function() {
 		wsmpd.list('album');
 	} );
 

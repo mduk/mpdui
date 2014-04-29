@@ -20,12 +20,6 @@
 body {
 	padding: 70px 15px 15px 15px;
 }
-
-#artists-container ul,
-#albums-container ul {
-	max-height: 400px;
-	overflow-y: scroll;
-}
 		</style>
 	</head>
 	<body>
@@ -50,6 +44,8 @@ body {
 					<ul class="nav navbar-nav">
 						<li class="active"><a href="#now-playing" id="nav-nowplaying" data-toggle="tab">Now Playing</a></li>
 						<li><a href="#search" id="nav-search" data-toggle="tab">Search</a></li>
+						<li><a href="#artists" id="nav-artists" data-toggle="tab">Artists</a></li>
+						<li><a href="#albums" id="nav-albums" data-toggle="tab">Albums</a></li>
 						<li><a href="#settings" id="nav-settings" data-toggle="tab">Settings</a></li>
 					</ul>
 
@@ -107,6 +103,13 @@ body {
 
 				<div class="tab-content">
 
+					<div class="tab-pane" id="artists">
+						<div id="artists-container"></div>
+					</div>
+					<div class="tab-pane" id="albums">
+						<div id="albums-container"></div>
+					</div>
+
 					<!-- Now Playing -->
 					<div class="tab-pane active" id="now-playing">
 
@@ -157,15 +160,6 @@ body {
 
 					<!-- search -->
 					<div class="tab-pane" id="search">
-						<div class="row">
-
-							<div class="col-md-6" id="artists-container"></div>
-	
-							<div class="col-md-6" id="albums-container"></div>
-
-						</div>
-						<!-- Buttons -->
-						
 						<div class="row">
 							<div class="col-md-12" id="search-container"></div>
 
