@@ -17,9 +17,7 @@ start( _StartType, _StartArgs ) ->
 		] }
 	] ),
 
-	{ ok, _ } = cowboy:start_http( http, 100, [ { port, 45001 } ], [ { env, [ { dispatch, Dispatch } ]  } ] ),
-
-    mpdui_sup:start_link().
+	{ ok, _ } = cowboy:start_http( http, 100, [ { port, 45001 } ], [ { env, [ { dispatch, Dispatch } ]  } ] ).
 
 stop( _State ) ->
     ok.
