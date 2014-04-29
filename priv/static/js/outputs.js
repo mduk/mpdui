@@ -4,6 +4,7 @@ define( function( require ) {
 	var defineComponent = require('flight/component'),
 	    jquery = require('jquery'),
 	    templates = require('js/templates'),
+	    nav = require('js/nav'),
 	    wsmpd = require('wsmpd');
 
 	return defineComponent( queue );
@@ -14,6 +15,7 @@ define( function( require ) {
 			this.renderOutputs();
 
 			this.on( document, 'outputs', this.onOutputs );
+			this.on( nav, 'tab-change', this.onTabChange );
 		} );
 
 		this.title = "Outputs";
@@ -22,6 +24,12 @@ define( function( require ) {
 		this.onOutputs = function( e, message ) {
 			this.updateList( message.result );
 			this.renderOutputs();
+		};
+
+		this.onTabChange = function( e, msg ) {
+			if ( msg.$to.attr('id') == 'nav-settings' ) {
+				wsmpd.outputs();
+			}
 		};
 
 		this.updateList = function( outputs ) {

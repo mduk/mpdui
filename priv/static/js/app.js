@@ -18,14 +18,6 @@ define( function( require ) {
 		wsmpd.playlistinfo();
 	} );
 
-	jquery('#nav-artists').click( function() {
-		wsmpd.list('artist');
-	} );
-	
-	jquery('#nav-settings').click( function() {
-		wsmpd.outputs();
-	} );
-
 	// Settings
 
 	jquery('#cmd-consume').click( function() {
