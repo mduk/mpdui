@@ -16,15 +16,6 @@ define( function( require ) {
 		wsmpd.playlistinfo();
 	} );
 
-	jquery('#nav-search-form button[type=submit]').click( function( e ) {
-		e.preventDefault();
-		wsmpd.search(
-			'album',
-			jquery("#nav-search-form input[type=text]").val()
-		);
-		jquery('#nav-library').click();
-	} );
-	
 	jquery('#nav-artists').click( function() {
 		wsmpd.list('artist');
 	} );
