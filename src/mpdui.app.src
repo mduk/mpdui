@@ -7,6 +7,6 @@
 		stdlib,
 		cowboy
 	]},
-	{mod, { mpdui_app, []}},
+	{mod, { mpdui, []}},
 	{env, []}
 ]}.
