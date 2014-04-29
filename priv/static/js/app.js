@@ -12,11 +12,6 @@ define( function( require ) {
 	require( 'js/artist-list' ).attachTo( '#artists-container' );
 	require( 'js/album-list' ).attachTo( '#albums-container' );
 
-	wsmpd.registerStatusCallback( function( status ) {
-		jquery('#currentsong-position').html( Math.round( status.time ).toString() );
-
-	} );
-
 	wsmpd.registerCallback( function( message ) {
 
 		if ( typeof message.playlistinfo == 'object' ) {

@@ -29,25 +29,16 @@ define( [ 'jquery' ], function( jquery ) {
 			websocket.onmessage = function(evt) {
 				var message = JSON.parse( evt.data );
 
-				var statusEnabled = ( typeof statusCallback == 'function' );
-				var generalEnabled = ( typeof generalCallback == 'function' );
-
-				var isCurrentSong = ( typeof message.currentsong == 'object' );
-				var isStatus = ( typeof message.status == 'object');
-
-				if ( statusEnabled && isStatus ) {
-					statusCallback( message.status );
-				}
-				else if ( generalEnabled ) {
-					generalCallback( message );
-				}
-
-				if ( isStatus ) {
+				if ( typeof message.status == 'object') {
 					$(document).trigger('status', message.status);
 				}
 
-				if ( isCurrentSong ) {
+				if ( typeof message.currentsong == 'object' ) {
 					$(document).trigger('currentsong', message.currentsong);
+				}
+
+				if ( typeof generalCallback == 'function' ) {
+					generalCallback( message );
 				}
 			};
 	
@@ -66,14 +57,6 @@ define( [ 'jquery' ], function( jquery ) {
 			}
 		},
 
-		registerCurrentsongCallback: function( callback ) {
-			currentsongCallback = callback;
-		},
-
-		registerStatusCallback: function( callback ) {
-			statusCallback = callback;
-		},
-		
 		registerCallback: function( callback ) {
 			generalCallback = callback;
 		},
