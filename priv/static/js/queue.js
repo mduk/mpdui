@@ -14,7 +14,7 @@ define( function( require ) {
 			this.on( document, 'status', this.onStatus );
 			this.on( document, 'currentsong', this.onCurrentsong );
 			this.on( document, 'playlistinfo', this.onPlaylistinfo );
-			this.on( document, 'findadd', this.onFindadd );
+			this.on( document, 'findadd clear', this.refreshQueue );
 
 			this.renderQueue();
 		} );
@@ -52,7 +52,7 @@ define( function( require ) {
 			this.renderQueue();
 		};
 
-		this.onFindadd = function() {
+		this.refreshQueue = function() {
 			wsmpd.playlistinfo();
 		};
 
