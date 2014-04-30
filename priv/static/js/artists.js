@@ -3,19 +3,24 @@ define( function( require ) {
 
 	var defineComponent = require('flight/component'),
 	    jquery = require('jquery'),
-	    templates = require('js/templates'),
 	    nav = require('js/nav'),
 	    wsmpd = require('wsmpd');
 
-	return defineComponent( queue );
+	return defineComponent( artists,
+		require('js/withTemplate')
+	);
 
-	function queue() {
+	function artists() {
+
+		this.defaultAttrs( {
+			withTemplate: 'list_panel'
+		} );
 
 		this.after('initialize', function() {
 			this.on( document, 'list-artist', this.onListArtist );
 			this.on( nav, 'tab-change', this.onTabChange );
 
-			this.renderList();
+			this.render();
 		} );
 
 		this.title = "Artists";
@@ -27,7 +32,7 @@ define( function( require ) {
 
 		this.onListArtist = function( e, artistList ) {
 			this.updateArtistList( artistList.result );
-			this.renderList();
+			this.render();
 		};
 
 		this.onTabChange = function( e, msg ) {
@@ -40,12 +45,6 @@ define( function( require ) {
 			this.list = artistList.map( function( elem ) {
 				return { title: elem.artist };
 			} );
-		};
-
-		this.renderList = function() {
-			this.$node.html( templates.list_panel.render( this ) );
-
-			jquery('button').tooltip();
 		};
 	}
 

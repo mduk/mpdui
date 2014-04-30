@@ -3,18 +3,23 @@ define( function( require ) {
 
 	var defineComponent = require('flight/component'),
 	    jquery = require('jquery'),
-	    templates = require('js/templates'),
 	    wsmpd = require('wsmpd');
 
-	return defineComponent( nowPlaying );
+	return defineComponent( nowPlaying,
+		require('js/withTemplate')
+	);
 
 	function nowPlaying() {
+
+		this.defaultAttrs( {
+			withTemplate: 'now_playing'
+		} );
 
 		this.after('initialize', function() {
 			this.on( document, 'status', this.onStatus );
 			this.on( document, 'currentsong', this.onCurrentsong );
 
-			this.renderNowPlaying();
+			this.render();
 		} );
 
 		this.state = '';
@@ -29,7 +34,7 @@ define( function( require ) {
 			this.state = status.state;
 			this.position = status.time;
 			this.updatePositionPercent();
-			this.renderNowPlaying();
+			this.render();
 		};
 
 		this.onCurrentsong = function( e, currentsong ) {
@@ -38,15 +43,11 @@ define( function( require ) {
 			this.album = currentsong.Album;
 			this.duration = currentsong.Time;
 			this.updatePositionPercent();
-			this.renderNowPlaying();
+			this.render();
 		};
 
 		this.updatePositionPercent = function() {
 			this.position_percent = ( 100 / this.duration ) * this.position;
-		};
-
-		this.renderNowPlaying = function() {
-			this.$node.html( templates.now_playing.render( this ) );
 		};
 	}
 

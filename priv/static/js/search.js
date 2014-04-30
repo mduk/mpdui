@@ -3,17 +3,22 @@ define( function( require ) {
 
 	var defineComponent = require('flight/component'),
 	    jquery = require('jquery'),
-	    templates = require('js/templates'),
 	    wsmpd = require('wsmpd');
 
-	return defineComponent( queue );
+	return defineComponent( search,
+		require('js/withTemplate')
+	);
 
-	function queue() {
+	function search() {
+
+		this.defaultAttrs( {
+			withTemplate: 'search'
+		} );
 
 		this.after('initialize', function() {
 			this.on( document, 'search', this.onSearch );
 
-			this.renderLibrary();
+			this.render();
 		} );
 
 		this.searchType = 'artist';
@@ -37,12 +42,10 @@ define( function( require ) {
 			this.searchTerm = msg.command.args[1];
 			this.results = msg.result;
 
-			this.renderLibrary();
+			this.render();
 		};
 
-		this.renderLibrary = function() {
-			this.$node.html( templates.search.render( this ) );
-			
+		this.postRender = function() {
 			this.on( '#search-container form', 'submit', this.submitSearch );
 			this.on( '#search-container table button', 'click', this.clickAddToQueue );
 		};

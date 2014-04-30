@@ -3,17 +3,22 @@ define( function( require ) {
 	
 	var defineComponent = require('flight/component'),
 	    jquery = require('jquery'),
-	    templates = require('js/templates'),
 	    wsmpd = require('wsmpd');
 
-	return defineComponent( miniControl );
+	return defineComponent( miniControl,
+		require('js/withTemplate')
+	);
 
 	function miniControl() {
-		
+
+		this.defaultAttrs( {
+			withTemplate: 'mini_control'
+		} );
+
 		this.after('initialize', function() {
 			this.on( document, 'status', this.onStatus );
 
-			this.renderMiniControl();
+			this.render();
 			
 			this.on( '#minicontrol-previous', 'click', this.clickPrevious );
 			this.on( '#minicontrol-playpause', 'click', this.clickPlayPause );
@@ -149,7 +154,7 @@ define( function( require ) {
 			this.repeatState = state;
 		};
 		
-		this.renderMiniControl = function() {
+		this.render = function() {
 			this.$node.html( templates.mini_control.render( this ) );
 		};
 	}

@@ -3,19 +3,24 @@ define( function( require ) {
 
 	var defineComponent = require('flight/component'),
 	    jquery = require('jquery'),
-	    templates = require('js/templates'),
 	    nav = require('js/nav'),
 	    wsmpd = require('wsmpd');
 
-	return defineComponent( queue );
+	return defineComponent( albums,
+		require('js/withTemplate')
+	);
 
-	function queue() {
+	function albums() {
+
+		this.defaultAttrs( {
+			withTemplate: 'albums'
+		} );
 
 		this.after('initialize', function() {
 			this.on( document, 'list-album', this.onListAlbum );
 			this.on( nav, 'tab-change', this.onTabChange );
 
-			this.renderList();
+			this.render();
 		} );
 
 		this.title = "Albums";
@@ -28,7 +33,7 @@ define( function( require ) {
 
 		this.onListAlbum = function( e, albumList ) {
 			this.updateAlbumList( albumList.result );
-			this.renderList();
+			this.render();
 		};
 
 		this.onTabChange = function( e, msg ) {
@@ -43,11 +48,7 @@ define( function( require ) {
 			} );
 		};
 
-		this.renderList = function() {
-			this.$node.html( templates.albums.render( this ) );
-
-			jquery('button').tooltip();
-
+		this.postRender = function() {
 			this.on( '#albums-container button.add-to-queue', 'click', this.clickAddToQueue );
 		};
 	}

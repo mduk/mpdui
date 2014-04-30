@@ -3,12 +3,17 @@ define( function( require ) {
 
 	var defineComponent = require('flight/component'),
 	    jquery = require('jquery'),
-	    templates = require('js/templates'),
 	    wsmpd = require('wsmpd');
 
-	return defineComponent( queue );
+	return defineComponent( queue,
+		require('js/withTemplate')
+	);
 
 	function queue() {
+
+		this.defaultAttrs( {
+			withTemplate: 'queue'
+		} );
 
 		this.after('initialize', function() {
 			this.on( document, 'status', this.onStatus );
@@ -16,7 +21,7 @@ define( function( require ) {
 			this.on( document, 'playlistinfo', this.onPlaylistinfo );
 			this.on( document, 'findadd clear', this.refreshQueue );
 
-			this.renderQueue();
+			this.render();
 		} );
 
 		this.state = '';
@@ -37,19 +42,19 @@ define( function( require ) {
 			}
 			
 			this.state = status.state;
-			this.renderQueue();
+			this.render();
 		};
 
 		this.onCurrentsong = function( e, currentsong ) {
 			this.position = currentsong.Pos;
 			this.updatePlaylistinfo();
-			this.renderQueue();
+			this.render();
 		};
 
 		this.onPlaylistinfo = function( e, playlistinfo ) {
 			this.playlistinfo = playlistinfo.result;
 			this.updatePlaylistinfo();
-			this.renderQueue();
+			this.render();
 		};
 
 		this.refreshQueue = function() {
@@ -70,13 +75,9 @@ define( function( require ) {
 			} );
 		};
 
-		this.renderQueue = function() {
-			this.$node.html( templates.queue.render( this ) );
-
+		this.postRender = function() {
 			this.on( '#queue-clear', 'click', this.clickClear );
 			this.on( '#queue-container a', 'click', this.clickTrack );
-
-			jquery('button').tooltip();
 		};
 	}
 
