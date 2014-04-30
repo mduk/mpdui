@@ -7,12 +7,27 @@
 			<span class="glyphicon glyphicon-remove"></span> Clear
 		</button>
 	</div>
-	<div class="list-group">
-		{{#playlistinfo}}
-		<a class="list-group-item {{#playing}}active{{/playing}}" href='#play:{{Pos}}' data-pos="{{Pos}}">
-			<h4 class="list-group-item-heading">{{Title}}</h4>
-			<p class="list-group-item-text">{{Artist}} - {{Album}}</p>
-		</a>
-		{{/playlistinfo}}
-	</div>
+
+	<table class="table table-condensed table-hover">
+		<tbody>
+			{{#playlistinfo}}
+			<tr {{#playing}}class="active"{{/playing}}>
+				<td>{{Title}}</td>
+				<td>{{Artist}}</td>
+				<td>{{Album}}</td>
+				<td>
+					<div class="btn-group">
+<button class="btn btn-default btn-xs remove-from-queue" data-pos="{{Pos}}"><span class="glyphicon glyphicon-remove"></span></button>
+{{#playing}}
+<button class="btn btn-default btn-xs btn-primary pause"><span class="glyphicon glyphicon-pause"></span></button>
+{{/playing}}
+{{^playing}}
+<button class="btn btn-default btn-xs play-now" data-pos="{{Pos}}"><span class="glyphicon glyphicon-play"></span></button>
+{{/playing}}
+					</div>
+				</td>
+			</tr>
+			{{/playlistinfo}}
+		</tbody>
+	</table>
 </div>

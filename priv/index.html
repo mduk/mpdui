@@ -54,35 +54,28 @@ body {
 			</div>
 		</nav>
 
-		<div class="row">
-			<div class="col-md-8">
+		<div class="tab-content">
 
-				<div class="tab-content">
-
-					<div class="tab-pane active" id="now-playing">
-						<div id="currentsong" class="jumbotron"></div>
-					</div>
-
-					<div class="tab-pane" id="search">
-						<div id="search-container"></div>
-					</div>
-
-					<div class="tab-pane" id="artists">
-						<div id="artists-container"></div>
-					</div>
-
-					<div class="tab-pane" id="albums">
-						<div id="albums-container"></div>
-					</div>
-					
-					<div class="tab-pane" id="settings">
-						<div id="settings-outputs-container"></div>
-					</div>
-				</div>
+			<div class="tab-pane active" id="now-playing">
+				<div id="currentsong" class="jumbotron"></div>
+				<div id="queue-container"></div>
 			</div>
 
-			<div class="col-md-4" id="queue-container"></div>
+			<div class="tab-pane" id="search">
+				<div id="search-container"></div>
+			</div>
 
+			<div class="tab-pane" id="artists">
+				<div id="artists-container"></div>
+			</div>
+
+			<div class="tab-pane" id="albums">
+				<div id="albums-container"></div>
+			</div>
+
+			<div class="tab-pane" id="settings">
+				<div id="settings-outputs-container"></div>
+			</div>
 		</div>
 
 		<script data-main="static/js/main" src="static/bower_components/requirejs/require.js"></script>
