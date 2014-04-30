@@ -12,7 +12,11 @@ define( function( require ) {
 	function queue() {
 
 		this.defaultAttrs( {
-			withTemplate: 'queue'
+			withTemplate: 'queue',
+
+			removeButtonSelector: 'button.remove-from-queue',
+			playNowButtonSelector: 'button.play-now',
+			pauseButtonSelector: 'button.pause'
 		} );
 
 		this.after('initialize', function() {
@@ -20,6 +24,12 @@ define( function( require ) {
 			this.on( document, 'currentsong', this.onCurrentsong );
 			this.on( document, 'playlistinfo', this.onPlaylistinfo );
 			this.on( document, 'findadd clear', this.refreshQueue );
+			
+			this.on( 'click', {
+				'removeButtonSelector': this.clickRemove,
+				'playNowButtonSelector': this.clickPlayNow,
+				'pauseButtonSelector': this.clickPause
+			} );
 
 			this.render();
 		} );
@@ -34,6 +44,20 @@ define( function( require ) {
 
 		this.clickClear = function() {
 			wsmpd.clear();
+		};
+
+		this.clickRemove = function( e, d ) {
+			wsmpd.delete( jquery( d.el ).data('pos') );
+			wsmpd.playlistinfo();
+		};
+
+		this.clickPlayNow = function( e, d ) {
+			wsmpd.play( jquery( d.el ).data('pos') );
+			wsmpd.playlistinfo();
+		};
+
+		this.clickPause = function() {
+			console.log('no pausing! LISTENING ONLY!');
 		};
 
 		this.onStatus = function( e, status ) {

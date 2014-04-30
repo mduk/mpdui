@@ -116,6 +116,9 @@ execute( C, <<"addid">>, [ Uri, Position ] ) ->
 execute( C, <<"clear">>, [] ) ->
 	ok( erlmpd:clear( C ) );
 
+execute( C, <<"delete">>, [ Pos ] ) ->
+	ok( erlmpd:delete( C, Pos ) );
+
 execute( C, <<"playlistinfo">>, [] ) ->
 	lists:map( fun object/1, erlmpd:playlistinfo( C ) );
 

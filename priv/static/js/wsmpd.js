@@ -165,6 +165,10 @@ define( [ 'jquery' ], function( jquery ) {
 			return sendCommand( 'clear', [] );
 		},
 
+		delete: function( Pos ) {
+			return sendCommand( 'delete', [ Pos ] );
+		},
+
 		playlistinfo: function() {
 			return sendCommand( 'playlistinfo', [] );
 		},
