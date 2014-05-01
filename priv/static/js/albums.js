@@ -13,7 +13,9 @@ define( function( require ) {
 	function albums() {
 
 		this.defaultAttrs( {
-			withTemplate: 'albums'
+			withTemplate: 'albums',
+
+			addToQueueButtonSelector: '#albums-container button.add-to-queue'
 		} );
 
 		this.after('initialize', function() {
@@ -21,14 +23,18 @@ define( function( require ) {
 			this.on( nav, 'tab-change', this.onTabChange );
 
 			this.render();
+
+			this.on( 'click', {
+				'addToQueueButtonSelector': this.clickAddToQueue
+			} );
 		} );
 
 		this.title = "Albums";
 		this.albums = [];
 
-		this.clickAddToQueue = function( e ) {
-			var album = jquery(e.currentTarget).data('album');
-			wsmpd.findadd( 'album', album);	
+		this.clickAddToQueue = function( e, d ) {
+			var album = jquery( d.el ).data('album');
+			wsmpd.findadd( 'album', album );	
 		};
 
 		this.onListAlbum = function( e, albumList ) {
@@ -46,10 +52,6 @@ define( function( require ) {
 			this.albums = albumList.map( function( elem ) {
 				return { title: elem.album };
 			} );
-		};
-
-		this.postRender = function() {
-			this.on( '#albums-container button.add-to-queue', 'click', this.clickAddToQueue );
 		};
 	}
 
