@@ -2,6 +2,7 @@
 	<div class="panel-heading">
 		<h3 class="panel-title">Queue</h3>
 	</div>
+
 	<div class="panel-body">
 		<button type="button" class="btn btn-default" id="queue-clear" data-toggle="tooltip" data-placement="top" title="Clear Queue">
 			<span class="glyphicon glyphicon-remove"></span> Clear
@@ -30,4 +31,11 @@
 			{{/playlistinfo}}
 		</tbody>
 	</table>
+
+	{{^playlistinfo}}
+	<div class="panel-footer">
+		<span class="empty">Queue empty</span>
+	</div>
+	{{/playlistinfo}}
+
 </div>
