@@ -12,13 +12,19 @@ define( function( require ) {
 	function search() {
 
 		this.defaultAttrs( {
-			withTemplate: 'search'
+			withTemplate: 'search',
+
+			searchFormSelector: '#search-container form',
+			addToQueueBtnSelector: '#search-container table button'
 		} );
 
 		this.after('initialize', function() {
 			this.on( document, 'search', this.onSearch );
 
 			this.render();
+
+			this.on( 'submit', { 'searchFormSelector': this.submitSearch } );
+			this.on( 'click', { 'addToQueueBtnSelector': this.clickAddToQueue } );
 		} );
 
 		this.searchType = 'artist';
@@ -32,8 +38,8 @@ define( function( require ) {
 			);
 		};
 
-		this.clickAddToQueue = function( e ) {
-			wsmpd.addid( jquery( e.delegateTarget ).data('songid') );
+		this.clickAddToQueue = function( e, d ) {
+			wsmpd.addid( jquery( d.el ).data('songid') );
 			wsmpd.playlistinfo();
 		};
 
@@ -43,11 +49,6 @@ define( function( require ) {
 			this.results = msg.result;
 
 			this.render();
-		};
-
-		this.postRender = function() {
-			this.on( '#search-container form', 'submit', this.submitSearch );
-			this.on( '#search-container table button', 'click', this.clickAddToQueue );
 		};
 	}
 
