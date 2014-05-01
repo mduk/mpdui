@@ -12,19 +12,28 @@ define( function( require ) {
 	function miniControl() {
 
 		this.defaultAttrs( {
-			withTemplate: 'mini_control'
+			withTemplate: 'mini_control',
+			
+			previousBtnSelector: '#minicontrol-previous',
+			playpauseBtnSelector: '#minicontrol-playpause',
+			nextBtnSelector: '#minicontrol-next',
+			randomBtnSelector: '#minicontrol-random',
+			repeatBtnSelector: '#minicontrol-repeat'
 		} );
 
 		this.after('initialize', function() {
 			this.on( document, 'status', this.onStatus );
 
 			this.render();
-			
-			this.on( '#minicontrol-previous', 'click', this.clickPrevious );
-			this.on( '#minicontrol-playpause', 'click', this.clickPlayPause );
-			this.on( '#minicontrol-next', 'click', this.clickNext );
-			this.on( '#minicontrol-random', 'click', this.clickRandom );
-			this.on( '#minicontrol-repeat', 'click', this.clickRepeat );
+
+			this.on( 'click', {
+				previousBtnSelector: this.clickPrevious,
+				playpauseBtnSelector: this.clickPlayPause, 
+				nextBtnSelector: this.clickNext,
+				randomBtnSelector: this.clickRandom,
+				repeatBtnSelector: this.clickRepeat
+			} );
+
 		});
 
 		this.playpauseState = 'pause';
@@ -152,10 +161,6 @@ define( function( require ) {
 			}
 
 			this.repeatState = state;
-		};
-		
-		this.render = function() {
-			this.$node.html( templates.mini_control.render( this ) );
 		};
 	}
 
