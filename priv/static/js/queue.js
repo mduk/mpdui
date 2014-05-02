@@ -14,6 +14,7 @@ define( function( require ) {
 		this.defaultAttrs( {
 			withTemplate: 'queue',
 
+			clearButtonSelector: 'button.clear-queue',
 			removeButtonSelector: 'button.remove-from-queue',
 			playNowButtonSelector: 'button.play-now',
 			pauseButtonSelector: 'button.pause'
@@ -26,6 +27,7 @@ define( function( require ) {
 			this.on( document, 'findadd clear', this.refreshQueue );
 			
 			this.on( 'click', {
+				'clearButtonSelector': this.clickClear,
 				'removeButtonSelector': this.clickRemove,
 				'playNowButtonSelector': this.clickPlayNow,
 				'pauseButtonSelector': this.clickPause
@@ -44,6 +46,7 @@ define( function( require ) {
 
 		this.clickClear = function() {
 			wsmpd.clear();
+			wsmpd.playlistinfo();
 		};
 
 		this.clickRemove = function( e, d ) {
