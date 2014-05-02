@@ -4,9 +4,12 @@
 	</div>
 
 	<div class="panel-body">
-		<button type="button" class="btn btn-default" id="queue-clear" data-toggle="tooltip" data-placement="top" title="Clear Queue">
+		<button type="button" class="btn btn-default clear-queue" data-toggle="tooltip" data-placement="top" title="Clear Queue">
 			<span class="glyphicon glyphicon-remove"></span> Clear
 		</button>
+		{{^playlistinfo}}
+		<span class="empty">Queue empty</span>
+		{{/playlistinfo}}
 	</div>
 
 	<table class="table table-condensed table-hover">
@@ -19,23 +22,13 @@
 				<td>
 					<div class="btn-group">
 <button class="btn btn-default btn-xs remove-from-queue" data-pos="{{Pos}}"><span class="glyphicon glyphicon-remove"></span></button>
-{{#playing}}
-<button class="btn btn-default btn-xs btn-primary pause"><span class="glyphicon glyphicon-pause"></span></button>
-{{/playing}}
-{{^playing}}
-<button class="btn btn-default btn-xs play-now" data-pos="{{Pos}}"><span class="glyphicon glyphicon-play"></span></button>
-{{/playing}}
+{{#playing}}<button class="btn btn-default btn-xs btn-primary pause"><span class="glyphicon glyphicon-pause"></span></button>{{/playing}}
+{{^playing}}<button class="btn btn-default btn-xs play-now" data-pos="{{Pos}}"><span class="glyphicon glyphicon-play"></span></button>{{/playing}}
 					</div>
 				</td>
 			</tr>
 			{{/playlistinfo}}
 		</tbody>
 	</table>
-
-	{{^playlistinfo}}
-	<div class="panel-footer">
-		<span class="empty">Queue empty</span>
-	</div>
-	{{/playlistinfo}}
 
 </div>
