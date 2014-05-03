@@ -10,7 +10,12 @@ define( function( require ) {
 
 		this.after('initialize', function() {
 			this.on( 'ul.nav a[data-toggle=tab]', 'click', this.clickTab );
+			this.on( document, 'change-tab', this.onChangeTab );
 		} );
+
+		this.onChangeTab = function( e, d ) {
+			jquery('#nav-' + d.to).tab('show');
+		};
 
 		this.clickTab = function( e ) {
 			var tab = jquery( e.currentTarget );

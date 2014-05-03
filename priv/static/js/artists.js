@@ -18,7 +18,7 @@ define( function( require ) {
 
 		this.after('initialize', function() {
 			this.on( document, 'list-artist', this.onListArtist );
-			this.on( nav, 'tab-change', this.onTabChange );
+			this.on( nav, 'view-change', this.onTabChange );
 
 			this.render();
 		} );
