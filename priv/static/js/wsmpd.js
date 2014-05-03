@@ -176,7 +176,7 @@ define( [ 'jquery' ], function( jquery ) {
 		// Database
 
 		search: function( type, what ) {
-			return sendCommand( 'search', [ type, what ] );
+			return sendCommand( 'search', [ type, new String( what ).toString() ] );
 		},
 
 		list: function( type, artist ) {
