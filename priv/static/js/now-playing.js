@@ -12,12 +12,20 @@ define( function( require ) {
 	function nowPlaying() {
 
 		this.defaultAttrs( {
-			withTemplate: 'now_playing'
+			withTemplate: 'now_playing',
+
+			artistSelector: 'h2 span',
+			albumSelector: 'h2 small'
 		} );
 
 		this.after('initialize', function() {
 			this.on( document, 'status', this.onStatus );
 			this.on( document, 'currentsong', this.onCurrentsong );
+
+			this.on( 'click', {
+				'artistSelector': this.clickArtist,
+				'albumSelector': this.clickAlbum,
+			} );
 
 			this.render();
 		} );
@@ -29,6 +37,20 @@ define( function( require ) {
 		this.duration = 0;
 		this.position = 0;
 		this.position_percent = 0;
+
+		this.clickArtist = function( e, d ) {
+			this.trigger( 'request-search', {
+				type: 'artist',
+				what: jquery( d.el ).html()
+			} );
+		};
+
+		this.clickAlbum = function( e, d ) {
+			this.trigger( 'request-search', {
+				type: 'album',
+				what: jquery( d.el ).html()
+			} );
+		};
 
 		this.onStatus = function( e, status ) {
 			this.state = status.state;

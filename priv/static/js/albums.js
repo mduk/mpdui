@@ -35,8 +35,10 @@ define( function( require ) {
 		this.albums = [];
 
 		this.clickViewAlbum = function( e, d ) {
-			wsmpd.search( 'album', jquery( d.el ).data('album') );
-			this.trigger( document, 'change-tab', { to: 'search' } );
+			this.trigger( document, 'request-search', {
+				type: 'album',
+				what: jquery( d.el ).data('album')
+			} );
 		};
 
 		this.clickAddToQueue = function( e, d ) {

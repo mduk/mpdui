@@ -33,9 +33,21 @@ define( function( require ) {
 
 		this.submitSearch = function() {
 			var terms = this.$node.find("input[type=text]").val();
-			wsmpd.search( 'title', terms );
-			wsmpd.search( 'artist', terms );
-			wsmpd.search( 'album', terms );
+
+			this.trigger( document, 'request-search', {
+				type: 'title',
+				what: terms
+			} );
+
+			this.trigger( document, 'request-search', {
+				type: 'album',
+				what: terms
+			} );
+
+			this.trigger( document, 'request-search', {
+				type: 'artist',
+				what: terms
+			} );
 		};
 
 		this.clickAddToQueue = function( e, d ) {

@@ -14,6 +14,8 @@ define( function( require ) {
 	require( 'js/albums' ).attachTo( '#albums-container' );
 	require( 'js/outputs' ).attachTo( '#settings-outputs-container' );
 
+	require( 'js/data/search' ).attachTo( document );
+
 	jquery(document).on( 'currentsong', function(e, msg) {
 		wsmpd.playlistinfo();
 	} );
