@@ -32,10 +32,10 @@ define( function( require ) {
 		this.results = [];
 
 		this.submitSearch = function() {
-			wsmpd.search(
-				this.$node.find("input[type=hidden]").val(),
-				this.$node.find("input[type=text]").val()
-			);
+			var terms = this.$node.find("input[type=text]").val();
+			wsmpd.search( 'title', terms );
+			wsmpd.search( 'artist', terms );
+			wsmpd.search( 'album', terms );
 		};
 
 		this.clickAddToQueue = function( e, d ) {
@@ -44,10 +44,14 @@ define( function( require ) {
 		};
 
 		this.onSearch = function( e, msg ) {
-			this.searchType = msg.command.args[0];
-			this.searchTerm = msg.command.args[1];
-			this.results = msg.result;
+			var searchTerm = msg.command.args[1];
 
+			if ( this.searchTerm != searchTerm ) {
+				this.searchTerm = searchTerm;
+				this.results = [];
+			}
+
+			jquery.merge( this.results, msg.result );
 			this.render();
 		};
 	}
