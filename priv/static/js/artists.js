@@ -13,21 +13,37 @@ define( function( require ) {
 	function artists() {
 
 		this.defaultAttrs( {
-			withTemplate: 'list_panel'
+			withTemplate: 'artists',
+
+			addToQueueButtonSelector: '#artists-container button.add-to-queue',
+			viewAlbumButtonSelector: '#artists-container button.view-album'
 		} );
 
 		this.after('initialize', function() {
 			this.on( document, 'list-artist', this.onListArtist );
-			this.on( nav, 'view-change', this.onTabChange );
+			this.on( nav, 'tab-change', this.onTabChange );
 
 			this.render();
+
+			this.on( 'click', {
+				'addToQueueButtonSelector': this.clickAddToQueue,
+				'viewAlbumButtonSelector': this.clickViewAlbum
+			} );
 		} );
 
 		this.title = "Artists";
-		this.list = [];
+		this.artists = [];
 
-		this.clickRow = function( e ) {
-			console.log( 'click', jquery( e.delegateTarget ) );
+		this.clickViewAlbum = function( e, d ) {
+			this.trigger( document, 'request-search', {
+				type: 'artist',
+				what: jquery( d.el ).data('artist')
+			} );
+		};
+
+		this.clickAddToQueue = function( e, d ) {
+			var artist = jquery( d.el ).data('artist');
+			wsmpd.findadd( 'artist', artist );	
 		};
 
 		this.onListArtist = function( e, artistList ) {
@@ -42,7 +58,7 @@ define( function( require ) {
 		};
 
 		this.updateArtistList = function( artistList ) {
-			this.list = artistList.map( function( elem ) {
+			this.artists = artistList.map( function( elem ) {
 				return { title: elem.artist };
 			} );
 		};
