@@ -27,6 +27,8 @@ define( function( require ) {
 			this.on( document, 'request-findadd', function( e, d ) {
 				wsmpd.findadd( d.type, d.what );
 			} );
+
+			wsmpd.connect();
 		} );
 
 	}

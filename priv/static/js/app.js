@@ -1,6 +1,5 @@
 define( function( require ) {
-	var jquery = require( 'jquery' ),
-		wsmpd = require( 'wsmpd' );
+	var jquery = require( 'jquery' );
 	
 	require( 'bootstrap' );
 
@@ -21,10 +20,6 @@ define( function( require ) {
 	} );
 
 	return function() {
-		jquery(document).ready( function() {
-			wsmpd.connect();
-		} );
-
 		jquery('button').tooltip();
 	};
 } );
