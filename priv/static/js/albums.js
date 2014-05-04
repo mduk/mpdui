@@ -34,17 +34,9 @@ define( function( require ) {
 		this.title = "Albums";
 		this.albums = [];
 
-		this.clickViewAlbum = function( e, d ) {
-			this.trigger( document, 'request-search', {
-				type: 'album',
-				what: jquery( d.el ).data('album')
-			} );
-		};
+		this.clickViewAlbum = request( 'request-search' );
 
-		this.clickAddToQueue = function( e, d ) {
-			var album = jquery( d.el ).data('album');
-			wsmpd.findadd( 'album', album );	
-		};
+		this.clickAddToQueue = request( 'request-findadd' );
 
 		this.onListAlbum = function( e, albumList ) {
 			this.updateAlbumList( albumList.result );
@@ -62,6 +54,15 @@ define( function( require ) {
 				return { title: elem.album };
 			} );
 		};
+
+		function request( event ) {
+			return function( e, d ) {
+				this.trigger( document, event, {
+					type: 'album',
+					what: jquery( d.el ).data('album')
+				} );
+			};
+		}
 	}
 
 } );

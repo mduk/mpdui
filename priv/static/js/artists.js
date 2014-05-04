@@ -34,17 +34,9 @@ define( function( require ) {
 		this.title = "Artists";
 		this.artists = [];
 
-		this.clickViewAlbum = function( e, d ) {
-			this.trigger( document, 'request-search', {
-				type: 'artist',
-				what: jquery( d.el ).data('artist')
-			} );
-		};
+		this.clickViewAlbum = request( 'request-search' )
 
-		this.clickAddToQueue = function( e, d ) {
-			var artist = jquery( d.el ).data('artist');
-			wsmpd.findadd( 'artist', artist );	
-		};
+		this.clickAddToQueue = request( 'request-findadd' );
 
 		this.onListArtist = function( e, artistList ) {
 			this.updateArtistList( artistList.result );
@@ -62,6 +54,15 @@ define( function( require ) {
 				return { title: elem.artist };
 			} );
 		};
+
+		function request( event ) {
+			return function( e, d ) {
+				this.trigger( document, event, {
+					type: 'artist',
+					what: jquery( d.el ).data('artist')
+				} );
+			};
+		}
 	}
 
 } );
