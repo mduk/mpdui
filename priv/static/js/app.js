@@ -3,14 +3,14 @@ define( function( require ) {
 	
 	require( 'bootstrap' );
 
-	require( 'js/nav' ).attachTo( 'nav ul.nav' );
-	require( 'js/mini-control' ).attachTo( '#mini-control-container' );
-	require( 'js/now-playing' ).attachTo( '#now-playing .jumbotron' );
-	require( 'js/queue' ).attachTo( '#queue-container' );
-	require( 'js/search' ).attachTo( '#search-container' );
-	require( 'js/artists' ).attachTo( '#artists-container' );
-	require( 'js/albums' ).attachTo( '#albums-container' );
-	require( 'js/outputs' ).attachTo( '#settings-outputs-container' );
+	require( 'js/ui/nav' ).attachTo( 'nav ul.nav' );
+	require( 'js/ui/mini-control' ).attachTo( '#mini-control-container' );
+	require( 'js/ui/now-playing' ).attachTo( '#now-playing .jumbotron' );
+	require( 'js/ui/queue' ).attachTo( '#queue-container' );
+	require( 'js/ui/search' ).attachTo( '#search-container' );
+	require( 'js/ui/artists' ).attachTo( '#artists-container' );
+	require( 'js/ui/albums' ).attachTo( '#albums-container' );
+	require( 'js/ui/outputs' ).attachTo( '#settings-outputs-container' );
 
 	require( 'js/data/search' ).attachTo( document );
 	require( 'js/data/wsmpd' ).attachTo( document );

@@ -2,8 +2,7 @@ define( function( require ) {
 	'use strict';
 
 	var defineComponent = require('flight/component'),
-	    jquery = require('jquery'),
-	    nav = require('js/nav');
+	    jquery = require('jquery');
 
 	return defineComponent( albums,
 		require('mixin/template')
@@ -20,7 +19,7 @@ define( function( require ) {
 
 		this.after('initialize', function() {
 			this.on( document, 'list-album', this.onListAlbum );
-			this.on( nav, 'tab-change', this.onTabChange );
+			this.on( document, 'tab-change', this.onTabChange );
 
 			this.render();
 

@@ -2,8 +2,7 @@ define( function( require ) {
 	'use strict';
 
 	var defineComponent = require('flight/component'),
-	    jquery = require('jquery'),
-	    nav = require('js/nav');
+	    jquery = require('jquery');
 
 	return defineComponent( outputs,
 		require('mixin/template')
@@ -19,7 +18,7 @@ define( function( require ) {
 			this.render();
 
 			this.on( document, 'outputs', this.onOutputs );
-			this.on( nav, 'tab-change', this.onTabChange );
+			this.on( document, 'tab-change', this.onTabChange );
 		} );
 
 		this.title = "Outputs";

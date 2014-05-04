@@ -20,7 +20,7 @@ define( function( require ) {
 		this.clickTab = function( e ) {
 			var tab = jquery( e.currentTarget );
 
-			this.trigger( 'tab-change', {
+			this.trigger( document, 'tab-change', {
 				'$from': this.active,
 				'$to': tab
 				
