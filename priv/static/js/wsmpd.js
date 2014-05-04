@@ -2,16 +2,10 @@ define( [ 'jquery' ], function( jquery ) {
 
 	var websocket;
 	
-	function send( txt ) {
-		if ( websocket.readyState == websocket.OPEN ) {
-			websocket.send(txt);
-		}
-	};
-
-	function sendCommand( command, arguments ) {
-		send( JSON.stringify( {
+	function sendCommand( command, args ) {
+		websocket.send( JSON.stringify( {
 			cmd: command,
-			args: arguments
+			args: args
 		} ) );
 	};
 
@@ -57,23 +51,9 @@ define( [ 'jquery' ], function( jquery ) {
 			websocket.onerror = function(evt) {};
 		},
 		
-		disconnect: function() {
-			websocket.close();
-		},
-		
-		isConnected: function() {
-			if ( websocket.readyState == websocket.OPEN ) {
-				return true;
-			} else {
-				return false;
-			}
-		},
-
 		addid: function( songid ) {
 			return sendCommand( 'addid', [ songid ] );
 		},
-
-		// Status
 
 		currentsong: function() {
 			return sendCommand( 'currentsong', [] );
@@ -83,28 +63,6 @@ define( [ 'jquery' ], function( jquery ) {
 			return sendCommand( 'status', [] );
 		},
 
-		stats: function() {
-			return sendCommand( 'stats', [] );
-		},
-
-		// Playback Options
-
-		consume: function( state ) {
-			return sendCommand( 'consume', [ state ] );
-		},
-
-		crossfade: function() {
-			return sendCommand( 'crossfade', [] );
-		},
-
-		mixrampdb: function( decibels ) {
-			return sendCommand( 'mixrampdb', [ decibels ] );
-		},
-
-		mixrampdeley: function( seconds ) {
-			return sendCommand( 'mixrampdeley', [ seconds ] );
-		},
-
 		random: function( state ) {
 			return sendCommand( 'random', [ state ] );
 		},
@@ -112,16 +70,6 @@ define( [ 'jquery' ], function( jquery ) {
 		repeat: function( state ) {
 			return sendCommand( 'repeat', [ state ] );
 		},
-
-		setvol: function( volume ) {
-			return sendCommand( 'setvol', [ volume ] );
-		},
-
-		single: function( state ) {
-			return sendCommand( 'single', [ state ] );
-		},
-
-		// Controlling Playback
 
 		next: function() {
 			return sendCommand( 'next', [] );
@@ -135,31 +83,9 @@ define( [ 'jquery' ], function( jquery ) {
 			return sendCommand( 'play', [ position ] );
 		},
 
-		playid: function( id ) {
-			return sendCommand( 'playid', [ id ] );
-		},
-
 		previous: function() {
 			return sendCommand( 'previous', [] );
 		},
-
-		seek: function( position, time ) {
-			return sendCommand( 'seek', [ position, time ] );
-		},
-
-		seekid: function( id, time ) {
-			return sendCommand( 'seekid', [ id, time ] );
-		},
-
-		seekcur: function( time ) {
-			return sendCommand( 'seekcur', [ time ] );
-		},
-
-		stop: function() {
-			return sendCommand( 'stop', [] );
-		},
-
-		// Current Playlist
 
 		clear: function() {
 			return sendCommand( 'clear', [] );
@@ -172,8 +98,6 @@ define( [ 'jquery' ], function( jquery ) {
 		playlistinfo: function() {
 			return sendCommand( 'playlistinfo', [] );
 		},
-
-		// Database
 
 		search: function( type, what ) {
 			return sendCommand( 'search', [ type, new String( what ).toString() ] );
@@ -192,20 +116,6 @@ define( [ 'jquery' ], function( jquery ) {
 
 		findadd: function( type, what ) {
 			return sendCommand( 'findadd', [ type, what ] );
-		},
-
-		// Output Devices
-
-		disableoutput: function( id ) {
-			return sendCommand( 'disableoutput', [ id ] );
-		},
-
-		enableoutput: function( id ) {
-			return sendCommand( 'enableoutput', [ id ] );
-		},
-
-		toggleoutput: function( id ) {
-			return sendCommand( 'toggleoutput', [ id ] );
 		},
 
 		outputs: function() {
