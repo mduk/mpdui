@@ -9,8 +9,6 @@ define( function( require ) {
 	function mpd() {
 
 		this.after( 'initialize', function() {
-			console.log( 'wsmpd initialised' );
-
 			this.on( document, 'request-search', function( e, d ) {
 				wsmpd.search( d.type, d.what );
 			} );
