@@ -64,7 +64,17 @@ define( function( require ) {
 				this.results = [];
 			}
 
-			jquery.merge( this.results, msg.result );
+			var storedResults = this.results;
+			var toMerge = msg.result.filter( function( track ) {
+				for ( var i = 0; i < storedResults.length; i++ ) {
+					if ( track.file = storedResults[i].file ) {
+						return false;
+					}
+				}
+				return true;
+			} );
+
+			jquery.merge( this.results, toMerge );
 			this.render();
 		};
 	}
