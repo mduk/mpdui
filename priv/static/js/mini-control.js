@@ -41,7 +41,7 @@ define( function( require ) {
 		this.repeatState = false;
 
 		this.clickPrevious = function() {
-			wsmpd.previous();
+			this.trigger( document, 'request-previous' );
 		};
 
 		this.clickPlayPause = function() {
@@ -65,7 +65,7 @@ define( function( require ) {
 		};
 
 		this.clickNext = function() {
-			wsmpd.next();
+			this.trigger( document, 'request-next' );
 		};
 
 		this.clickRandom = function() {

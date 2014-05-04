@@ -32,6 +32,14 @@ define( function( require ) {
 				wsmpd.list( d.type );
 			} );
 
+			this.on( document, 'request-previous', function( e, d ) {
+				wsmpd.previous();
+			} );
+
+			this.on( document, 'request-next', function( e, d ) {
+				wsmpd.next();
+			} );
+
 			wsmpd.connect();
 		} );
 
