@@ -6,7 +6,7 @@ define( function( require ) {
 	    wsmpd = require('wsmpd');
 
 	return defineComponent( queue,
-		require('js/withTemplate')
+		require('mixin/template')
 	);
 
 	function queue() {

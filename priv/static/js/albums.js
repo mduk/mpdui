@@ -7,7 +7,7 @@ define( function( require ) {
 	    wsmpd = require('wsmpd');
 
 	return defineComponent( albums,
-		require('js/withTemplate')
+		require('mixin/template')
 	);
 
 	function albums() {

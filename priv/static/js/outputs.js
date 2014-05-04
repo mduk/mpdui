@@ -7,7 +7,7 @@ define( function( require ) {
 	    nav = require('js/nav');
 
 	return defineComponent( outputs,
-		require('js/withTemplate')
+		require('mixin/template')
 	);
 
 	function outputs() {
