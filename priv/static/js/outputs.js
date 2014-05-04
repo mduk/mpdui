@@ -3,7 +3,6 @@ define( function( require ) {
 
 	var defineComponent = require('flight/component'),
 	    jquery = require('jquery'),
-	    wsmpd = require('wsmpd'),
 	    nav = require('js/nav');
 
 	return defineComponent( outputs,

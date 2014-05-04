@@ -2,8 +2,7 @@ define( function( require ) {
 	'use strict';
 
 	var defineComponent = require('flight/component'),
-	    jquery = require('jquery'),
-	    wsmpd = require('wsmpd');
+	    jquery = require('jquery');
 
 	return defineComponent( queue,
 		require('mixin/template')

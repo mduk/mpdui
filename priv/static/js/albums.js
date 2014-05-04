@@ -3,8 +3,7 @@ define( function( require ) {
 
 	var defineComponent = require('flight/component'),
 	    jquery = require('jquery'),
-	    nav = require('js/nav'),
-	    wsmpd = require('wsmpd');
+	    nav = require('js/nav');
 
 	return defineComponent( albums,
 		require('mixin/template')
