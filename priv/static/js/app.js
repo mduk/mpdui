@@ -18,6 +18,8 @@ define( function( require ) {
 		require( 'js/data/search' ).attachTo( document );
 		require( 'js/data/wsmpd' ).attachTo( document );
 
+		require( 'js/keyboard-commands' ).attachTo( document );
+
 		jquery('button').tooltip();
 	};
 } );
