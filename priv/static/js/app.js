@@ -15,10 +15,6 @@ define( function( require ) {
 	require( 'js/data/search' ).attachTo( document );
 	require( 'js/data/wsmpd' ).attachTo( document );
 
-	jquery(document).on( 'currentsong', function(e, msg) {
-		jquery(document).trigger('request-playlistinfo');
-	} );
-
 	return function() {
 		jquery('button').tooltip();
 	};

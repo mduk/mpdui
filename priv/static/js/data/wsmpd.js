@@ -66,6 +66,10 @@ define( function( require ) {
 				wsmpd.addid( d.id );
 			} );
 
+			this.on( document, 'currentsong', function() {
+				wsmpd.playlistinfo();
+			} );
+
 			wsmpd.connect();
 		} );
 
