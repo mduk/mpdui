@@ -9,7 +9,8 @@ define( function( require ) {
 		require( 'js/ui/mini-control' ).attachTo( '#mini-control-container' );
 		require( 'js/ui/now-playing' ).attachTo( '#now-playing .jumbotron' );
 		require( 'js/ui/queue' ).attachTo( '#queue-container' );
-		require( 'js/ui/search' ).attachTo( '#search-container' );
+		require( 'js/ui/search-form' ).attachTo( '#search-form-container' );
+		require( 'js/ui/search-results' ).attachTo( '#search-results-container' );
 		require( 'js/ui/artists' ).attachTo( '#artists-container' );
 		require( 'js/ui/albums' ).attachTo( '#albums-container' );
 		require( 'js/ui/outputs' ).attachTo( '#settings-outputs-container' );

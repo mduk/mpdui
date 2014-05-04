@@ -11,43 +11,20 @@ define( function( require ) {
 	function search() {
 
 		this.defaultAttrs( {
-			withTemplate: 'search',
+			withTemplate: 'search-results',
 
-			searchFormSelector: '#search-container form',
-			addToQueueBtnSelector: '#search-container table button'
+			addToQueueBtnSelector: 'table button'
 		} );
 
 		this.after('initialize', function() {
 			this.on( document, 'search', this.onSearch );
 
-			this.render();
-
-			this.on( 'submit', { 'searchFormSelector': this.submitSearch } );
 			this.on( 'click', { 'addToQueueBtnSelector': this.clickAddToQueue } );
 		} );
 
 		this.searchType = 'artist';
 		this.searchTerm = '';
 		this.results = [];
-
-		this.submitSearch = function() {
-			var terms = this.$node.find("input[type=text]").val();
-
-			this.trigger( document, 'request-search', {
-				type: 'title',
-				what: terms
-			} );
-
-			this.trigger( document, 'request-search', {
-				type: 'album',
-				what: terms
-			} );
-
-			this.trigger( document, 'request-search', {
-				type: 'artist',
-				what: terms
-			} );
-		};
 
 		this.clickAddToQueue = function( e, d ) {
 			this.trigger( document, 'request-addid', {

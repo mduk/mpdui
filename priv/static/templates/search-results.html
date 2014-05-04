@@ -1,0 +1,22 @@
+<table class="table table-condensed table-striped table-hover">
+	<thead>
+		<tr>
+			<th>&nbsp;</th>
+			<th>#</th>
+			<th>Title</th>
+			<th>Album</th>
+			<th>Artist</th>
+		</tr>
+	</thead>
+	<tbody>
+		{{#results}}
+		<tr>
+			<td><button class="btn btn-default btn-xs" class="add-to-queue" data-songid="{{file}}"><span class="glyphicon glyphicon-plus"></span></button></td>
+			<td>{{Track}}</td>
+			<td>{{Title}}</td>
+			<td>{{Album}}</td>
+			<td>{{Artist}}</td>
+		</tr>
+		{{/results}}
+	</tbody>
+</table>
