@@ -1,0 +1,20 @@
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h3 class="panel-title">Artists</h3>
+	</div>
+	<table class="table table-condensed table-striped table-hover">
+		<tbody>
+			{{#artists}}
+			<tr>
+				<td>{{title}}</td>
+				<td>
+					<div class="btn-group">
+						<button class="btn btn-default btn-xs view-album" data-artist="{{title}}"><span class="glyphicon glyphicon-eye-open"></span></button>
+						<button class="btn btn-default btn-xs add-to-queue" data-artist="{{title}}"><span class="glyphicon glyphicon-plus"></span></button>
+					</div>
+				</td>
+			</tr>
+			{{/artists}}
+		</tbody>
+	</table>
+</div>
