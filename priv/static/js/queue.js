@@ -45,18 +45,17 @@ define( function( require ) {
 		};
 
 		this.clickClear = function() {
-			wsmpd.clear();
-			wsmpd.playlistinfo();
+			this.trigger(document, 'request-clear');
 		};
 
 		this.clickRemove = function( e, d ) {
 			wsmpd.delete( jquery( d.el ).data('pos') );
-			wsmpd.playlistinfo();
+			this.trigger(document, 'request-playlistinfo');;
 		};
 
 		this.clickPlayNow = function( e, d ) {
 			wsmpd.play( jquery( d.el ).data('pos') );
-			wsmpd.playlistinfo();
+			this.trigger(document, 'request-playlistinfo');;
 		};
 
 		this.clickPause = function() {
@@ -85,7 +84,7 @@ define( function( require ) {
 		};
 
 		this.refreshQueue = function() {
-			wsmpd.playlistinfo();
+			this.trigger(document, 'request-playlistinfo');;
 		};
 
 		this.updatePlaylistinfo = function() {

@@ -52,7 +52,7 @@ define( function( require ) {
 
 		this.clickAddToQueue = function( e, d ) {
 			wsmpd.addid( jquery( d.el ).data('songid') );
-			wsmpd.playlistinfo();
+			this.trigger(document, 'request-playlistinfo');
 		};
 
 		this.onSearch = function( e, msg ) {

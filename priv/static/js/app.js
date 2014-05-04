@@ -15,9 +15,10 @@ define( function( require ) {
 	require( 'js/outputs' ).attachTo( '#settings-outputs-container' );
 
 	require( 'js/data/search' ).attachTo( document );
+	require( 'js/data/wsmpd' ).attachTo( document );
 
 	jquery(document).on( 'currentsong', function(e, msg) {
-		wsmpd.playlistinfo();
+		jquery(document).trigger('request-playlistinfo');
 	} );
 
 	// Settings
