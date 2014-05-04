@@ -45,7 +45,9 @@ define( function( require ) {
 
 		this.onTabChange = function( e, msg ) {
 			if ( msg.$to.attr('id') == 'nav-artists' ) {
-				wsmpd.list('artist');
+				this.trigger( document, 'request-list', {
+					type: 'artist'
+				} );
 			}
 		};
 

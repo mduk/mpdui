@@ -45,7 +45,9 @@ define( function( require ) {
 
 		this.onTabChange = function( e, msg ) {
 			if ( msg.$to.attr('id') == 'nav-albums' ) {
-				wsmpd.list('album');
+				this.trigger( document, 'request-list', {
+					type: 'album'
+				} );
 			}
 		};
 

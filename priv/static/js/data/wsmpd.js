@@ -28,6 +28,10 @@ define( function( require ) {
 				wsmpd.findadd( d.type, d.what );
 			} );
 
+			this.on( document, 'request-list', function( e, d ) {
+				wsmpd.list( d.type );
+			} );
+
 			wsmpd.connect();
 		} );
 
