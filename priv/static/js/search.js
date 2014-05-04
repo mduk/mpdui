@@ -51,7 +51,9 @@ define( function( require ) {
 		};
 
 		this.clickAddToQueue = function( e, d ) {
-			wsmpd.addid( jquery( d.el ).data('songid') );
+			this.trigger( document, 'request-addid', {
+				id: jquery( d.el ).data('songid')
+			} );
 			this.trigger(document, 'request-playlistinfo');
 		};
 

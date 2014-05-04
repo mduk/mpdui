@@ -33,7 +33,7 @@ define( function( require ) {
 
 		this.onTabChange = function( e, msg ) {
 			if ( msg.$to.attr('id') == 'nav-settings' ) {
-				wsmpd.outputs();
+				this.trigger( document, 'request-outputs' );
 			}
 		};
 		

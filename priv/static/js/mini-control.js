@@ -47,17 +47,17 @@ define( function( require ) {
 		this.clickPlayPause = function() {
 			switch ( this.playpauseState ) {
 				case 'pause':
-					wsmpd.pause( 0 );
+					this.trigger( document, 'request-pause', { state: 0 } );
 					this.updatePlayPauseButton( 'play' );
 					break;
 
 				case 'play':
-					wsmpd.pause( 1 );
+					this.trigger( document, 'request-pause', { state: 1 } );
 					this.updatePlayPauseButton( 'pause' );
 					break;
 
 				case 'stop':
-					wsmpd.play( 0 );
+					this.trigger( document, 'request-play', { pos: 0 } );
 					this.updatePlayPauseButton( 'play' );
 					break;
 			}
@@ -71,12 +71,12 @@ define( function( require ) {
 		this.clickRandom = function() {
 			switch ( this.randomState ) {
 				case true:
-					wsmpd.random( 0 );
+					this.trigger( document, 'request-random', { state: 0 } );
 					this.updateRandomButton( false );
 					break;
 
 				case false:
-					wsmpd.random( 1 );
+					this.trigger( document, 'request-random', { state: 1 } );
 					this.updateRandomButton( true );
 					break;
 			}
@@ -85,12 +85,12 @@ define( function( require ) {
 		this.clickRepeat = function() {
 			switch ( this.repeatState ) {
 				case true:
-					wsmpd.repeat( 0 );
+					this.trigger( document, 'request-repeat', { state: 0 } );
 					this.updateRepeatButton( false );
 					break;
 
 				case false:
-					wsmpd.repeat( 1 );
+					this.trigger( document, 'request-repeat', { state: 1 } );
 					this.updateRepeatButton( true );
 					break;
 			}

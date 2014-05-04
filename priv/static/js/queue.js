@@ -40,21 +40,21 @@ define( function( require ) {
 		this.position = 0;
 		this.playlistinfo = [];
 
-		this.clickTrack = function( e ) {
-			wsmpd.play( jquery( e.delegateTarget ).data('pos') );
-		};
-
 		this.clickClear = function() {
 			this.trigger(document, 'request-clear');
 		};
 
 		this.clickRemove = function( e, d ) {
-			wsmpd.delete( jquery( d.el ).data('pos') );
+			this.trigger( document, 'request-delete', {
+				pos: jquery( d.el ).data('pos')
+			} );
 			this.trigger(document, 'request-playlistinfo');;
 		};
 
 		this.clickPlayNow = function( e, d ) {
-			wsmpd.play( jquery( d.el ).data('pos') );
+			this.trigger( document, 'request-play', {
+				pos: jquery( d.el ).data('pos')
+			} );
 			this.trigger(document, 'request-playlistinfo');;
 		};
 

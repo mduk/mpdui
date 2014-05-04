@@ -40,6 +40,34 @@ define( function( require ) {
 				wsmpd.next();
 			} );
 
+			this.on( document, 'request-outputs', function( e, d ) {
+				wsmpd.outputs();
+			} );
+
+			this.on( document, 'request-play', function( e, d ) {
+				wsmpd.play( d.pos );
+			} );
+
+			this.on( document, 'request-delete', function( e, d ) {
+				wsmpd.delete( d.pos );
+			} );
+
+			this.on( document, 'request-random', function( e, d ) {
+				wsmpd.random( d.state );
+			} );
+
+			this.on( document, 'request-repeat', function( e, d ) {
+				wsmpd.repeat( d.state );
+			} );
+
+			this.on( document, 'request-pause', function( e, d ) {
+				wsmpd.pause( d.state );
+			} );
+
+			this.on( document, 'request-addid', function( e, d ) {
+				wsmpd.addid( d.id );
+			} );
+
 			wsmpd.connect();
 		} );
 
