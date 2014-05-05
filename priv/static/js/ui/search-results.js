@@ -30,7 +30,6 @@ define( function( require ) {
 			this.trigger( document, 'request-addid', {
 				id: jquery( d.el ).data('songid')
 			} );
-			this.trigger(document, 'request-playlistinfo');
 		};
 
 		this.onSearch = function( e, msg ) {

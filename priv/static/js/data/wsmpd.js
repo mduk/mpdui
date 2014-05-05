@@ -24,6 +24,7 @@ define( function( require ) {
 
 			this.on( document, 'request-findadd', function( e, d ) {
 				wsmpd.findadd( d.type, d.what );
+				wsmpd.playlistinfo();
 			} );
 
 			this.on( document, 'request-list', function( e, d ) {
@@ -48,6 +49,7 @@ define( function( require ) {
 
 			this.on( document, 'request-delete', function( e, d ) {
 				wsmpd.delete( d.pos );
+				wsmpd.playlistinfo();
 			} );
 
 			this.on( document, 'request-random', function( e, d ) {
@@ -64,6 +66,7 @@ define( function( require ) {
 
 			this.on( document, 'request-addid', function( e, d ) {
 				wsmpd.addid( d.id );
+				wsmpd.playlistinfo();
 			} );
 
 			this.on( document, 'currentsong', function() {
