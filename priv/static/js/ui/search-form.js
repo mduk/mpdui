@@ -32,7 +32,9 @@ define( function( require ) {
 		};
 
 		this.submitSearch = function( e ) {
-			e.preventDefault();
+			if ( typeof e != 'undefined' ) {
+				e.preventDefault();
+			};
 
 			var terms = this.select('searchInputSelector').val().trim();
 
