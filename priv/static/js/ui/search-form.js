@@ -31,7 +31,9 @@ define( function( require ) {
 			}
 		};
 
-		this.submitSearch = function() {
+		this.submitSearch = function( e ) {
+			e.preventDefault();
+
 			var terms = this.select('searchInputSelector').val().trim();
 
 			this.trigger( document, 'request-search', {
