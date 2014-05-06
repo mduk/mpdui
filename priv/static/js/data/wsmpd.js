@@ -11,6 +11,7 @@ define( function( require ) {
 		this.after( 'initialize', function() {
 			this.on( document, 'request-search', function( e, d ) {
 				wsmpd.search( d.type, d.what );
+				this.trigger( document, 'change-tab', { to: 'search' } );
 			} );
 
 			this.on( document, 'request-playlistinfo', function() {

@@ -15,7 +15,6 @@ define( function( require ) {
 		require( 'js/ui/albums' ).attachTo( '#albums-container' );
 		require( 'js/ui/outputs' ).attachTo( '#settings-outputs-container' );
 
-		require( 'js/data/search' ).attachTo( document );
 		require( 'js/data/wsmpd' ).attachTo( document );
 
 		require( 'js/keyboard-commands' ).attachTo( document );
