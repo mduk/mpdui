@@ -18,15 +18,16 @@ websocket_init( _, Req, _ ) ->
 
 websocket_handle( { text, RawMsg }, Req, C ) ->
 	{ struct, MsgData } = mochijson2:decode( RawMsg ),
-	ReplyData = execute_command( C,
+	{ ok, C2 } = erlmpd:connect(),
+	ReplyData = execute_command( C2,
 		proplists:get_value( <<"cmd">>, MsgData ),
 		proplists:get_value( <<"args">>, MsgData, [] )
 	),
+	erlmpd:close( C2 ),
 
 	{ reply, { text, mochijson2:encode( ReplyData ) }, Req, C };
 websocket_handle( _, Req, C ) ->
 	{ ok, Req, C }.
-
 websocket_info( { mpd_currentsong, Playing }, Req, C ) ->
 	Message = { struct, [
 		{ <<"currentsong">>, { struct, Playing } }
