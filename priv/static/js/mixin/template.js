@@ -5,7 +5,7 @@ define(function(require) {
 
 		this.render = function() {
 			this.$node.html(
-				templates[this.attr.withTemplate].render(this)
+				templates[this.attr.withTemplate].render(this, templates)
 			);
 		};
 
