@@ -7,14 +7,21 @@ init( { tcp, http }, _Req, _Opts ) ->
 	{ upgrade, protocol, cowboy_websocket }.
 
 websocket_init( _, Req, _ ) ->
-	{ ok, C } = erlmpd:connect(),
-	WsHandler = self(),
-	spawn_link( fun() ->
-		mpdui_poller_currentsong:start_link( WsHandler, C, 1000 ),
-		timer:sleep( 500 ),
-		mpdui_poller_status:start_link( WsHandler, C, 1000 )
-	end ),
-	{ ok, Req, C }.
+	State = case erlmpd:connect() of
+		{ ok, C } ->
+			WsHandler = self(),
+			spawn_link( fun() ->
+				mpdui_poller_currentsong:start_link( WsHandler, C, 1000 ),
+				timer:sleep( 500 ),
+				mpdui_poller_status:start_link( WsHandler, C, 1000 )
+			end ),
+			C;
+
+		Err = { error, _ } ->
+			throw( Err )
+
+	end,
+	{ ok, Req, State }.
 
 websocket_handle( { text, RawMsg }, Req, C ) ->
 	{ struct, MsgData } = mochijson2:decode( RawMsg ),
