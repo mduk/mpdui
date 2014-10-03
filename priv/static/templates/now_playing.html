@@ -1,10 +1,21 @@
-<h1>{{title}}</h1>
-<h2><span>{{artist}}</span> <small>{{album}}</small></h2>
-<div class="progress">
-	<div class="progress-bar" 
-		role="progressbar"
-		aria-valuenow="{{position_percent}}"
-		aria-valuemin="0"
-		aria-valuemax="100"
-		style="width: {{position_percent}}%;"></div>
+<div id="currentsong" class="jumbotron">
+	<h1>{{title}}</h1>
+	<h2>
+		<span id="nowplaying-artist-container" class="query-provider dropdown">
+			<span>{{artist}}</span>
+		</span>
+
+		<span id="nowplaying-album-container">
+			<small>{{album}}</small>
+		</span>
+	</h2>
+
+	<div class="progress">
+		<div class="progress-bar"
+			role="progressbar"
+			aria-valuenow="{{position_percent}}"
+			aria-valuemin="0"
+			aria-valuemax="100"
+			style="width: {{position_percent}}%;"></div>
+	</div>
 </div>

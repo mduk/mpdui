@@ -55,7 +55,13 @@ define( function( require ) {
 			this.state = status.state;
 			this.position = status.time;
 			this.updatePositionPercent();
-			this.render();
+
+			if ( this.state == 'stop' ) {
+				this.$node.html('');
+			}
+			else {
+				this.render();
+			}
 		};
 
 		this.onCurrentsong = function( e, currentsong ) {
