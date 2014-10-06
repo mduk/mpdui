@@ -7,6 +7,7 @@ define( function( require ) {
 
 		require( 'js/ui/nav' ).attachTo( 'nav ul.nav' );
 		require( 'js/ui/mini-control' ).attachTo( '#mini-control-container' );
+		require( 'js/ui/connection-status' ).attachTo( '#connection-status-container' );
 		require( 'js/ui/now-playing' ).attachTo( '#now-playing-container' );
 		require( 'js/ui/queue' ).attachTo( '#queue-container' );
 		require( 'js/ui/search-form' ).attachTo( '#search-form-container' );

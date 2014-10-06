@@ -23,32 +23,46 @@ define( [ 'jquery' ], function( jquery ) {
 			default: return cmdName( message );
 		}
 	};
+
+	function fire( event, data ) {
+		jquery(document).trigger( event, data );
+	};
 	
 	return {
 		connect: function( host ) {
 			websocket = new WebSocket( host );
 	
-			websocket.onopen = function(evt) {};
+			websocket.onopen = function(evt) {
+				fire('websocket-connect', {
+					host: host
+				} );
+			};
 	
-			websocket.onclose = function(evt) {};
+			websocket.onclose = function(evt) {
+				fire('websocket-disconnect', {});
+				websocket = false;
+			};
 	
 			websocket.onmessage = function(evt) {
 				var message = JSON.parse( evt.data );
 				
 				if ( typeof message.status == 'object') {
-					jquery(document).trigger('status', message.status);
+					fire('status', message.status);
 					return;
 				}
 
 				if ( typeof message.currentsong == 'object' ) {
-					jquery(document).trigger('currentsong', message.currentsong);
+					fire('currentsong', message.currentsong);
 					return;
 				}
 
-				jquery(document).trigger( getEventName( message ), message );
+				fire( getEventName( message ), message );
 			};
 	
-			websocket.onerror = function(evt) {};
+			websocket.onerror = function(evt) {
+				fire('websocket-disconnect', {});
+				websocket = false;
+			};
 		},
 		
 		addid: function( songid ) {
