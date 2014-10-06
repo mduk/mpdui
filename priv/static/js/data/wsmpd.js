@@ -70,11 +70,15 @@ define( function( require ) {
 				wsmpd.playlistinfo();
 			} );
 
+			// Refresh the playlistinfo when the currentsong changes
 			this.on( document, 'currentsong', function() {
 				wsmpd.playlistinfo();
 			} );
 
-			wsmpd.connect();
+			// Connect to an MPD host
+			this.on( document, 'request-connect', function( e, d ) {
+				wsmpd.connect();
+			} );
 		} );
 
 	}

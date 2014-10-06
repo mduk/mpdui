@@ -20,5 +20,7 @@ define( function( require ) {
 		require( 'js/keyboard-commands' ).attachTo( document );
 
 		jquery('button').tooltip();
+
+		jquery( document ).trigger( 'request-connect' );
 	};
 } );
