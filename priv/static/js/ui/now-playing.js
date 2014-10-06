@@ -25,11 +25,9 @@ define( function( require ) {
 				'artistSelector': this.clickArtist,
 				'albumSelector': this.clickAlbum,
 			} );
-
-			this.render();
 		} );
 
-		this.state = '';
+		this.state = 'stop';
 		this.title = '';
 		this.artist = '';
 		this.album = '';
@@ -70,7 +68,13 @@ define( function( require ) {
 			this.album = currentsong.Album;
 			this.duration = currentsong.Time;
 			this.updatePositionPercent();
-			this.render();
+
+			if ( this.state == 'stop' ) {
+				this.$node.html('');
+			}
+			else {
+				this.render();
+			}
 		};
 
 		this.updatePositionPercent = function() {
