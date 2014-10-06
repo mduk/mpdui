@@ -129,7 +129,7 @@ define( [ 'jquery' ], function( jquery ) {
 		},
 
 		findadd: function( type, what ) {
-			return sendCommand( 'findadd', [ type, what ] );
+			return sendCommand( 'findadd', [ type, new String( what ).toString() ] );
 		},
 
 		outputs: function() {
