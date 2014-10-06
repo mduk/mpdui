@@ -79,6 +79,11 @@ define( function( require ) {
 			this.on( document, 'request-connect', function( e, d ) {
 				wsmpd.connect( d.host );
 			} );
+
+			// Request the current playlistinfo on connection
+			this.on( document, 'websocket-connect', function() {
+				wsmpd.playlistinfo();
+			} );
 		} );
 
 	}
