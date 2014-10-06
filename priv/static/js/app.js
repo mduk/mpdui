@@ -21,6 +21,8 @@ define( function( require ) {
 
 		jquery('button').tooltip();
 
-		jquery( document ).trigger( 'request-connect' );
+		jquery( document ).trigger( 'request-connect', {
+			host: "ws://" + window.location.host + "/websocket"
+		} );
 	};
 } );

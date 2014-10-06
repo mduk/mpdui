@@ -25,8 +25,8 @@ define( [ 'jquery' ], function( jquery ) {
 	};
 	
 	return {
-		connect: function() {
-			websocket = new WebSocket("ws://" + window.location.host + "/websocket");
+		connect: function( host ) {
+			websocket = new WebSocket( host );
 	
 			websocket.onopen = function(evt) {};
 	

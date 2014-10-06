@@ -77,7 +77,7 @@ define( function( require ) {
 
 			// Connect to an MPD host
 			this.on( document, 'request-connect', function( e, d ) {
-				wsmpd.connect();
+				wsmpd.connect( d.host );
 			} );
 		} );
 
