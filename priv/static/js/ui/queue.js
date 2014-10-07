@@ -20,7 +20,6 @@ define( function( require ) {
 		} );
 
 		this.after('initialize', function() {
-			this.on( document, 'status', this.onStatus );
 			this.on( document, 'currentsong', this.onCurrentsong );
 			this.on( document, 'playlistinfo', this.onPlaylistinfo );
 			
@@ -56,15 +55,6 @@ define( function( require ) {
 
 		this.clickPause = function() {
 			console.log('no pausing! LISTENING ONLY!');
-		};
-
-		this.onStatus = function( e, status ) {
-			if ( this.state == status.state ) {
-				return;
-			}
-			
-			this.state = status.state;
-			this.render();
 		};
 
 		this.onCurrentsong = function( e, currentsong ) {

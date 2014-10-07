@@ -96,9 +96,17 @@ define( function( require ) {
 		};
 
 		this.onStatus = function( e, status ) {
-			this.updatePlayPauseButton( status.state );
-			this.updateRandomButton( status.random );
-			this.updateRepeatButton( status.repeat );
+			if ( typeof status.state != 'undefined' ) {
+				this.updatePlayPauseButton( status.state );
+			}
+
+			if ( typeof status.random != 'undefined' ) {
+				this.updateRandomButton( status.random );
+			}
+
+			if ( typeof status.repeat != 'undefined' ) {
+				this.updateRepeatButton( status.repeat );
+			}
 		};
 
 		this.updatePlayPauseButton = function( state ) {

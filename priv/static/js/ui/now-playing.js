@@ -50,8 +50,14 @@ define( function( require ) {
 		};
 
 		this.onStatus = function( e, status ) {
-			this.state = status.state;
-			this.position = status.time;
+			if ( typeof status.state != 'undefined' ) {
+				this.state = status.state;
+			}
+
+			if ( typeof status.time != 'undefined' ) {
+				this.position = status.time;
+			}
+
 			this.updatePositionPercent();
 
 			if ( this.state == 'stop' ) {
