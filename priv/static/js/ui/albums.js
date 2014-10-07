@@ -13,8 +13,8 @@ define( function( require ) {
 		this.defaultAttrs( {
 			withTemplate: 'albums',
 
-			addToQueueButtonSelector: '#albums-container button.add-to-queue',
-			viewAlbumButtonSelector: '#albums-container button.view-album'
+			addToQueueButtonSelector: 'button.add-to-queue',
+			viewAlbumButtonSelector: 'button.view-album'
 		} );
 
 		this.after('initialize', function() {
