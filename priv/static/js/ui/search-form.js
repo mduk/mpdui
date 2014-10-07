@@ -41,17 +41,7 @@ define( function( require ) {
 			var terms = this.select('searchInputSelector').val().trim();
 
 			this.trigger( document, 'request-search', {
-				type: 'title',
-				what: terms
-			} );
-
-			this.trigger( document, 'request-search', {
-				type: 'album',
-				what: terms
-			} );
-
-			this.trigger( document, 'request-search', {
-				type: 'artist',
+				type: 'any',
 				what: terms
 			} );
 		};
