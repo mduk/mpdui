@@ -14,7 +14,6 @@ define( function( require ) {
 		require( 'js/ui/search-results' ).attachTo( '#search-results-container' );
 		require( 'js/ui/artists' ).attachTo( '#artists-container' );
 		require( 'js/ui/albums' ).attachTo( '#albums-container' );
-		require( 'js/ui/outputs' ).attachTo( '#settings-outputs-container' );
 
 		require( 'js/data/wsmpd' ).attachTo( document );
 
