@@ -23,7 +23,6 @@ define( function( require ) {
 			this.on( document, 'status', this.onStatus );
 			this.on( document, 'currentsong', this.onCurrentsong );
 			this.on( document, 'playlistinfo', this.onPlaylistinfo );
-			this.on( document, 'findadd clear', this.refreshQueue );
 			
 			this.on( 'click', {
 				'clearButtonSelector': this.clickClear,
@@ -47,14 +46,12 @@ define( function( require ) {
 			this.trigger( document, 'request-delete', {
 				pos: jquery( d.el ).data('pos')
 			} );
-			this.trigger(document, 'request-playlistinfo');;
 		};
 
 		this.clickPlayNow = function( e, d ) {
 			this.trigger( document, 'request-play', {
 				pos: jquery( d.el ).data('pos')
 			} );
-			this.trigger(document, 'request-playlistinfo');;
 		};
 
 		this.clickPause = function() {
@@ -80,10 +77,6 @@ define( function( require ) {
 			this.playlistinfo = playlistinfo.result;
 			this.updatePlaylistinfo();
 			this.render();
-		};
-
-		this.refreshQueue = function() {
-			this.trigger(document, 'request-playlistinfo');;
 		};
 
 		this.updatePlaylistinfo = function() {
