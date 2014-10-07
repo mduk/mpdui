@@ -15,6 +15,7 @@ define( function( require ) {
 
 			searchFormSelector: 'form',
 			searchInputSelector: 'form input[type=text]',
+			findaddButtonSelector: 'button.findadd'
 		} );
 
 		this.after('initialize', function() {
@@ -22,6 +23,7 @@ define( function( require ) {
 
 			this.on( 'submit', { 'searchFormSelector': this.submitSearch } );
 			this.on( 'keyup', { 'searchInputSelector': this.keyupSearchInput } );
+			this.on( 'click', { 'findaddButtonSelector': this.clickFindadd } );
 		} );
 
 		this.keyupSearchInput = function( e, d ) {
@@ -49,6 +51,25 @@ define( function( require ) {
 			} );
 
 			this.trigger( document, 'request-search', {
+				type: 'artist',
+				what: terms
+			} );
+		};
+
+		this.clickFindadd = function( e, d ) {
+			var terms = this.select('searchInputSelector').val().trim();
+
+			this.trigger( document, 'request-findadd', {
+				type: 'title',
+				what: terms
+			} );
+
+			this.trigger( document, 'request-findadd', {
+				type: 'album',
+				what: terms
+			} );
+
+			this.trigger( document, 'request-findadd', {
 				type: 'artist',
 				what: terms
 			} );
