@@ -134,6 +134,15 @@ define( [ 'jquery' ], function( jquery ) {
 
 		outputs: function() {
 			return sendCommand( 'outputs', [] );
+		},
+
+		consume: function( state ) {
+			if ( state == true ) {
+				return sendCommand( 'consume', [ 1 ] );
+			}
+			else {
+				return sendCommand( 'consume', [ 0 ] );
+			}
 		}
 	};
 

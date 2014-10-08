@@ -70,6 +70,10 @@ define( function( require ) {
 				wsmpd.playlistinfo();
 			} );
 
+			this.on( document, 'request-consume', function( e, d ) {
+				wsmpd.consume( d.state );
+			} );
+
 			// Connect to an MPD host
 			this.on( document, 'request-connect', function( e, d ) {
 				wsmpd.connect( d.host );

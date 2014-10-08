@@ -7,6 +7,7 @@
 		<button type="button" class="btn btn-default clear-queue" data-toggle="tooltip" data-placement="top" title="Clear Queue">
 			<span class="glyphicon glyphicon-remove"></span> Clear
 		</button>
+		<button type="button" class="btn btn-default consume-queue {{#consume}}btn-primary{{/consume}}" data-toggle="tooltip" data-placement="top" title="Consume Queue">Consume</button>
 		{{^playlistinfo}}
 		<span class="empty">Queue empty</span>
 		{{/playlistinfo}}
