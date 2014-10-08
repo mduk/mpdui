@@ -15,7 +15,7 @@ define( function( require ) {
 		require( 'js/ui/artists' ).attachTo( '#artists-container' );
 		require( 'js/ui/albums' ).attachTo( '#albums-container' );
 
-		require( 'js/data/wsmpd' ).attachTo( document );
+		require( 'js/data/mpd' ).attachTo( document );
 
 		require( 'js/keyboard-commands' ).attachTo( document );
 
