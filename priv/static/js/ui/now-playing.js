@@ -4,8 +4,10 @@ define( function( require ) {
 	var defineComponent = require('flight/component'),
 	    jquery = require('jquery');
 
-	return defineComponent( nowPlaying,
-		require('mixin/template')
+	return defineComponent(
+		require('mixin/template'),
+		require('mixin/event-imprint'),
+		nowPlaying
 	);
 
 	function nowPlaying() {
@@ -13,27 +15,40 @@ define( function( require ) {
 		this.defaultAttrs( {
 			withTemplate: 'now_playing',
 
+			imprintEvents: {
+				'status': [ 'state', 'time' ],
+				'currentsong': [ 'Title', 'Album', 'Artist', 'Time' ]
+			},
+
+			imprints: {
+				status: {
+					state: 'stop'
+				},
+				currentsong: {
+					Title: '-',
+					Album: '-',
+					Artist: '-',
+					Time: 0
+				},
+			},
+
 			artistSelector: 'h2 span',
-			albumSelector: 'h2 small'
+			albumSelector: 'h2 small',
+
+			position_percent: 0
 		} );
 
 		this.after('initialize', function() {
-			this.on( document, 'status', this.onStatus );
-			this.on( document, 'currentsong', this.onCurrentsong );
+			this.onImprint( {
+				'status': this.imprintUpdate,
+				'currentsong': this.imprintUpdate
+			} );
 
 			this.on( 'click', {
 				'artistSelector': this.clickArtist,
 				'albumSelector': this.clickAlbum,
 			} );
 		} );
-
-		this.state = 'stop';
-		this.title = '';
-		this.artist = '';
-		this.album = '';
-		this.duration = 0;
-		this.position = 0;
-		this.position_percent = 0;
 
 		this.clickArtist = function( e, d ) {
 			this.trigger( 'request-search', {
@@ -49,42 +64,26 @@ define( function( require ) {
 			} );
 		};
 
-		this.onStatus = function( e, status ) {
-			if ( typeof status.state != 'undefined' ) {
-				this.state = status.state;
-			}
-
-			if ( typeof status.time != 'undefined' ) {
-				this.position = status.time;
-			}
-
+		this.imprintUpdate = function( imprint ) {
 			this.updatePositionPercent();
-
-			if ( this.state == 'stop' ) {
-				this.$node.html('');
-			}
-			else {
-				this.render();
-			}
-		};
-
-		this.onCurrentsong = function( e, currentsong ) {
-			this.title = currentsong.Title;
-			this.artist = currentsong.Artist;
-			this.album = currentsong.Album;
-			this.duration = currentsong.Time;
-			this.updatePositionPercent();
-
-			if ( this.state == 'stop' ) {
-				this.$node.html('');
-			}
-			else {
-				this.render();
-			}
+			this.render();
 		};
 
 		this.updatePositionPercent = function() {
-			this.position_percent = ( 100 / this.duration ) * this.position;
+			this.attr.position_percent =
+				( 100 / this.attr.imprints.currentsong.Time )
+				* this.attr.imprints.status.time;
+		};
+
+		this.render = function() {
+			if ( this.attr.imprints.status.state == 'stop' ) {
+				this.$node.html('');
+			}
+			else {
+				this.$node.html(
+					templates[this.attr.withTemplate].render(this.attr, templates)
+				);
+			}
 		};
 	}
 
