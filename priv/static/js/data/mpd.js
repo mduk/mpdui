@@ -91,11 +91,11 @@ define( function( require ) {
 		};
 
 		this.onRequestPlay = function( e, d ) {
-			sendCommand( 'play', d.pos );
+			sendCommand( 'play', [ d.pos ] );
 		};
 
 		this.onRequestDelete = function( e, d ) {
-			sendCommand( 'delete', d.pos );
+			sendCommand( 'delete', [ d.pos ] );
 			sendCommand( 'playlistinfo', [] );
 		};
 
