@@ -14,7 +14,9 @@ define( function( require ) {
 			withTemplate: 'artists',
 
 			addToQueueButtonSelector: '#artists-container button.add-to-queue',
-			viewAlbumButtonSelector: '#artists-container button.view-album'
+			viewAlbumButtonSelector: '#artists-container button.view-album',
+
+			artists: []
 		} );
 
 		this.after('initialize', function() {
@@ -28,9 +30,6 @@ define( function( require ) {
 				'viewAlbumButtonSelector': this.clickViewAlbum
 			} );
 		} );
-
-		this.title = "Artists";
-		this.artists = [];
 
 		this.clickViewAlbum = request( 'request-search' )
 
@@ -50,7 +49,7 @@ define( function( require ) {
 		};
 
 		this.updateArtistList = function( artistList ) {
-			this.artists = artistList.map( function( elem ) {
+			this.attr.artists = artistList.map( function( elem ) {
 				return { title: elem.artist };
 			} );
 		};

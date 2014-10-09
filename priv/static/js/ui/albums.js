@@ -14,7 +14,9 @@ define( function( require ) {
 			withTemplate: 'albums',
 
 			addToQueueButtonSelector: 'button.add-to-queue',
-			viewAlbumButtonSelector: 'button.view-album'
+			viewAlbumButtonSelector: 'button.view-album',
+
+			albums: []
 		} );
 
 		this.after('initialize', function() {
@@ -28,9 +30,6 @@ define( function( require ) {
 				'viewAlbumButtonSelector': this.clickViewAlbum
 			} );
 		} );
-
-		this.title = "Albums";
-		this.albums = [];
 
 		this.clickViewAlbum = request( 'request-search' );
 
@@ -50,7 +49,7 @@ define( function( require ) {
 		};
 
 		this.updateAlbumList = function( albumList ) {
-			this.albums = albumList.map( function( elem ) {
+			this.attr.albums = albumList.map( function( elem ) {
 				return { title: elem.album };
 			} );
 		};

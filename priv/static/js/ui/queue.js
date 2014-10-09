@@ -4,8 +4,9 @@ define( function( require ) {
 	var defineComponent = require('flight/component'),
 	    jquery = require('jquery');
 
-	return defineComponent( queue,
-		require('mixin/template')
+	return defineComponent(
+		require('mixin/template'),
+		queue
 	);
 
 	function queue() {
@@ -17,7 +18,12 @@ define( function( require ) {
 			consumeButtonSelector: 'button.consume-queue',
 			removeButtonSelector: 'button.remove-from-queue',
 			playNowButtonSelector: 'button.play-now',
-			pauseButtonSelector: 'button.pause'
+			pauseButtonSelector: 'button.pause',
+
+			state: '',
+			consume: false,
+			position: 0,
+			playlistinfo: []
 		} );
 
 		this.after('initialize', function() {
@@ -36,17 +42,12 @@ define( function( require ) {
 			this.render();
 		} );
 
-		this.state = '';
-		this.consume = false;
-		this.position = 0;
-		this.playlistinfo = [];
-
 		this.clickClear = function() {
 			this.trigger(document, 'request-clear');
 		};
 
 		this.clickConsume = function() {
-			if ( this.consume == true ) {
+			if ( this.attr.consume == true ) {
 				this.trigger( document, 'request-consume', { state: false } );
 			}
 			else {
@@ -71,27 +72,27 @@ define( function( require ) {
 		};
 
 		this.onCurrentsong = function( e, currentsong ) {
-			this.position = currentsong.Pos;
+			this.attr.position = currentsong.Pos;
 			this.updatePlaylistinfo();
 			this.render();
 		};
 
 		this.onPlaylistinfo = function( e, playlistinfo ) {
-			this.playlistinfo = playlistinfo.result;
+			this.attr.playlistinfo = playlistinfo.result;
 			this.updatePlaylistinfo();
 			this.render();
 		};
 
 		this.onStatus = function( e, status ) {
 			if ( typeof status.consume != 'undefined' ) {
-				this.consume = status.consume;
+				this.attr.consume = status.consume;
 				this.updateConsumeButton();
 			}
 		};
 
 		this.updatePlaylistinfo = function() {
-			var position = this.position;
-			this.playlistinfo = this.playlistinfo.map( function( track ) {
+			var position = this.attr.position;
+			this.attr.playlistinfo = this.attr.playlistinfo.map( function( track ) {
 				if ( track.Pos == position ) {
 					track.playing = true;
 				}
@@ -105,7 +106,7 @@ define( function( require ) {
 
 		this.updateConsumeButton = function() {
 			var btn = this.select('consumeButtonSelector');
-			if ( this.consume == true ) {
+			if ( this.attr.consume == true ) {
 				btn.addClass( 'btn-primary' );
 			}
 			else {
@@ -113,10 +114,6 @@ define( function( require ) {
 			}
 		};
 
-		this.postRender = function() {
-			this.on( '#queue-clear', 'click', this.clickClear );
-			this.on( '#queue-container a', 'click', this.clickTrack );
-		};
 	}
 
 } );

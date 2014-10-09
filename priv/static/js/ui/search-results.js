@@ -13,7 +13,10 @@ define( function( require ) {
 		this.defaultAttrs( {
 			withTemplate: 'search-results',
 
-			addToQueueBtnSelector: 'table button'
+			addToQueueBtnSelector: 'table button',
+
+			searchTerm: '',
+			results: []
 		} );
 
 		this.after('initialize', function() {
@@ -21,10 +24,6 @@ define( function( require ) {
 
 			this.on( 'click', { 'addToQueueBtnSelector': this.clickAddToQueue } );
 		} );
-
-		this.searchType = 'artist';
-		this.searchTerm = '';
-		this.results = [];
 
 		this.clickAddToQueue = function( e, d ) {
 			this.trigger( document, 'request-addid', {
@@ -35,12 +34,12 @@ define( function( require ) {
 		this.onSearch = function( e, msg ) {
 			var searchTerm = msg.command.args[1];
 
-			if ( this.searchTerm != searchTerm ) {
-				this.searchTerm = searchTerm;
-				this.results = [];
+			if ( this.attr.searchTerm != searchTerm ) {
+				this.attr.searchTerm = searchTerm;
+				this.attr.results = [];
 			}
 
-			var storedResults = this.results;
+			var storedResults = this.attr.results;
 			var toMerge = msg.result.filter( function( track ) {
 				for ( var i = 0; i < storedResults.length; i++ ) {
 					if ( track.file = storedResults[i].file ) {
@@ -50,7 +49,7 @@ define( function( require ) {
 				return true;
 			} );
 
-			jquery.merge( this.results, toMerge );
+			jquery.merge( this.attr.results, toMerge );
 			this.render();
 		};
 	}
