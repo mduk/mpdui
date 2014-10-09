@@ -1,14 +1,39 @@
 define( function( require ) {
 	'use strict';
 
-	var defineComponent = require('flight/component'),
-	    wsmpd = require('wsmpd');
+	var defineComponent = require('flight/component');
 
 	return defineComponent( mpd );
 
-	var websocket;
-
 	function mpd() {
+
+		var websocket;
+
+		function sendCommand( command, args ) {
+			websocket.send( JSON.stringify( {
+				cmd: command,
+				args: args
+			} ) );
+		};
+
+		function getEventName( message ) {
+			var cmdName = function( message ) {
+				return message.command.cmd;
+			};
+
+			var cmdAndFirstArg = function( message ) {
+				return message.command.cmd + '-' + message.command.args[0];
+			};
+
+			switch ( message.command.cmd ) {
+				case 'list': return cmdAndFirstArg( message );
+				default: return cmdName( message );
+			}
+		};
+
+		function bool2int( bool ) {
+			return bool ? 1 : 0;
+		};
 
 		this.after( 'initialize', function() {
 			this.on( document, 'request-search', this.onRequestSearch );
@@ -31,76 +56,102 @@ define( function( require ) {
 		} );
 
 		this.onRequestSearch = function( e, d ) {
-			wsmpd.search( d.type, d.what );
-			this.trigger( document, 'change-tab', { to: 'search' } );
+			sendCommand( 'search', [ d.type, new String( d.what ).toString() ] );
+			this.trigger( document, 'change-tab', { to: 'search' } ); // no
 		};
 
 		this.onRequestPlaylistinfo = function( e, d ) {
-			wsmpd.playlistinfo();
+			sendCommand( 'playlistinfo', [] );
 		};
 
 		this.onRequestClear = function( e, d ) {
-			wsmpd.clear();
-			wsmpd.playlistinfo();
+			sendCommand( 'clear', [] );
+			sendCommand( 'playlistinfo', [] );
 		};
 
 		this.onRequestFindadd = function( e, d ) {
-			wsmpd.findadd( d.type, d.what );
-			wsmpd.playlistinfo();
+			sendCommand( 'findadd', [ d.type, new String( d.what ).toString() ] );
+			sendCommand( 'playlistinfo', [] );
 		};
 
 		this.onRequestList = function( e, d ) {
-			wsmpd.list( d.type );
+			sendCommand( 'list', [ d.type ] );
 		};
 
 		this.onRequestPrevious = function( e, d ) {
-			wsmpd.previous();
+			sendCommand( 'previous', [] );
 		};
 
 		this.onRequestNext = function( e, d ) {
-			wsmpd.next();
+			sendCommand( 'next', [] );
 		};
 
 		this.onRequestOutputs = function( e, d ) {
-			wsmpd.outputs();
+			sendCommand( 'outputs', [] );
 		};
 
 		this.onRequestPlay = function( e, d ) {
-			wsmpd.play( d.pos );
+			sendCommand( 'play', d.pos );
 		};
 
 		this.onRequestDelete = function( e, d ) {
-			wsmpd.delete( d.pos );
-			wsmpd.playlistinfo();
+			sendCommand( 'delete', d.pos );
+			sendCommand( 'playlistinfo', [] );
 		};
 
 		this.onRequestRandom = function( e, d ) {
-			wsmpd.random( d.state );
+			sendCommand( 'random', [ bool2int( d.state ) ] );
 		};
 
 		this.onRequestRepeat = function( e, d ) {
-			wsmpd.repeat( d.state );
+			sendCommand( 'repeat', [ bool2int( d.state ) ] );
 		};
 
 		this.onRequestPause = function( e, d ) {
-			wsmpd.pause( d.state );
+			sendCommand( 'pause', [ bool2int( d.state ) ] );
 		};
 
 		this.onRequestAddid = function( e, d ) {
-			wsmpd.addid( d.id );
-			wsmpd.playlistinfo();
+			sendCommand( 'addid', [ d.id ] );
+			sendCommand( 'playlistinfo', [] );
 		};
 
 		this.onRequestConsume = function( e, d ) {
-			wsmpd.consume( d.state );
+			sendCommand( 'consume', [ bool2int( d.state ) ] );
 		};
 
 		this.onRequestConnect = function( e, d ) {
-			wsmpd.connect( d.host );
+			websocket = new WebSocket( d.host );
+
+			var component = this;
+
+			websocket.onopen = function() {
+				component.trigger( document, 'websocket-connect' );
+			};
+
+			websocket.onclose = function() {
+				component.trigger( document, 'websocket-disconnect' );
+			};
+
+			websocket.onmessage = function( e ) {
+				var message = JSON.parse( e.data );
+
+				if ( typeof message.status == 'object' ) {
+					component.trigger( document, 'status', message.status );
+					return;
+				}
+
+				if ( typeof message.currentsong == 'object' ) {
+					component.trigger( document, 'currentsong', message.currentsong );
+					return;
+				}
+
+				component.trigger( document, getEventName( message ), message );
+			};
 		};
 
 		this.onWebsocketConnect = function() {
-			wsmpd.playlistinfo();
+			this.trigger( document, 'request-playlistinfo' );
 		};
 
 	}
