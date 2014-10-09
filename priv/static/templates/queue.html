@@ -8,14 +8,14 @@
 			<span class="glyphicon glyphicon-remove"></span> Clear
 		</button>
 		<button type="button" class="btn btn-default consume-queue {{#consume}}btn-primary{{/consume}}" data-toggle="tooltip" data-placement="top" title="Consume Queue">Consume</button>
-		{{^playlistinfo}}
+		{{^imprints.playlistinfo.result}}
 		<span class="empty">Queue empty</span>
-		{{/playlistinfo}}
+		{{/imprints.playlistinfo.result}}
 	</div>
 
 	<table class="table table-condensed table-hover">
 		<tbody>
-			{{#playlistinfo}}
+			{{#imprints.playlistinfo.result}}
 			<tr {{#playing}}class="active"{{/playing}}>
 				<td>{{Title}}</td>
 				<td>{{Artist}}</td>
@@ -28,7 +28,7 @@
 					</div>
 				</td>
 			</tr>
-			{{/playlistinfo}}
+			{{/imprints.playlistinfo.result}}
 		</tbody>
 	</table>
 

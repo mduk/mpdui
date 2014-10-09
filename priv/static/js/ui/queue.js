@@ -6,6 +6,7 @@ define( function( require ) {
 
 	return defineComponent(
 		require('mixin/template'),
+		require('mixin/event-imprint'),
 		queue
 	);
 
@@ -14,22 +15,29 @@ define( function( require ) {
 		this.defaultAttrs( {
 			withTemplate: 'queue',
 
+			imprintEvents: {
+				status: [ 'consume' ],
+				currentsong: [ 'Pos' ],
+				playlistinfo: [ 'result' ]
+			},
+
+			imprints: {
+				status: { consume: false },
+				currentsong: { Pos: 0 },
+				playlistinfo: { result: [] }
+			},
+
 			clearButtonSelector: 'button.clear-queue',
 			consumeButtonSelector: 'button.consume-queue',
 			removeButtonSelector: 'button.remove-from-queue',
 			playNowButtonSelector: 'button.play-now',
 			pauseButtonSelector: 'button.pause',
-
-			state: '',
-			consume: false,
-			position: 0,
-			playlistinfo: []
 		} );
 
 		this.after('initialize', function() {
-			this.on( document, 'currentsong', this.onCurrentsong );
-			this.on( document, 'playlistinfo', this.onPlaylistinfo );
-			this.on( document, 'status', this.onStatus );
+			this.onImprint( 'currentsong', this.imprintCurrentsong );
+			this.onImprint( 'playlistinfo', this.imprintPlaylistinfo );
+			this.onImprint( 'status', this.imprintStatus );
 			
 			this.on( 'click', {
 				'clearButtonSelector': this.clickClear,
@@ -43,11 +51,11 @@ define( function( require ) {
 		} );
 
 		this.clickClear = function() {
-			this.trigger(document, 'request-clear');
+			this.trigger( document, 'request-clear' );
 		};
 
 		this.clickConsume = function() {
-			if ( this.attr.consume == true ) {
+			if ( this.attr.imprints.status.consume == true ) {
 				this.trigger( document, 'request-consume', { state: false } );
 			}
 			else {
@@ -71,28 +79,24 @@ define( function( require ) {
 			console.log('no pausing! LISTENING ONLY!');
 		};
 
-		this.onCurrentsong = function( e, currentsong ) {
-			this.attr.position = currentsong.Pos;
+		this.imprintCurrentsong = function() {
 			this.updatePlaylistinfo();
 			this.render();
 		};
 
-		this.onPlaylistinfo = function( e, playlistinfo ) {
-			this.attr.playlistinfo = playlistinfo.result;
+		this.imprintPlaylistinfo = function() {
 			this.updatePlaylistinfo();
 			this.render();
 		};
 
-		this.onStatus = function( e, status ) {
-			if ( typeof status.consume != 'undefined' ) {
-				this.attr.consume = status.consume;
-				this.updateConsumeButton();
-			}
+		this.imprintStatus = function() {
+			this.updateConsumeButton();
 		};
 
 		this.updatePlaylistinfo = function() {
-			var position = this.attr.position;
-			this.attr.playlistinfo = this.attr.playlistinfo.map( function( track ) {
+			var position = this.attr.imprints.currentsong.Pos;
+			this.attr.imprints.playlistinfo.results =
+				this.attr.imprints.playlistinfo.result.map( function( track ) {
 				if ( track.Pos == position ) {
 					track.playing = true;
 				}
@@ -106,7 +110,7 @@ define( function( require ) {
 
 		this.updateConsumeButton = function() {
 			var btn = this.select('consumeButtonSelector');
-			if ( this.attr.consume == true ) {
+			if ( this.attr.imprints.status.consume ) {
 				btn.addClass( 'btn-primary' );
 			}
 			else {
