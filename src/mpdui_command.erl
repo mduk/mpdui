@@ -143,6 +143,23 @@ execute( C, <<"list">>, [ Type, Artist ] ) ->
 		binary_to_list( Artist )
 	) );
 
+execute( C, <<"list">>, [ ListType, FilterType, FilterValue ] ) ->
+	Map = fun( Elem ) -> object( ListType, Elem ) end,
+	lists:map( Map, erlmpd:list( C,
+		binary_to_atom( ListType, utf8 ),
+		binary_to_atom( FilterType, utf8 ),
+		binary_to_list( FilterValue )
+	) );
+
+execute( C, <<"find">>, [ Type, What ] ) ->
+	Map = fun( Elem ) -> object( Elem ) end,
+	R = erlmpd:find( C,
+		binary_to_atom( Type, utf8 ),
+		binary_to_list( What )
+	),
+	io:format("Found: ~p~n",[R]),
+	lists:map( Map, R );
+
 execute( C, <<"findadd">>, [ Type, What ] ) ->
 	ok( erlmpd:findadd( C,
 		binary_to_atom( Type, utf8 ),
