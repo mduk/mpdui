@@ -22,12 +22,25 @@ define( function( require ) {
 			};
 
 			var cmdAndFirstArg = function( message ) {
-				return message.command.cmd + '-' + message.command.args[0];
+				switch ( message.command.args[1] ) {
+					case 'artist':
+						return message.command.cmd
+							+ '-' + message.command.args[0]
+							+ '-' + message.command.args[1];
+
+					default:
+						return message.command.cmd
+							+ '-' + message.command.args[0];
+				}
 			};
 
 			switch ( message.command.cmd ) {
-				case 'list': return cmdAndFirstArg( message );
-				default: return cmdName( message );
+				case 'list':
+				case 'find':
+					return cmdAndFirstArg( message );
+
+				default:
+					return cmdName( message );
 			}
 		};
 
@@ -39,8 +52,11 @@ define( function( require ) {
 			this.on( document, 'request-search', this.onRequestSearch );
 			this.on( document, 'request-playlistinfo', this.onRequestPlaylistinfo );
 			this.on( document, 'request-clear', this.onRequestClear );
+			this.on( document, 'request-find', this.onRequestFind );
 			this.on( document, 'request-findadd', this.onRequestFindadd );
 			this.on( document, 'request-list', this.onRequestList );
+			this.on( document, 'request-list-artist', this.onRequestListArtist );
+			this.on( document, 'request-list-artist-albums', this.onRequestListArtistAlbums );
 			this.on( document, 'request-previous', this.onRequestPrevious );
 			this.on( document, 'request-next', this.onRequestNext );
 			this.on( document, 'request-outputs', this.onRequestOutputs );
@@ -74,8 +90,21 @@ define( function( require ) {
 			sendCommand( 'playlistinfo', [] );
 		};
 
+		this.onRequestFind = function( e, d ) {
+			console.log( 'mpd', 'find', d );
+			sendCommand( 'find', [ d.type, new String( d.what ).toString() ] );
+		};
+
 		this.onRequestList = function( e, d ) {
 			sendCommand( 'list', [ d.type ] );
+		};
+
+		this.onRequestListArtist = function( e, d ) {
+			sendCommand( 'list', [ 'artist' ] );
+		};
+
+		this.onRequestListArtistAlbums = function( e, d ) {
+			sendCommand( 'list', [ 'album', 'artist', d.artist ] );
 		};
 
 		this.onRequestPrevious = function( e, d ) {
