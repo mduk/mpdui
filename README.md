@@ -12,7 +12,7 @@ There are three dependencies you will need to install yourself.
 
 	[you@host:~]$ git clone https://github.com/mduk/mpdui.git
 	[you@host:~]$ cd mpdui
-	[you@host:~]$ make
-	[you@host:~]$ ./start.sh
+	[you@host:~/mpdui]$ make
+	[you@host:~/mpdui]$ ./start.sh
 
 Point your browser of choice at http://localhost:45001/
