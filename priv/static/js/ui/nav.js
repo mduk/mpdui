@@ -14,18 +14,21 @@ define( function( require ) {
 		} );
 
 		this.onChangeTab = function( e, d ) {
-			jquery('#nav-' + d.to).tab('show');
+			var tab = jquery('#nav-' + d.to);
+			tab.tab('show');
+			this.changeTab( tab );
 		};
 
 		this.clickTab = function( e ) {
 			var tab = jquery( e.currentTarget );
+			this.changeTab( tab );
+		};
 
+		this.changeTab = function( tab ) {
 			this.trigger( document, 'tab-change', {
 				'$from': this.active,
 				'$to': tab
-				
 			} );
-
 			this.active = tab;
 		};
 	}
