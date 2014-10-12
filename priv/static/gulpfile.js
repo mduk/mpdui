@@ -1,9 +1,7 @@
 var gulp = require('gulp');
 var compiler = require('gulp-hogan-compile');
 
-gulp.task( 'default', function() {
-
-} );
+gulp.task( 'default', [ 'templates' ] );
 
 gulp.task( 'templates', function() {
 	gulp.src('templates/**/*.html')

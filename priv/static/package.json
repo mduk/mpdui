@@ -1,0 +1,8 @@
+{
+	"name": "mpdui",
+	"dependencies": {
+		"bower": "*",
+		"gulp": "*",
+		"gulp-hogan-compile": "*"
+	}
+}
