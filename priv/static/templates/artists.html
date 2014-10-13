@@ -5,11 +5,10 @@
 	<table class="table table-condensed table-striped table-hover">
 		<tbody>
 			{{#artists}}
-			<tr>
+			<tr class="artist" data-artist="{{title}}">
 				<td>{{title}}</td>
 				<td>
 					<div class="btn-group">
-						<button class="btn btn-default btn-xs view-artist" data-artist="{{title}}"><span class="glyphicon glyphicon-eye-open"></span></button>
 						<button class="btn btn-default btn-xs add-to-queue" data-artist="{{title}}"><span class="glyphicon glyphicon-plus"></span></button>
 					</div>
 				</td>
