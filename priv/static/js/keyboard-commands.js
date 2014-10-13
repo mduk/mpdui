@@ -16,7 +16,8 @@ define( function( require ) {
 			}
 
 			switch( String.fromCharCode( e.charCode ) ) {
-				case 's': this.trigger( document, 'change-tab', { to: 'search' } ); break;
+				case 's':
+				case '/': this.trigger( document, 'change-tab', { to: 'search' } ); break;
 				case 'n': this.trigger( document, 'change-tab', { to: 'nowplaying' } ); break;
 				case 'b': this.trigger( document, 'change-tab', { to: 'browse' } ); break;
 			}
