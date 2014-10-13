@@ -1,5 +1,8 @@
 -module( mpdui_command ).
 
+-define( bin( A ), is_binary( A ) ).
+-define( int( A ), is_integer( A ) ).
+
 -export( [ execute/3 ] ).
 
 %% Status
@@ -22,16 +25,6 @@ execute( C, <<"consume">>, [ 0 ] ) ->
 execute( _, <<"consume">>, _ ) ->
 	error_msg( <<"Consume argument must be an integer, 0 or 1">> );
 
-execute( C, <<"crossfade">>, [ Seconds ] ) when is_integer( Seconds ) ->
-	ok( erlmpd:crossfade( C, Seconds ) );
-execute( _, <<"crossfade">>, _ ) ->
-	error_msg( <<"Seconds argument must be an integer">> );
-
-execute( _, <<"mixrampdb">>, _ ) ->
-	unsupported();
-execute( _, <<"mixrampdelay">>, _ ) ->
-	unsupported();
-
 execute( C, <<"random">>, [ 1 ] ) ->
 	ok( erlmpd:random( C, true ) );
 execute( C, <<"random">>, [ 0 ] ) ->
@@ -46,7 +39,8 @@ execute( C, <<"repeat">>, [ 0 ] ) ->
 execute( _, <<"repeat">>, _ ) ->
 	error_msg( <<"State argument must be an integer, 0 or 1">> );
 
-execute( C, <<"setvol">>, [ Vol ] ) when is_integer( Vol ); Vol >= 0; Vol =< 100 ->
+execute( C, <<"setvol">>, [ Vol ] )
+when ?int( Vol ); Vol >= 0; Vol =< 100 ->
 	ok( erlmpd:setvol( C, Vol ) );
 execute( _, <<"setvol">>, [ 0 ] ) ->
 	error_msg( <<"Volume argument must be an integer between 0 and 100 inclusive">> );
@@ -72,14 +66,14 @@ execute( _, <<"pause">>, _ ) ->
 
 execute( C, <<"play">>, [] ) ->
 	ok( erlmpd:play( C ) );
-execute( C, <<"play">>, [ Position ] ) when is_integer( Position ) ->
+execute( C, <<"play">>, [ Position ] ) when ?int( Position ) ->
 	ok( erlmpd:play( C, Position ) );
 execute( _, <<"play">>, _ ) ->
 	error_msg( <<"First argument must be an integer">> );
 
 execute( C, <<"playid">>, [] ) ->
 	ok( erlmpd:playid( C ) );
-execute( C, <<"playid">>, [ Id ] ) when is_integer( Id ) ->
+execute( C, <<"playid">>, [ Id ] ) when ?int( Id ) ->
 	ok( erlmpd:playid( C, Id ) );
 execute( _, <<"playid">>, _ ) ->
 	error_msg( <<"First argument must be an integer">> );
@@ -87,18 +81,16 @@ execute( _, <<"playid">>, _ ) ->
 execute( C, <<"previous">>, [] ) ->
 	ok( erlmpd:previous( C ) );
 
-execute( C, <<"seek">>, [ Position, Time ] ) when is_integer( Position ) and is_integer( Time ) ->
+execute( C, <<"seek">>, [ Position, Time ] )
+when ?int( Position ) and ?int( Time ) ->
 	ok( erlmpd:seek( C, Position, Time ) );
 execute( _, <<"seek">>, _ ) ->
 	error_msg( <<"Position and Time arguments must be integers">> );
 
-execute( C, <<"seekid">>, [ Id, Time ] ) when is_integer( Id ) and is_integer( Time ) ->
+execute( C, <<"seekid">>, [ Id, Time ] ) when ?int( Id ) and ?int( Time ) ->
 	ok( erlmpd:seekid( C, Id, Time ) );
 execute( _, <<"seekid">>, _ ) ->
 	error_msg( <<"Id and Time arguments must be integers">> );
-
-execute( _, <<"seekcur">>, _ ) ->
-	unsupported();
 
 execute( C, <<"stop">>, [] ) ->
 	ok( erlmpd:stop( C ) );
@@ -116,34 +108,34 @@ execute( C, <<"addid">>, [ Uri, Position ] ) ->
 execute( C, <<"clear">>, [] ) ->
 	ok( erlmpd:clear( C ) );
 
-execute( C, <<"delete">>, [ Pos ] ) ->
+execute( C, <<"delete">>, [ Pos ] ) when ?int( Pos ) ->
 	ok( erlmpd:delete( C, Pos ) );
 
 execute( C, <<"playlistinfo">>, [] ) ->
 	lists:map( fun object/1, erlmpd:playlistinfo( C ) );
 
-%% Stored Playlists
-
 %% Music Database
 
-execute( C, <<"search">>, [ Type, What ] ) ->
+execute( C, <<"search">>, [ Type, What ] )
+when ?bin( Type ), ?bin( What ) ->
 	lists:map( fun object/1, erlmpd:search( C,
 		binary_to_atom( Type, utf8 ), 
 		binary_to_list( What ) 
 	) );
 
-execute( C, <<"list">>, [ Type ] ) ->
+execute( C, <<"list">>, [ Type ] ) when ?bin( Type ) ->
 	Map = fun( Elem ) -> object( Type, Elem ) end,
 	lists:map( Map, erlmpd:list( C, binary_to_atom( Type, utf8 ) ) );
 
-execute( C, <<"list">>, [ Type, Artist ] ) ->
+execute( C, <<"list">>, [ Type, Artist ] ) when ?bin( Type ), ?bin( Artist ) ->
 	Map = fun( Elem ) -> object( Type, Elem ) end,
 	lists:map( Map, erlmpd:list( C,
 		binary_to_atom( Type, utf8 ),
 		binary_to_list( Artist )
 	) );
 
-execute( C, <<"list">>, [ ListType, FilterType, FilterValue ] ) ->
+execute( C, <<"list">>, [ ListType, FilterType, FilterValue ] )
+when ?bin( ListType ), ?bin( FilterType ), ?bin( FilterValue ) ->
 	Map = fun( Elem ) -> object( ListType, Elem ) end,
 	lists:map( Map, erlmpd:list( C,
 		binary_to_atom( ListType, utf8 ),
@@ -151,7 +143,8 @@ execute( C, <<"list">>, [ ListType, FilterType, FilterValue ] ) ->
 		binary_to_list( FilterValue )
 	) );
 
-execute( C, <<"find">>, [ Type, What ] ) ->
+execute( C, <<"find">>, [ Type, What ] )
+when ?bin( Type ), ?bin( What ) ->
 	Map = fun( Elem ) -> object( Elem ) end,
 	R = erlmpd:find( C,
 		binary_to_atom( Type, utf8 ),
@@ -160,7 +153,8 @@ execute( C, <<"find">>, [ Type, What ] ) ->
 	io:format("Found: ~p~n",[R]),
 	lists:map( Map, R );
 
-execute( C, <<"findadd">>, [ Type, What ] ) ->
+execute( C, <<"findadd">>, [ Type, What ] )
+when ?bin( Type ), ?bin( What ) ->
 	ok( erlmpd:findadd( C,
 		binary_to_atom( Type, utf8 ),
 		binary_to_list( What )
@@ -172,18 +166,15 @@ execute( C, <<"findadd">>, [ Type, What ] ) ->
 
 %% Audio Output Devices
 
-execute( C, <<"disableoutput">>, [ Id ] ) when is_integer( Id ) ->
+execute( C, <<"disableoutput">>, [ Id ] ) when ?int( Id ) ->
 	ok( erlmpd:disableoutput( C, Id ) );
 execute( _, <<"disableoutput">>, _ ) ->
 	error_msg( <<"Id argument must be an integer">> );
 
-execute( C, <<"enableoutput">>, [ Id ] ) when is_integer( Id ) ->
+execute( C, <<"enableoutput">>, [ Id ] ) when ?int( Id ) ->
 	ok( erlmpd:enableoutput( C, Id ) );
 execute( _, <<"enableoutput">>, _ ) ->
 	error_msg( <<"Id argument must be an integer">> );
-
-execute( _, <<"toggleoutput">>, _ ) ->
-	unsupported();
 
 execute( C, <<"outputs">>, [] ) ->
 	lists:map( fun object/1, erlmpd:outputs( C ) );
@@ -220,5 +211,3 @@ error_msg( Msg ) -> { struct, [
 	{ <<"ok">>, false },
 	{ <<"error">>, Msg }
 ] }.
-
-unsupported() -> error_msg( <<"erlmpd doesn't seem to have that one... :(">> ).
