@@ -10,9 +10,9 @@ define( function( require ) {
 	function browse() {
 
 		this.defaultAttrs( {
-			addToQueueButtonSelector: 'button.add-to-queue',
 			artistRowSelector: 'tr.artist',
-			albumRowSelector: 'tr.album'
+			albumRowSelector: 'tr.album',
+			trackRowSelector: 'tr.track'
 		} );
 
 		this.after('initialize', function() {
@@ -22,9 +22,9 @@ define( function( require ) {
 			this.on( document, 'find-album', this.onFindAlbum );
 
 			this.on( 'click', {
-				'addToQueueButtonSelector': this.onClickAddToQueueButton,
 				'artistRowSelector': this.onClickArtistRow,
-				'albumRowSelector': this.onClickAlbumRow
+				'albumRowSelector': this.onClickAlbumRow,
+				'trackRowSelector': this.onClickTrackRow
 			} );
 		} );
 
@@ -41,9 +41,14 @@ define( function( require ) {
 		// Received an artist list
 		//	Render the artist list
 		this.onListArtist = function( e, d ) {
-			this.$node.html( templates['artists'].render( {
-				artists: d.result.map( function( elem ) {
-					return { title: elem.artist }
+			this.$node.html( templates['listpanel'].render( {
+				title: 'Artists',
+				items: d.result.map( function( elem ) {
+					return {
+						class: 'artist',
+						title: elem.artist,
+						id: elem.artist
+					}
 				} )
 			}, templates ) );
 		};
@@ -51,7 +56,7 @@ define( function( require ) {
 		// View Artist button was clicked
 		//	Request artist albums list
 		this.onClickArtistRow = function( e, d ) {
-			var artist = jquery( d.el ).data('artist');
+			var artist = jquery( d.el ).data('id');
 			this.trigger( document, 'request-list-artist-albums', {
 				artist: artist
 			} );
@@ -60,9 +65,14 @@ define( function( require ) {
 		// Received artist albums list
 		//	Render the album list
 		this.onListAlbumArtist = function( e, d ) {
-			this.$node.html( templates['albums'].render( {
-				albums: d.result.map( function( elem ) {
-					return { title: elem.album }
+			this.$node.html( templates['listpanel'].render( {
+				title: 'Albums',
+				items: d.result.map( function( elem ) {
+					return {
+						class: 'album',
+						title: elem.album,
+						id: elem.album
+					}
 				} )
 			}, templates ) );
 		};
@@ -70,7 +80,7 @@ define( function( require ) {
 		// Clicked view album button
 		//	Request the track list
 		this.onClickAlbumRow = function( e, d ) {
-			var album = jquery( d.el ).data('album');
+			var album = jquery( d.el ).data('id');
 			this.trigger( document, 'request-find', {
 				type: 'album',
 				what: album
@@ -80,18 +90,23 @@ define( function( require ) {
 		// Recieved the track list
 		//	Render the track list
 		this.onFindAlbum = function( e, d ) {
-			this.$node.html( templates['tracks'].render( {
-				tracks: d.result.map( function( elem ) {
-					return { title: elem.Title, file: elem.file }
+			this.$node.html( templates['listpanel'].render( {
+				title: 'Tracks',
+				items: d.result.map( function( elem ) {
+					return {
+						class: 'track',
+						title: elem.Title,
+						id: elem.file
+					}
 				} )
 			}, templates ) );
 		};
 
 		// Click the add button
 		//	Request playlist append
-		this.onClickAddToQueueButton = function( e, d ) {
+		this.onClickTrackRow = function( e, d ) {
 			this.trigger( document, 'request-addid', {
-				id: jquery( d.el ).data('songid')
+				id: jquery( d.el ).data('id')
 			} );
 		}
 	}

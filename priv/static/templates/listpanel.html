@@ -1,0 +1,17 @@
+<div class="panel panel-default">
+	{{#title}}
+	<div class="panel-heading">
+		<h3 class="panel-title">{{title}}</h3>
+	</div>
+	{{/title}}
+
+	<table class="table table-condensed table-striped table-hover">
+		<tbody>
+			{{#items}}
+			<tr class="{{class}}" data-id="{{id}}">
+				<td>{{title}}</td>
+			</tr>
+			{{/items}}
+		</tbody>
+	</table>
+</div>
