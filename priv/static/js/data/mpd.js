@@ -91,7 +91,6 @@ define( function( require ) {
 		};
 
 		this.onRequestFind = function( e, d ) {
-			console.log( 'mpd', 'find', d );
 			sendCommand( 'find', [ d.type, new String( d.what ).toString() ] );
 		};
 
